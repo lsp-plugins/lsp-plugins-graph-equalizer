@@ -30,9 +30,17 @@ namespace lsp
         // Plugin UI factory
         static const meta::plugin_t *uis[] =
         {
+            &meta::graph_equalizer_x16_mono,
+            &meta::graph_equalizer_x16_stereo,
+            &meta::graph_equalizer_x16_lr,
+            &meta::graph_equalizer_x16_ms,
+            &meta::graph_equalizer_x32_mono,
+            &meta::graph_equalizer_x32_stereo,
+            &meta::graph_equalizer_x32_lr,
+            &meta::graph_equalizer_x32_ms
         };
 
-        static ui::Factory factory(uis, 0);
+        static ui::Factory factory(uis, 8);
 
     } // namespace plugui
 } // namespace lsp
