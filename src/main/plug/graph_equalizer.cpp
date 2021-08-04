@@ -33,12 +33,12 @@ namespace lsp
     namespace plugins
     {
         //-------------------------------------------------------------------------
-        typedef struct graph_equalizer_settings_t
+        typedef struct plugin_settings_t
         {
             const meta::plugin_t   *metadata;
             uint8_t                 bands;
             uint8_t                 mode;
-        } graph_equalizer_settings_t;
+        } plugin_settings_t;
 
         static const meta::plugin_t *plugins[] =
         {
@@ -52,7 +52,7 @@ namespace lsp
             &meta::graph_equalizer_x32_ms
         };
 
-        static const graph_equalizer_settings_t trigger_settings[] =
+        static const plugin_settings_t plugin_settings[] =
         {
             { &meta::graph_equalizer_x16_mono,   16, graph_equalizer::EQ_MONO         },
             { &meta::graph_equalizer_x16_stereo, 16, graph_equalizer::EQ_STEREO       },
@@ -66,15 +66,15 @@ namespace lsp
             { NULL, 0, false }
         };
 
-        static plug::Module *graph_equalizer_factory(const meta::plugin_t *meta)
+        static plug::Module *plugin_factory(const meta::plugin_t *meta)
         {
-            for (const graph_equalizer_settings_t *s = trigger_settings; s->metadata != NULL; ++s)
+            for (const plugin_settings_t *s = plugin_settings; s->metadata != NULL; ++s)
                 if (s->metadata == meta)
                     return new graph_equalizer(s->metadata, s->bands, s->mode);
             return NULL;
         }
 
-        static plug::Factory factory(graph_equalizer_factory, plugins, 8);
+        static plug::Factory factory(plugin_factory, plugins, 8);
 
         //-------------------------------------------------------------------------
         const float graph_equalizer::band_frequencies[] =
