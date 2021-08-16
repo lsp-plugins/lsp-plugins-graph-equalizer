@@ -21,7 +21,7 @@
 # Package version
 ARTIFACT_ID                 = LSP_PLUGINS_GRAPH_EQUALIZER
 ARTIFACT_NAME               = lsp-plugins-graph-equalizer
-ARTIFACT_DESC               = Trigger plugin series
+ARTIFACT_DESC               = Graphic Equalizer plugin series
 ARTIFACT_HEADERS            = lsp-plug.in
 ARTIFACT_EXPORT_ALL         = 1
 ARTIFACT_VERSION            = 1.0.3-devel
