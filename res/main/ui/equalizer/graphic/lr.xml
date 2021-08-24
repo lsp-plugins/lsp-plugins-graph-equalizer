@@ -1,4 +1,7 @@
 <plugin resizable="true">
+	<ui:eval id="num_filters" value="(ex :gl_16) ? 32 : 16" />
+	<ui:eval id="num_blocks" value="(ex :gl_16) ? 8 : 4" />
+	
 	<grid rows="2" cols="3" spacing="4">
 		<vbox spacing="4" expand="true">
 			<!-- Signal meters -->

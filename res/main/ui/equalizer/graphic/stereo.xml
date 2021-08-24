@@ -1,22 +1,27 @@
 <plugin resizable="true">
+	<ui:eval id="num_filters" value="(ex :g_16) ? 32 : 16" />
+	<ui:eval id="num_blocks" value="(ex :g_16) ? 4 : 2" />
+	
 	<grid rows="2" cols="3" spacing="4">
 		<vbox spacing="4" expand="true">
 			<!-- Signal meters -->
 			<hbox spacing="4">
 				<meter expand="true"
-					id="im" angle="0"
-				    type="rms_peak"
+					id="iml" id2="imr"
+					stereo="true" type="rms_peak"
+					angle="0"
 					min="-36 db" max="+6 db" 
-					color="middle_channel"
+					color="left_channel" color2="right_channel"
 				/>
 				<label text="labels.input:db" />
 				<void min_width="64" />
 				<label text="labels.output:db" />
 				<meter expand="true"
-					id="sm" angle="0"
-				    type="rms_peak"
+					id="sml" id2="smr"
+					stereo="true" type="rms_peak"
+					angle="0"
 					min="-36 db" max="+6 db" 
-					color="middle_channel"
+					color="left_channel" color2="right_channel"
 				/>
 			</hbox>
 			
@@ -56,7 +61,8 @@
 				<marker value="-24 db" color="g_yellow" basis="1" parallel="0" /> <!-- -24 dB -->
 
 				<!-- Amplitude graph -->
-				<mesh id="fftg" width="2" color="middle_channel" />
+				<mesh id="fftg_l" width="2" color="left_channel" visibility_id="fftv_l" />
+				<mesh id="fftg_r" width="2" color="right_channel" visibility_id="fftv_r" />
 				<mesh id="ag" width="3" color="middle_channel" fill="0.8" smooth="true" />
 				
 				<!-- Dots -->
@@ -134,7 +140,14 @@
 				<label text="labels.mode" />
 				<combo id="slope" />
 				<combo id="mode" />
-				<void expand="true" />
+				<align hpos="0.5" expand="true">
+					<hbox spacing="4">
+						<button id="fftv_l" size="16" color="left_channel" led="true" />
+						<label text="labels.chan.left" />
+						<button id="fftv_r" size="16" color="right_channel" led="true" />
+						<label text="labels.chan.right" />
+					</hbox>
+				</align>
 				<label text="labels.graphs.spectrum" />
 			</hbox>
 		</vbox>
@@ -145,7 +158,7 @@
 		</vbox>
 		<vbox spacing="4">
 			<group text="groups.signal" expand="true">
-				<grid rows="2" cols="2" hspacing="4">
+				<grid rows="3" cols="2" hspacing="4">
 					<knob id="g_in" />
 					<vbox vfill="false">
 						<label text="labels.input" halign="0" />
@@ -156,6 +169,12 @@
 					<vbox vfill="false">
 						<label text="labels.output" expand="true" halign="0" />
 						<value id="g_out" same_line="true" halign="0" />
+					</vbox>
+					
+					<knob id="bal" balance="0.5" scale_color="yellow" />
+					<vbox vfill="false">
+						<label text="labels.balance" halign="0" />
+						<value id="bal" same_line="true" halign="0" />
 					</vbox>
 				</grid>
 			</group>

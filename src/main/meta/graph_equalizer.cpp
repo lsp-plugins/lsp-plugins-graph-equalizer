@@ -44,29 +44,29 @@ namespace lsp
 
         static const port_item_t band_fft_mode[] =
         {
-            { "Off",        "metering.fft.off" },
-            { "Post-eq",    "metering.fft.post_eq" },
-            { "Pre-eq",     "metering.fft.pre_eq" },
+            { "Off",                    "metering.fft.off" },
+            { "Post-eq",                "metering.fft.post_eq" },
+            { "Pre-eq",                 "metering.fft.pre_eq" },
             { NULL, NULL }
         };
 
         static const port_item_t band_slopes[] =
         {
-            { "BT48",       "graph_eq.slope.bt48" },
-            { "MT48",       "graph_eq.slope.mt48" },
-            { "BT72",       "graph_eq.slope.bt72" },
-            { "MT72",       "graph_eq.slope.mt72" },
-            { "BT96",       "graph_eq.slope.bt96" },
-            { "MT96",       "graph_eq.slope.mt96" },
+            { "BT48",                   "graph_eq.slope.bt48" },
+            { "MT48",                   "graph_eq.slope.mt48" },
+            { "BT72",                   "graph_eq.slope.bt72" },
+            { "MT72",                   "graph_eq.slope.mt72" },
+            { "BT96",                   "graph_eq.slope.bt96" },
+            { "MT96",                   "graph_eq.slope.mt96" },
             { NULL, NULL }
         };
 
         static const port_item_t band_eq_modes[] =
         {
-            { "IIR",        "eq.type.iir" },
-            { "FIR",        "eq.type.fir" },
-            { "FFT",        "eq.type.fft" },
-            { "SPM",        "eq.type.spm" },
+            { "IIR",                    "eq.type.iir" },
+            { "FIR",                    "eq.type.fir" },
+            { "FFT",                    "eq.type.fft" },
+            { "SPM",                    "eq.type.spm" },
             { NULL, NULL }
         };
 
@@ -336,7 +336,7 @@ namespace lsp
             graph_equalizer_classes,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x16_mono_ports,
-            "equalizer/graphic/x16/mono.xml",
+            "equalizer/graphic/mono.xml",
             NULL,
             mono_plugin_port_groups
         };
@@ -357,7 +357,7 @@ namespace lsp
             graph_equalizer_classes,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x32_mono_ports,
-            "equalizer/graphic/x32/mono.xml",
+            "equalizer/graphic/mono.xml",
             NULL,
             mono_plugin_port_groups
         };
@@ -378,7 +378,7 @@ namespace lsp
             graph_equalizer_classes,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x16_stereo_ports,
-            "equalizer/graphic/x16/stereo.xml",
+            "equalizer/graphic/stereo.xml",
             NULL,
             stereo_plugin_port_groups
         };
@@ -399,7 +399,7 @@ namespace lsp
             graph_equalizer_classes,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x32_stereo_ports,
-            "equalizer/graphic/x32/stereo.xml",
+            "equalizer/graphic/stereo.xml",
             NULL,
             stereo_plugin_port_groups
         };
@@ -420,7 +420,7 @@ namespace lsp
             graph_equalizer_classes,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x16_lr_ports,
-            "equalizer/graphic/x16/lr.xml",
+            "equalizer/graphic/lr.xml",
             NULL,
             stereo_plugin_port_groups
         };
@@ -441,7 +441,7 @@ namespace lsp
             graph_equalizer_classes,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x32_lr_ports,
-            "equalizer/graphic/x32/lr.xml",
+            "equalizer/graphic/lr.xml",
             NULL,
             stereo_plugin_port_groups
         };
@@ -462,7 +462,7 @@ namespace lsp
             graph_equalizer_classes,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x16_ms_ports,
-            "equalizer/graphic/x16/ms.xml",
+            "equalizer/graphic/ms.xml",
             NULL,
             stereo_plugin_port_groups
         };
@@ -483,7 +483,7 @@ namespace lsp
             graph_equalizer_classes,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x32_ms_ports,
-            "equalizer/graphic/x32/ms.xml",
+            "equalizer/graphic/ms.xml",
             NULL,
             stereo_plugin_port_groups
         };
