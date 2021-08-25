@@ -67,112 +67,112 @@
 				</ui:attributes>
 				
 				<!-- Meshes -->
-				<mesh id="fftg_m" width="2" color="middle_channel" visibility=":fftv_m" />
+				<mesh id="fftg_m" width="2" color="mid_channel" visibility=":fftv_m" />
 				<mesh id="fftg_s" width="2" color="side_channel" visibility=":fftv_s" />
-				<mesh id="ag_m" width="3" color="middle_channel" smooth="true" visibility=":fftv_m" />
-				<mesh id="ag_s" width="3" color="side_channel" smooth="true" visibility=":fftv_s" />
+				<mesh id="ag_m" width="3" color="mid_channel" fill="true" fcolor="mid_channel" fcolor.a="0.8" smooth="true" visibility=":fftv_m" />
+				<mesh id="ag_s" width="3" color="side_channel" fill="true" fcolor="side_channel" fcolor.a="0.8" smooth="true" visibility=":fftv_s" />
 				
 				<ui:if test=":num_filters ile 16">
 					<ui:attributes y.editable="true" pointer="vsize" bsize="4">
-						<dot x="14.62" y.id="gm_0" visibility=":fvm_0" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="14.62" y.id="gm_0" visibility=":fvm_0" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="17.10" y.id="gs_0" visibility=":fvs_0" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="23.27" y.id="gm_1" visibility=":fvm_1" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="23.27" y.id="gm_1" visibility=":fvm_1" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="27.07" y.id="gs_1" visibility=":fvs_1" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="36.74" y.id="gm_2" visibility=":fvm_2" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="36.74" y.id="gm_2" visibility=":fvm_2" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="42.86" y.id="gs_2" visibility=":fvs_2" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="58.48" y.id="gm_3" visibility=":fvm_3" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="58.48" y.id="gm_3" visibility=":fvm_3" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="68.40" y.id="gs_3" visibility=":fvs_3" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="92.83" y.id="gm_4" visibility=":fvm_4" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="92.83" y.id="gm_4" visibility=":fvm_4" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="107.72" y.id="gs_4" visibility=":fvs_4" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="146.20" y.id="gm_5" visibility=":fvm_5" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="146.20" y.id="gm_5" visibility=":fvm_5" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="171.00" y.id="gs_5" visibility=":fvs_5" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="232.70" y.id="gm_6" visibility=":fvm_6" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="232.70" y.id="gm_6" visibility=":fvm_6" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="270.74" y.id="gs_6" visibility=":fvs_6" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="367.45" y.id="gm_7" visibility=":fvm_7" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="367.45" y.id="gm_7" visibility=":fvm_7" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="428.63" y.id="gs_7" visibility=":fvs_7" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="584.80" y.id="gm_8" visibility=":fvm_8" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="584.80" y.id="gm_8" visibility=":fvm_8" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="683.99" y.id="gs_8" visibility=":fvs_8" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="928.32" y.id="gm_9" visibility=":fvm_9" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="928.32" y.id="gm_9" visibility=":fvm_9" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="1077.22" y.id="gs_9" visibility=":fvs_9" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="1462.01" y.id="gm_10" visibility=":fvm_10" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="1462.01" y.id="gm_10" visibility=":fvm_10" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="1709.98" y.id="gs_10" visibility=":fvs_10" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="2326.97" y.id="gm_11" visibility=":fvm_11" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="2326.97" y.id="gm_11" visibility=":fvm_11" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="2707.39" y.id="gs_11" visibility=":fvs_11" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="3674.49" y.id="gm_12" visibility=":fvm_12" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="3674.49" y.id="gm_12" visibility=":fvm_12" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="4286.31" y.id="gs_12" visibility=":fvs_12" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="5848.04" y.id="gm_13" visibility=":fvm_13" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="5848.04" y.id="gm_13" visibility=":fvm_13" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="6839.91" y.id="gs_13" visibility=":fvs_13" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="9283.18" y.id="gm_14" visibility=":fvm_14" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="9283.18" y.id="gm_14" visibility=":fvm_14" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="10772.17" y.id="gs_14" visibility=":fvs_14" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="14620.09" y.id="gm_15" visibility=":fvm_15" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="14620.09" y.id="gm_15" visibility=":fvm_15" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="17099.76" y.id="gs_15" visibility=":fvs_15" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
 					</ui:attributes>
 				</ui:if>
 				<ui:if test=":num_filters igt 16">
 					<ui:attributes y.editable="true" pointer="vsize" bsize="4">
-						<dot x="14.91" y.id="gm_0" visibility=":fvm_0" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="14.91" y.id="gm_0" visibility=":fvm_0" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="16.77" y.id="gs_0" visibility=":fvs_0" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="18.91" y.id="gm_1" visibility=":fvm_1" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="18.91" y.id="gm_1" visibility=":fvm_1" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="21.15" y.id="gs_1" visibility=":fvs_1" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="23.71" y.id="gm_2" visibility=":fvm_2" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="23.71" y.id="gm_2" visibility=":fvm_2" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="26.57" y.id="gs_2" visibility=":fvs_2" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="29.82" y.id="gm_3" visibility=":fvm_3" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="29.82" y.id="gm_3" visibility=":fvm_3" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="33.54" y.id="gs_3" visibility=":fvs_3" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="37.46" y.id="gm_4" visibility=":fvm_4" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="37.46" y.id="gm_4" visibility=":fvm_4" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="42.05" y.id="gs_4" visibility=":fvs_4" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="47.43" y.id="gm_5" visibility=":fvm_5" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="47.43" y.id="gm_5" visibility=":fvm_5" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="53.13" y.id="gs_5" visibility=":fvs_5" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="59.64" y.id="gm_6" visibility=":fvm_6" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="59.64" y.id="gm_6" visibility=":fvm_6" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="67.07" y.id="gs_6" visibility=":fvs_6" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="74.92" y.id="gm_7" visibility=":fvm_7" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="74.92" y.id="gm_7" visibility=":fvm_7" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="84.09" y.id="gs_7" visibility=":fvs_7" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="94.57" y.id="gm_8" visibility=":fvm_8" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="94.57" y.id="gm_8" visibility=":fvm_8" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="105.74" y.id="gs_8" visibility=":fvs_8" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="119.27" y.id="gm_9" visibility=":fvm_9" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="119.27" y.id="gm_9" visibility=":fvm_9" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="134.15" y.id="gs_9" visibility=":fvs_9" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="149.09" y.id="gm_10" visibility=":fvm_10" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="149.09" y.id="gm_10" visibility=":fvm_10" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="167.68" y.id="gs_10" visibility=":fvs_10" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="189.15" y.id="gm_11" visibility=":fvm_11" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="189.15" y.id="gm_11" visibility=":fvm_11" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="211.47" y.id="gs_11" visibility=":fvs_11" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="237.14" y.id="gm_12" visibility=":fvm_12" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="237.14" y.id="gm_12" visibility=":fvm_12" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="265.66" y.id="gs_12" visibility=":fvs_12" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="298.18" y.id="gm_13" visibility=":fvm_13" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="298.18" y.id="gm_13" visibility=":fvm_13" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="335.36" y.id="gs_13" visibility=":fvs_13" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="374.59" y.id="gm_14" visibility=":fvm_14" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="374.59" y.id="gm_14" visibility=":fvm_14" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="420.46" y.id="gs_14" visibility=":fvs_14" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="474.29" y.id="gm_15" visibility=":fvm_15" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="474.29" y.id="gm_15" visibility=":fvm_15" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="531.33" y.id="gs_15" visibility=":fvs_15" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="596.37" y.id="gm_16" visibility=":fvm_16" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="596.37" y.id="gm_16" visibility=":fvm_16" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="670.73" y.id="gs_16" visibility=":fvs_16" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="749.18" y.id="gm_17" visibility=":fvm_17" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="749.18" y.id="gm_17" visibility=":fvm_17" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="840.92" y.id="gs_17" visibility=":fvs_17" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="945.74" y.id="gm_18" visibility=":fvm_18" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="945.74" y.id="gm_18" visibility=":fvm_18" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="1057.37" y.id="gs_18" visibility=":fvs_18" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="1192.74" y.id="gm_19" visibility=":fvm_19" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="1192.74" y.id="gm_19" visibility=":fvm_19" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="1341.45" y.id="gs_19" visibility=":fvs_19" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="1490.92" y.id="gm_20" visibility=":fvm_20" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="1490.92" y.id="gm_20" visibility=":fvm_20" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="1676.81" y.id="gs_20" visibility=":fvs_20" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="1891.48" y.id="gm_21" visibility=":fvm_21" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="1891.48" y.id="gm_21" visibility=":fvm_21" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="2114.74" y.id="gs_21" visibility=":fvs_21" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="2371.43" y.id="gm_22" visibility=":fvm_22" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="2371.43" y.id="gm_22" visibility=":fvm_22" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="2656.63" y.id="gs_22" visibility=":fvs_22" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="2981.84" y.id="gm_23" visibility=":fvm_23" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="2981.84" y.id="gm_23" visibility=":fvm_23" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="3353.63" y.id="gs_23" visibility=":fvs_23" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="3745.92" y.id="gm_24" visibility=":fvm_24" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="3745.92" y.id="gm_24" visibility=":fvm_24" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="4204.58" y.id="gs_24" visibility=":fvs_24" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="4742.86" y.id="gm_25" visibility=":fvm_25" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="4742.86" y.id="gm_25" visibility=":fvm_25" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="5313.25" y.id="gs_25" visibility=":fvs_25" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="5963.69" y.id="gm_26" visibility=":fvm_26" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="5963.69" y.id="gm_26" visibility=":fvm_26" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="6707.26" y.id="gs_26" visibility=":fvs_26" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="7491.83" y.id="gm_27" visibility=":fvm_27" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="7491.83" y.id="gm_27" visibility=":fvm_27" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="8409.16" y.id="gs_27" visibility=":fvs_27" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="9457.42" y.id="gm_28" visibility=":fvm_28" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="9457.42" y.id="gm_28" visibility=":fvm_28" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="10573.72" y.id="gs_28" visibility=":fvs_28" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="11927.37" y.id="gm_29" visibility=":fvm_29" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="11927.37" y.id="gm_29" visibility=":fvm_29" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="13414.51" y.id="gs_29" visibility=":fvs_29" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="14909.23" y.id="gm_30" visibility=":fvm_30" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="14909.23" y.id="gm_30" visibility=":fvm_30" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="16768.14" y.id="gs_30" visibility=":fvs_30" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
-						<dot x="18914.82" y.id="gm_31" visibility=":fvm_31" color="middle_channel" hover.color="middle_channel" bcolor="middle_channel" hover.bcolor="middle_channel" />
+						<dot x="18914.82" y.id="gm_31" visibility=":fvm_31" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" />
 						<dot x="21147.40" y.id="gs_31" visibility=":fvs_31" color="side_channel" hover.color="side_channel" bcolor="side_channel" hover.bcolor="side_channel" />
 					</ui:attributes>
 				</ui:if>
@@ -225,12 +225,12 @@
 					<hbox spacing="4">
 						<vbox>
 							<hbox>
-								<button id="fftv_m" size="16" color="middle_channel" led="true" />
+								<button id="fftv_m" size="16" color="mid_channel" led="true" />
 								<label text="labels.chan.middle" />
 							</hbox>
 							<value id="gain_m" same_line="true" fill="true" halign="1" />
 						</vbox>
-						<knob id="gain_m" size="16" scale_color="middle_channel" />
+						<knob id="gain_m" size="16" scale_color="mid_channel" />
 						<vbox>
 							<hbox>
 								<button id="fftv_s" size="16" color="side_channel" led="true" />
@@ -298,7 +298,7 @@
 		<cell cols="3">
 			<cgroup id="fsel">
 				<ui:for id="blk" first="0" last=":num_blocks - 1">
-					<ui:eval id="chc" value="(:blk mod 2) ? 'side_channel' : 'middle_channel'" />
+					<ui:eval id="chc" value="(:blk mod 2) ? 'side_channel' : 'mid_channel'" />
 					<ui:eval id="chp" value="(:blk mod 2) ? 's' : 'm'" />
 					<ui:eval id="f" value=":blk idiv 2" />
 					

@@ -6,168 +6,215 @@
 		<vbox spacing="4" expand="true">
 			<!-- Signal meters -->
 			<hbox spacing="4">
-				<meter expand="true"
-					id="iml" id2="imr"
-					stereo="true" type="rms_peak"
-					angle="0"
-					min="-36 db" max="+6 db" 
-					color="left_channel" color2="right_channel"
-				/>
+				<ledmeter hexpand="true" angle="0">
+					<ledchannel id="iml" min="-36 db" max="+6 db" log="true" type="rms_peak"
+						peak.visibility="true" 
+						value.color="left_channel" />
+					<ledchannel id="imr" min="-36 db" max="+6 db" log="true" type="rms_peak"
+						peak.visibility="true" 
+						value.color="right_channel" />
+				</ledmeter>
 				<label text="labels.input:db" />
 				<void min_width="64" />
 				<label text="labels.output:db" />
-				<meter expand="true"
-					id="sml" id2="smr"
-					stereo="true" type="rms_peak"
-					angle="0"
-					min="-36 db" max="+6 db" 
-					color="left_channel" color2="right_channel"
-				/>
+				<ledmeter hexpand="true" angle="0">
+					<ledchannel id="sml" min="-36 db" max="+6 db" log="true" type="rms_peak"
+						peak.visibility="true" 
+						value.color="left_channel" />
+					<ledchannel id="smr" min="-36 db" max="+6 db" log="true" type="rms_peak"
+						peak.visibility="true" 
+						value.color="right_channel" />
+				</ledmeter>
 			</hbox>
-
+			
 			<!-- Graph -->
-			<graph width="640" height="340" expand="true" fill="true">
-				<center hpos="-1" vpos="-1" visible="false" />
+			<graph width.min="640" height.min="340" expand="true" fill="true">
+				<origin hpos="-1" vpos="-1" visible="false" />
 				
 				<!-- Gray grid -->
-				<ui:for id="f" first="20" last="90" step="10"><marker value="${f}" color="g_gray" basis="0" parallel="1" /></ui:for>
-				<ui:for id="f" first="200" last="900" step="100"><marker value="${f}" color="g_gray" basis="0" parallel="1" /></ui:for>
-				<ui:for id="f" first="2000" last="9000" step="1000"><marker value="${f}" color="g_gray" basis="0" parallel="1" /></ui:for>
-				<marker value="20000" color="g_gray" basis="0" parallel="1" />
-				
-				<marker value="+36 db" color="g_gray" basis="1" parallel="0" /> <!-- +36 dB -->
-				<marker value="+12 db" color="g_gray" basis="1" parallel="0" /> <!-- +12 dB -->
-				<marker value="-12 db" color="g_gray" basis="1" parallel="0" /> <!-- -12 dB -->
-				<marker value="-36 db" color="g_gray" basis="1" parallel="0" /> <!-- -36 dB -->
-				
-				<!-- Additional markers for zoom -->
-				<marker value="+18 db" color="g_gray" basis="1" parallel="0" visibility=":zoom le -18 db" />
-				<marker value="+6 db" color="g_gray" basis="1" parallel="0" visibility=":zoom le -18 db" />
-				<marker value="-6 db" color="g_gray" basis="1" parallel="0" visibility=":zoom le -18 db" />
-				<marker value="-18 db" color="g_gray" basis="1" parallel="0" visibility=":zoom le -18 db" />
-				
-				<marker value="+9 db" color="g_gray" basis="1" parallel="0" visibility=":zoom le -33 db" />
-				<marker value="+3 db" color="g_gray" basis="1" parallel="0" visibility=":zoom le -33 db" />
-				<marker value="-3 db" color="g_gray" basis="1" parallel="0" visibility=":zoom le -33 db" />
-				<marker value="-9 db" color="g_gray" basis="1" parallel="0" visibility=":zoom le -33 db" />
+				<ui:attributes ox="0" oy="1" color="graph_alt_4">
+					<ui:for id="f" first="20" last="90" step="10">
+						<marker v="${f}" />
+					</ui:for>
+					<ui:for id="f" first="200" last="900" step="100">
+						<marker v="${f}" />
+					</ui:for>
+					<ui:for id="f" first="2000" last="9000" step="1000">
+						<marker v="${f}" />
+					</ui:for>
+					<marker value="20000" />
+				</ui:attributes>
+				<ui:for id="g" first="-36" last="36" step="24">
+					<marker v="${g} db" ox="1" oy="0" color="graph_alt_4" />
+				</ui:for>
+				<ui:for id="g" first="-18" last="18" step="12">
+					<marker v="${g} db" ox="1" oy="0" color="graph_alt_4" visibility=":zoom le -18 db" />
+				</ui:for>
+				<ui:for id="g" first="-9" last="9" step="6">
+					<marker v="${g} db" ox="1" oy="0" color="graph_alt_4" visibility=":zoom le -33 db" />
+				</ui:for>
 				
 				<!-- Yellow grid -->
-				<marker value="100" color="g_yellow" basis="0" parallel="1" /> <!-- 100 Hz -->
-				<marker value="1000" color="g_yellow" basis="0" parallel="1" /> <!-- 1 kHz -->
-				<marker value="10000" color="g_yellow" basis="0" parallel="1" /> <!-- 10 kHz -->
-
-				<marker value="+24 db" color="g_yellow" basis="1" parallel="0" /> <!-- 24 dB -->
-				<marker value="0 db" color="g_white" basis="1" parallel="0" /> <!-- 0 dB -->
-				<marker value="-24 db" color="g_yellow" basis="1" parallel="0" /> <!-- -24 dB -->
-
-				<!-- Amplitude graph -->
-				<mesh id="fftg_l" width="2" color="left_channel" visibility_id="fftv_l" />
-				<mesh id="fftg_r" width="2" color="right_channel" visibility_id="fftv_r" />
-				<mesh id="ag_l" width="3" color="left_channel" fill="0.8" smooth="true" visibility_id="fftv_l" />
-				<mesh id="ag_r" width="3" color="right_channel" fill="0.8" smooth="true" visibility_id="fftv_r" />
-				
-				<!-- Dots -->
-				<ui:attributes editable="true" border="8" padding="8">
-					<dot hpos="14.91" vpos_id="gl_0" visibility_id="fvl_0" color="left_channel" />
-					<dot hpos="16.77" vpos_id="gr_0" visibility_id="fvr_0" color="right_channel" />
-					<dot hpos="18.91" vpos_id="gl_1" visibility_id="fvl_1" color="left_channel" />
-					<dot hpos="21.15" vpos_id="gr_1" visibility_id="fvr_1" color="right_channel" />
-					<dot hpos="23.71" vpos_id="gl_2" visibility_id="fvl_2" color="left_channel" />
-					<dot hpos="26.57" vpos_id="gr_2" visibility_id="fvr_2" color="right_channel" />
-					<dot hpos="29.82" vpos_id="gl_3" visibility_id="fvl_3" color="left_channel" />
-					<dot hpos="33.54" vpos_id="gr_3" visibility_id="fvr_3" color="right_channel" />
-					<dot hpos="37.46" vpos_id="gl_4" visibility_id="fvl_4" color="left_channel" />
-					<dot hpos="42.05" vpos_id="gr_4" visibility_id="fvr_4" color="right_channel" />
-					<dot hpos="47.43" vpos_id="gl_5" visibility_id="fvl_5" color="left_channel" />
-					<dot hpos="53.13" vpos_id="gr_5" visibility_id="fvr_5" color="right_channel" />
-					<dot hpos="59.64" vpos_id="gl_6" visibility_id="fvl_6" color="left_channel" />
-					<dot hpos="67.07" vpos_id="gr_6" visibility_id="fvr_6" color="right_channel" />
-					<dot hpos="74.92" vpos_id="gl_7" visibility_id="fvl_7" color="left_channel" />
-					<dot hpos="84.09" vpos_id="gr_7" visibility_id="fvr_7" color="right_channel" />
-					<dot hpos="94.57" vpos_id="gl_8" visibility_id="fvl_8" color="left_channel" />
-					<dot hpos="105.74" vpos_id="gr_8" visibility_id="fvr_8" color="right_channel" />
-					<dot hpos="119.27" vpos_id="gl_9" visibility_id="fvl_9" color="left_channel" />
-					<dot hpos="134.15" vpos_id="gr_9" visibility_id="fvr_9" color="right_channel" />
-					<dot hpos="149.09" vpos_id="gl_10" visibility_id="fvl_10" color="left_channel" />
-					<dot hpos="167.68" vpos_id="gr_10" visibility_id="fvr_10" color="right_channel" />
-					<dot hpos="189.15" vpos_id="gl_11" visibility_id="fvl_11" color="left_channel" />
-					<dot hpos="211.47" vpos_id="gr_11" visibility_id="fvr_11" color="right_channel" />
-					<dot hpos="237.14" vpos_id="gl_12" visibility_id="fvl_12" color="left_channel" />
-					<dot hpos="265.66" vpos_id="gr_12" visibility_id="fvr_12" color="right_channel" />
-					<dot hpos="298.18" vpos_id="gl_13" visibility_id="fvl_13" color="left_channel" />
-					<dot hpos="335.36" vpos_id="gr_13" visibility_id="fvr_13" color="right_channel" />
-					<dot hpos="374.59" vpos_id="gl_14" visibility_id="fvl_14" color="left_channel" />
-					<dot hpos="420.46" vpos_id="gr_14" visibility_id="fvr_14" color="right_channel" />
-					<dot hpos="474.29" vpos_id="gl_15" visibility_id="fvl_15" color="left_channel" />
-					<dot hpos="531.33" vpos_id="gr_15" visibility_id="fvr_15" color="right_channel" />
-					<dot hpos="596.37" vpos_id="gl_16" visibility_id="fvl_16" color="left_channel" />
-					<dot hpos="670.73" vpos_id="gr_16" visibility_id="fvr_16" color="right_channel" />
-					<dot hpos="749.18" vpos_id="gl_17" visibility_id="fvl_17" color="left_channel" />
-					<dot hpos="840.92" vpos_id="gr_17" visibility_id="fvr_17" color="right_channel" />
-					<dot hpos="945.74" vpos_id="gl_18" visibility_id="fvl_18" color="left_channel" />
-					<dot hpos="1057.37" vpos_id="gr_18" visibility_id="fvr_18" color="right_channel" />
-					<dot hpos="1192.74" vpos_id="gl_19" visibility_id="fvl_19" color="left_channel" />
-					<dot hpos="1341.45" vpos_id="gr_19" visibility_id="fvr_19" color="right_channel" />
-					<dot hpos="1490.92" vpos_id="gl_20" visibility_id="fvl_20" color="left_channel" />
-					<dot hpos="1676.81" vpos_id="gr_20" visibility_id="fvr_20" color="right_channel" />
-					<dot hpos="1891.48" vpos_id="gl_21" visibility_id="fvl_21" color="left_channel" />
-					<dot hpos="2114.74" vpos_id="gr_21" visibility_id="fvr_21" color="right_channel" />
-					<dot hpos="2371.43" vpos_id="gl_22" visibility_id="fvl_22" color="left_channel" />
-					<dot hpos="2656.63" vpos_id="gr_22" visibility_id="fvr_22" color="right_channel" />
-					<dot hpos="2981.84" vpos_id="gl_23" visibility_id="fvl_23" color="left_channel" />
-					<dot hpos="3353.63" vpos_id="gr_23" visibility_id="fvr_23" color="right_channel" />
-					<dot hpos="3745.92" vpos_id="gl_24" visibility_id="fvl_24" color="left_channel" />
-					<dot hpos="4204.58" vpos_id="gr_24" visibility_id="fvr_24" color="right_channel" />
-					<dot hpos="4742.86" vpos_id="gl_25" visibility_id="fvl_25" color="left_channel" />
-					<dot hpos="5313.25" vpos_id="gr_25" visibility_id="fvr_25" color="right_channel" />
-					<dot hpos="5963.69" vpos_id="gl_26" visibility_id="fvl_26" color="left_channel" />
-					<dot hpos="6707.26" vpos_id="gr_26" visibility_id="fvr_26" color="right_channel" />
-					<dot hpos="7491.83" vpos_id="gl_27" visibility_id="fvl_27" color="left_channel" />
-					<dot hpos="8409.16" vpos_id="gr_27" visibility_id="fvr_27" color="right_channel" />
-					<dot hpos="9457.42" vpos_id="gl_28" visibility_id="fvl_28" color="left_channel" />
-					<dot hpos="10573.72" vpos_id="gr_28" visibility_id="fvr_28" color="right_channel" />
-					<dot hpos="11927.37" vpos_id="gl_29" visibility_id="fvl_29" color="left_channel" />
-					<dot hpos="13414.51" vpos_id="gr_29" visibility_id="fvr_29" color="right_channel" />
-					<dot hpos="14909.23" vpos_id="gl_30" visibility_id="fvl_30" color="left_channel" />
-					<dot hpos="16768.14" vpos_id="gr_30" visibility_id="fvr_30" color="right_channel" />
-					<dot hpos="18914.82" vpos_id="gl_31" visibility_id="fvl_31" color="left_channel" />
-					<dot hpos="21147.40" vpos_id="gr_31" visibility_id="fvr_31" color="right_channel" />
+				<ui:attributes ox="0" oy="1" color="graph_alt_2">
+					<marker v="100" />
+					<marker v="1000" />
+					<marker v="10000" />
 				</ui:attributes>
-
+				<ui:attributes ox="1" oy="0" color="graph_alt_2">
+					<marker v="+24 db" />
+					<marker v="0 db" />
+					<marker v="-24 db" />
+				</ui:attributes>
+				
+				<!-- Meshes -->
+				<mesh id="fftg_l" width="2" color="left_channel" visibility=":fftv_l" />
+				<mesh id="fftg_r" width="2" color="right_channel" visibility=":fftv_r" />
+				<mesh id="ag_l" width="3" color="left_channel" fill="true" fcolor="left_channel" fcolor.a="0.8" smooth="true" visibility=":fftv_l" />
+				<mesh id="ag_r" width="3" color="right_channel" fill="true" fcolor="right_channel" fcolor.a="0.8" smooth="true" visibility=":fftv_r" />
+				
+				<ui:if test=":num_filters ile 16">
+					<ui:attributes y.editable="true" pointer="vsize" bsize="4">
+						<dot x="14.62" y.id="gl_0" visibility=":fvl_0" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="17.10" y.id="gr_0" visibility=":fvr_0" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="23.27" y.id="gl_1" visibility=":fvl_1" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="27.07" y.id="gr_1" visibility=":fvr_1" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="36.74" y.id="gl_2" visibility=":fvl_2" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="42.86" y.id="gr_2" visibility=":fvr_2" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="58.48" y.id="gl_3" visibility=":fvl_3" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="68.40" y.id="gr_3" visibility=":fvr_3" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="92.83" y.id="gl_4" visibility=":fvl_4" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="107.72" y.id="gr_4" visibility=":fvr_4" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="146.20" y.id="gl_5" visibility=":fvl_5" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="171.00" y.id="gr_5" visibility=":fvr_5" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="232.70" y.id="gl_6" visibility=":fvl_6" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="270.74" y.id="gr_6" visibility=":fvr_6" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="367.45" y.id="gl_7" visibility=":fvl_7" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="428.63" y.id="gr_7" visibility=":fvr_7" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="584.80" y.id="gl_8" visibility=":fvl_8" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="683.99" y.id="gr_8" visibility=":fvr_8" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="928.32" y.id="gl_9" visibility=":fvl_9" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="1077.22" y.id="gr_9" visibility=":fvr_9" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="1462.01" y.id="gl_10" visibility=":fvl_10" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="1709.98" y.id="gr_10" visibility=":fvr_10" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="2326.97" y.id="gl_11" visibility=":fvl_11" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="2707.39" y.id="gr_11" visibility=":fvr_11" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="3674.49" y.id="gl_12" visibility=":fvl_12" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="4286.31" y.id="gr_12" visibility=":fvr_12" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="5848.04" y.id="gl_13" visibility=":fvl_13" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="6839.91" y.id="gr_13" visibility=":fvr_13" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="9283.18" y.id="gl_14" visibility=":fvl_14" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="10772.17" y.id="gr_14" visibility=":fvr_14" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="14620.09" y.id="gl_15" visibility=":fvl_15" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="17099.76" y.id="gr_15" visibility=":fvr_15" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+					</ui:attributes>
+				</ui:if>
+				<ui:if test=":num_filters igt 16">
+					<ui:attributes y.editable="true" pointer="vsize" bsize="4">
+						<dot x="14.91" y.id="gl_0" visibility=":fvl_0" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="16.77" y.id="gr_0" visibility=":fvr_0" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="18.91" y.id="gl_1" visibility=":fvl_1" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="21.15" y.id="gr_1" visibility=":fvr_1" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="23.71" y.id="gl_2" visibility=":fvl_2" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="26.57" y.id="gr_2" visibility=":fvr_2" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="29.82" y.id="gl_3" visibility=":fvl_3" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="33.54" y.id="gr_3" visibility=":fvr_3" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="37.46" y.id="gl_4" visibility=":fvl_4" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="42.05" y.id="gr_4" visibility=":fvr_4" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="47.43" y.id="gl_5" visibility=":fvl_5" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="53.13" y.id="gr_5" visibility=":fvr_5" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="59.64" y.id="gl_6" visibility=":fvl_6" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="67.07" y.id="gr_6" visibility=":fvr_6" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="74.92" y.id="gl_7" visibility=":fvl_7" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="84.09" y.id="gr_7" visibility=":fvr_7" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="94.57" y.id="gl_8" visibility=":fvl_8" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="105.74" y.id="gr_8" visibility=":fvr_8" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="119.27" y.id="gl_9" visibility=":fvl_9" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="134.15" y.id="gr_9" visibility=":fvr_9" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="149.09" y.id="gl_10" visibility=":fvl_10" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="167.68" y.id="gr_10" visibility=":fvr_10" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="189.15" y.id="gl_11" visibility=":fvl_11" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="211.47" y.id="gr_11" visibility=":fvr_11" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="237.14" y.id="gl_12" visibility=":fvl_12" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="265.66" y.id="gr_12" visibility=":fvr_12" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="298.18" y.id="gl_13" visibility=":fvl_13" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="335.36" y.id="gr_13" visibility=":fvr_13" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="374.59" y.id="gl_14" visibility=":fvl_14" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="420.46" y.id="gr_14" visibility=":fvr_14" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="474.29" y.id="gl_15" visibility=":fvl_15" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="531.33" y.id="gr_15" visibility=":fvr_15" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="596.37" y.id="gl_16" visibility=":fvl_16" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="670.73" y.id="gr_16" visibility=":fvr_16" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="749.18" y.id="gl_17" visibility=":fvl_17" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="840.92" y.id="gr_17" visibility=":fvr_17" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="945.74" y.id="gl_18" visibility=":fvl_18" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="1057.37" y.id="gr_18" visibility=":fvr_18" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="1192.74" y.id="gl_19" visibility=":fvl_19" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="1341.45" y.id="gr_19" visibility=":fvr_19" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="1490.92" y.id="gl_20" visibility=":fvl_20" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="1676.81" y.id="gr_20" visibility=":fvr_20" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="1891.48" y.id="gl_21" visibility=":fvl_21" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="2114.74" y.id="gr_21" visibility=":fvr_21" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="2371.43" y.id="gl_22" visibility=":fvl_22" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="2656.63" y.id="gr_22" visibility=":fvr_22" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="2981.84" y.id="gl_23" visibility=":fvl_23" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="3353.63" y.id="gr_23" visibility=":fvr_23" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="3745.92" y.id="gl_24" visibility=":fvl_24" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="4204.58" y.id="gr_24" visibility=":fvr_24" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="4742.86" y.id="gl_25" visibility=":fvl_25" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="5313.25" y.id="gr_25" visibility=":fvr_25" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="5963.69" y.id="gl_26" visibility=":fvl_26" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="6707.26" y.id="gr_26" visibility=":fvr_26" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="7491.83" y.id="gl_27" visibility=":fvl_27" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="8409.16" y.id="gr_27" visibility=":fvr_27" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="9457.42" y.id="gl_28" visibility=":fvl_28" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="10573.72" y.id="gr_28" visibility=":fvr_28" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="11927.37" y.id="gl_29" visibility=":fvl_29" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="13414.51" y.id="gr_29" visibility=":fvr_29" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="14909.23" y.id="gl_30" visibility=":fvl_30" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="16768.14" y.id="gr_30" visibility=":fvr_30" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+						<dot x="18914.82" y.id="gl_31" visibility=":fvl_31" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
+						<dot x="21147.40" y.id="gr_31" visibility=":fvr_31" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+					</ui:attributes>
+				</ui:if>
+				
 				<!-- Boundaries -->
-				<marker value="1" color="g_white" basis="2" parallel="0" /> <!-- +48 dB -->
-				<marker value="24000" color="g_white" basis="0" parallel="1" />
+				<marker ox="2" oy="0" v="1" color="graph_prim" /> <!-- +48 dB -->
+				<marker ox="0" oy="1" v="24000" color="graph_prim" />
 				
 				<!-- Axis -->
-				<axis min="10" max="24000" color="g_white" angle="0.0" logarithmic="true" />
-				<axis min="-48 db / :zoom" max="48 db * :zoom" color="g_white" angle="0.5" logarithmic="true" /> <!-- -48..+48 dB -->
+				<axis min="10" max="24000" color="graph_prim" angle="0.0" log="true" />
+				<axis min="-48 db / :zoom" max="48 db * :zoom" color="graph_prim" angle="0.5" log="true" /> <!-- -48..+48 dB -->
 				<axis min="-1" max="1" visible="false" angle="0.5" />
 				
 				<!-- Text -->
-				<text text="graph.units.hz" basis="0;2" coord="10;0" halign="1" valign="1" />
-				<text text="100" basis="0;2" coord="100;0" halign="1" valign="1" />
-				<text text="graph.values.x_k" text:value="1" basis="0;2" coord="1000;0" halign="1" valign="1" />
-				<text text="graph.values.x_k" text:value="10" basis="0;2" coord="10000;0" halign="1" valign="1" />
-				
-				<text text="+36" coord="10;36 db" halign="1" valign="-1" />
-				<text text="+24" coord="10;24 db" halign="1" valign="-1" />
-				<text text="+12" coord="10;12 db" halign="1" valign="-1" />
-				<text text="0" coord="10;0 db" halign="1" valign="1" />
-				<text text="-12" coord="10;-12 db" halign="1" valign="1" />
-				<text text="-24" coord="10;-24 db" halign="1" valign="1" />
-				<text text="-36" coord="10;-36 db" halign="1" valign="1" />
-				<text text="graph.units.db" basis="0;2" coord="10;1" halign="1" valign="-1" />
-				
-				<!-- Additional text -->
-				<text text="+18" coord="10;18 db" halign="1" valign="-1" visibility=":zoom le -18 db" />
-				<text text="+6" coord="10;6 db" halign="1" valign="-1" visibility=":zoom le -18 db" />
-				<text text="-6" coord="10;-6 db" halign="1" valign="1" visibility=":zoom le -18 db" />
-				<text text="-18" coord="10;-18 db" halign="1" valign="1" visibility=":zoom le -18 db" />
-
-				<text text="+9" coord="10;9 db" halign="1" valign="-1" visibility=":zoom le -33 db" />
-				<text text="+3" coord="10;3 db" halign="1" valign="-1" visibility=":zoom le -33 db" />
-				<text text="-3" coord="10;-3 db" halign="1" valign="1" visibility=":zoom le -33 db" />
-				<text text="-9" coord="10;-9 db" halign="1" valign="1" visibility=":zoom le -33 db" />
+				<ui:attributes ox="0" oy="2" y="0" halign="1" valign="1"> 
+					<text x="10" text="graph.units.hz" />
+					<text x="100" text="100" />
+					<text x="1000" text="graph.values.x_k" text:value="1" />
+					<text x="10000" text="graph.values.x_k" text:value="10" />
+				</ui:attributes>
+				<ui:attributes x="10" halign="1">
+					<text y="36 db" text="+36" valign="-1" />
+					<text y="24 db" text="+24" valign="-1" />
+					<text y="12 db" text="+12" valign="-1" />
+					<text y="0 db" text="0" valign="1" />
+					<text y="-12 db" text="-12" valign="1" />
+					<text y="-24 db" text="-24" valign="1" />
+					<text y="-36 db" text="-36" valign="1" />
+					<text y="1" ox="0" oy="2" text="graph.units.db" valign="-1" />
+				</ui:attributes>
+				<ui:attributes x="10" halign="1" visibility=":zoom le -18 db">
+					<text y="18 db" text="+18" valign="-1" />
+					<text y="6 db" text="+6" valign="-1" />
+					<text y="-6 db" text="-6" valign="1" />
+					<text y="-18 db" text="-18" valign="1" />
+				</ui:attributes>
+				<ui:attributes x="10" halign="1" visibility=":zoom le -33 db">
+					<text y="9 db" text="+9" valign="-1" />
+					<text y="3 db" text="+3" valign="-1" />
+					<text y="-3 db" text="-3" valign="1" />
+					<text y="-9 db" text="-9" valign="1" />
+				</ui:attributes>
 			</graph>
 			<hbox spacing="4">
 				<label text="labels.mode" />
@@ -185,9 +232,9 @@
 			</hbox>
 		</vbox>
 		<vbox>
-			<label text="labels.zoom" />
-			<fader id="zoom" angle="1" expand="true" />
-			<value id="zoom" />
+			<label font.name="lsp-icons" font.size="12" font.antialias="true" text="E" color="text_icon" padding.bottom="4" padding.top="4"/>
+			<fader id="zoom" angle="1" vexpand="true" />
+			<value id="zoom" width="40"/>
 		</vbox>
 		<vbox spacing="4">
 			<group text="groups.signal" expand="true">
@@ -236,13 +283,35 @@
 		<cell cols="3">
 			<cgroup id="fsel">
 				<ui:for id="blk" first="0" last="3">
-					<ui:set id="chc" value="${(:blk mod 2) ? 'right_channel' : 'left_channel'}" />
-					<ui:set id="chp" value="${(:blk mod 2) ? 'r' : 'l'}" />
-					<ui:set id="f" value="${:blk idiv 2}" />
+					<ui:eval id="chc" value="(:blk mod 2) ? 'right_channel' : 'left_channel'" />
+					<ui:eval id="chp" value="(:blk mod 2) ? 'r' : 'l'" />
+					<ui:eval id="f" value=":blk idiv 2" />
 					
 					<grid rows="5" cols="17">
 						<label text="labels.units.hz" fill="true" halign="0" />
-						<ui:if test="${:f ieq 0}">
+						<!-- x16 frequencies -->
+						<ui:if test=":num_channels ile 16">
+							<label text="16" />
+							<label text="25" />
+							<label text="40" />
+							<label text="63" />
+							<label text="100" />
+							<label text="160" />
+							<label text="250" />
+							<label text="400" />
+							<label text="630" />
+							<ui:attributes text="labels.values.x_k">
+								<label text:value="1" />
+								<label text:value="1.6" />
+								<label text:value="2.5" />
+								<label text:value="4" />
+								<label text:value="6.3" />
+								<label text:value="10" />
+								<label text:value="16" />
+							</ui:attributes>
+						</ui:if>
+						<!-- x32 frequencies (part 1) -->
+						<ui:if test="(:num_filters igt 16) and (:f ieq 0)">
 							<label text="16" />
 							<label text="20" />
 							<label text="25" />
@@ -260,27 +329,30 @@
 							<label text="400" />
 							<label text="500" />
 						</ui:if>
-						<ui:if test="${:f ieq 1}">
+						<!-- x32 frequencies (part 2) -->
+						<ui:if test="(:num_filters igt 16) and (:f ieq 1)">
 							<label text="630" />
 							<label text="800" />
-							<label text="labels.values.x_k" text:value="1" />
-							<label text="labels.values.x_k" text:value="1.25" />
-							<label text="labels.values.x_k" text:value="1.6" />
-							<label text="labels.values.x_k" text:value="2" />
-							<label text="labels.values.x_k" text:value="2.5" />
-							<label text="labels.values.x_k" text:value="3.15" />
-							<label text="labels.values.x_k" text:value="4" />
-							<label text="labels.values.x_k" text:value="5" />
-							<label text="labels.values.x_k" text:value="6.3" />
-							<label text="labels.values.x_k" text:value="8" />
-							<label text="labels.values.x_k" text:value="10" />
-							<label text="labels.values.x_k" text:value="12.5" />
-							<label text="labels.values.x_k" text:value="16" />
-							<label text="labels.values.x_k" text:value="20" />
+							<ui:attributes text="labels.values.x_k">
+								<label text:value="1" />
+								<label text:value="1.25" />
+								<label text:value="1.6" />
+								<label text:value="2" />
+								<label text:value="2.5" />
+								<label text:value="3.15" />
+								<label text:value="4" />
+								<label text:value="5" />
+								<label text:value="6.3" />
+								<label text:value="8" />
+								<label text:value="10" />
+								<label text:value="12.5" />
+								<label text:value="16" />
+								<label text:value="20" />
+							</ui:attributes>
 						</ui:if>
 						
 						<label text="labels.ctl" halign="0" />
-						<ui:for id="i" first="${:f*16}" last="${:f*16+15}">
+						<ui:for id="i" first=":f*16" last=":f*16+15">
 							<ui:set id="ch" value="${chp}_${i}" />
 							<grid rows="3" cols="2" fill="false">
 								<button id="xe${ch}" led="true" size="12" color="yellow" />
@@ -293,11 +365,11 @@
 						</ui:for>
 						
 						<cell rows="2"><label text="labels.gain:db" halign="0" /></cell>
-						<ui:for id="i" first="${:f*16}" last="${:f*16+15}">
-							<knob id="g${chp}_${i}"  size="20" scale_color="${chc}" />
+						<ui:for id="i" first=":f*16" last=":f*16+15">
+							<knob id="g${chp}_${i}"  size="20" scolor="${chc}" />
 						</ui:for>
 						
-						<ui:for id="i" first="${:f*16}" last="${:f*16+15}">
+						<ui:for id="i" first=":f*16" last=":f*16+15">
 							<value id="g${chp}_${i}" detailed="false" />
 						</ui:for>
 					</grid>
