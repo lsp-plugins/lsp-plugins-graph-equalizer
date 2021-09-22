@@ -243,112 +243,32 @@
 							<label text="labels.units.hz" fill="true" halign="0" pad="6"/>
 							<!-- x16 frequencies -->
 							<ui:if test=":num_filters ile 16">
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="16"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="25"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="40"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="63"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="100"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="160"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="250"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="400"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="630"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<ui:attributes text="labels.values.x_k">
-									<label text:value="1"/>
-									<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-									<label text:value="1.6"/>
-									<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-									<label text:value="2.5"/>
-									<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-									<label text:value="4"/>
-									<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-									<label text:value="6.3"/>
-									<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-									<label text:value="10"/>
-									<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-									<label text:value="16"/>
-								</ui:attributes>
+								<ui:for id="f" list="16;25;40;63;100;160;250;400;630">
+									<cell rows="5" bg.color="bg" pad.v="6"><vsep pad="0"/></cell>
+									<label text="${f}"/>
+								</ui:for>
+								<ui:for id="f" list="1;'1.6';'2.5';4;'6.3';10;16">
+									<cell rows="5" bg.color="bg" pad.v="6"><vsep pad="0"/></cell>
+									<label text="labels.values.x_k" text:value="${f}"/>
+								</ui:for>
 							</ui:if>
 							<!-- x32 frequencies (part 1) -->
 							<ui:if test="(:num_filters igt 16) and (:f ieq 0)">
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="16"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="20"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="25"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="31.5"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="40"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="50"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="63"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="80"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="100"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="125"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="160"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="200"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="250"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="315"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="400"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="500"/>
+								<ui:for id="f" list="16;20;25;'31.5';40;50;63;80;100;125;160;200;250;315;400;500">
+									<cell rows="5" bg.color="bg" pad.v="6"><vsep pad="0"/></cell>
+									<label text="${f}"/>
+								</ui:for>
 							</ui:if>
 							<!-- x32 frequencies (part 2) -->
 							<ui:if test="(:num_filters igt 16) and (:f ieq 1)">
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="630"/>
-								<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-								<label text="800"/>
-								<ui:attributes text="labels.values.x_k">
-									<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-									<label text:value="1"/>
-									<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-									<label text:value="1.25"/>
-									<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-									<label text:value="1.6"/>
-									<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-									<label text:value="2"/>
-									<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-									<label text:value="2.5"/>
-									<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-									<label text:value="3.15"/>
-									<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-									<label text:value="4"/>
-									<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-									<label text:value="5"/>
-									<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-									<label text:value="6.3"/>
-									<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-									<label text:value="8"/>
-									<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-									<label text:value="10"/>
-									<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-									<label text:value="12.5"/>
-									<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-									<label text:value="16"/>
-									<cell rows="5" bg.color="bg" pad.t="6" pad.b="6"><vsep pad="0"/></cell>
-									<label text:value="20"/>
-								</ui:attributes>
+								<ui:for id="f" list="630;800">
+									<cell rows="5" bg.color="bg" pad.v="6"><vsep pad="0"/></cell>
+									<label text="${f}"/>
+								</ui:for>
+								<ui:for id="f" list="1;'1.25';'1.6';2;'2.5';'3.15';4;5;'6.3';8;10;'12.5';16;20">
+									<cell rows="5" bg.color="bg" pad.v="6"><vsep pad="0"/></cell>
+									<label text="labels.values.x_k" text:value="${f}"/>
+								</ui:for>
 							</ui:if>
 
 							<label text="labels.ctl" fill="true" halign="0" pad="6"/>
