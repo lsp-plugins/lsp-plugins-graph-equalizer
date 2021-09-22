@@ -46,30 +46,18 @@
 						</ui:with>
 
 						<!-- Meshes -->
-
 						<mesh id="fftg_l" width="2" color="left" visibility=":fftv_l"/>
 						<mesh id="fftg_r" width="2" color="right" visibility=":fftv_r"/>
 						<mesh id="ag" width="3" color="graph_mesh" fill="true" fcolor="graph_mesh" fcolor.a="0.8" smooth="true"/>
 						<ui:if test=":num_filters ile 16">
-							<ui:with pointer="hand" color="graph_mesh"
-								bsize="4" hover.color="graph_mesh" bcolor="graph_mesh" hover.bcolor="graph_mesh" y.editable="true">
-								<dot x="16" y.id="g_0" visibility=":fv_0"/>
-								<dot x="25" y.id="g_1" visibility=":fv_1"/>
-								<dot x="40" y.id="g_2" visibility=":fv_2"/>
-								<dot x="63" y.id="g_3" visibility=":fv_3"/>
-								<dot x="100" y.id="g_4" visibility=":fv_4"/>
-								<dot x="160" y.id="g_5" visibility=":fv_5"/>
-								<dot x="250" y.id="g_6" visibility=":fv_6"/>
-								<dot x="400" y.id="g_7" visibility=":fv_7"/>
-								<dot x="630" y.id="g_8" visibility=":fv_8"/>
-								<dot x="1000" y.id="g_9" visibility=":fv_9"/>
-								<dot x="1600" y.id="g_10" visibility=":fv_10"/>
-								<dot x="2500" y.id="g_11" visibility=":fv_11"/>
-								<dot x="4000" y.id="g_12" visibility=":fv_12"/>
-								<dot x="6300" y.id="g_13" visibility=":fv_13"/>
-								<dot x="10000" y.id="g_14" visibility=":fv_14"/>
-								<dot x="16000" y.id="g_15" visibility=":fv_15"/>
-							</ui:with>
+							<ui:for id="f" counter="i" list="16;25;40;63;100;160;250;400;630;1000;1600;2500;4000;6300;10000;16000">
+								<dot x="${f}" y.id="g_${i}"
+									pointer="hand" bsize="4"
+									color="graph_mesh"
+									hover.color="graph_mesh" bcolor="graph_mesh"
+									hover.bcolor="graph_mesh" y.editable="true"										 
+									visibility=":fv_${i}" />
+							</ui:for>
 						</ui:if>
 						<ui:if test=":num_filters igt 16">
 							<ui:with pointer="hand" color="graph_mesh"
