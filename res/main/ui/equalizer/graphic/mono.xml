@@ -26,46 +26,44 @@
 				<origin hpos="-1" vpos="-1" visible="false" />
 				
 				<!-- Gray grid -->
-				<ui:attributes ox="0" oy="1">
+				<ui:with color="graph_alt_1">
 					<ui:for id="f" first="20" last="90" step="10">
-						<marker v="${f}" color="graph_alt_1" />
+						<marker v="${:f}" />
+						<marker v="${:f*10}" />
+						<marker v="${:f*100}" />
 					</ui:for>
-					<ui:for id="f" first="200" last="900" step="100">
-						<marker v="${f}" color="graph_alt_1" />
-					</ui:for>
-					<ui:for id="f" first="2000" last="9000" step="1000">
-						<marker v="${f}" color="graph_alt_1" />
-					</ui:for>
-					<marker value="20000" color="graph_alt_1" />
-				</ui:attributes>
-				<ui:for id="g" first="-36" last="36" step="24">
-					<marker v="${g} db" ox="1" oy="0" color="graph_alt_1" />
-				</ui:for>
-				<ui:for id="g" first="-18" last="18" step="12">
-					<marker v="${g} db" ox="1" oy="0" color="graph_alt_1" visibility=":zoom le -18 db" />
-				</ui:for>
-				<ui:for id="g" first="-9" last="9" step="6">
-					<marker v="${g} db" ox="1" oy="0" color="graph_alt_1" visibility=":zoom le -33 db" />
-				</ui:for>
-				
+					<marker value="20000" color="graph_alt_1"/>
+					<ui:with ox="1" oy="0">
+						<ui:for id="g" first="-36" last="36" step="24">
+							<marker v="${g} db" />
+						</ui:for>
+						<ui:for id="g" first="-18" last="18" step="12">
+							<marker v="${g} db" visibility=":zoom le -18 db"/>
+						</ui:for>
+						<ui:for id="g" first="-9" last="9" step="6">
+							<marker v="${g} db" visibility=":zoom le -33 db"/>
+						</ui:for>
+					</ui:with>
+				</ui:with>
+
 				<!-- Yellow grid -->
-				<ui:attributes ox="0" oy="1" color="graph_sec">
-					<marker v="100" />
-					<marker v="1000" />
-					<marker v="10000" />
-				</ui:attributes>
-				<ui:attributes ox="1" oy="0" color="graph_sec">
-					<marker v="+24 db" />
-					<marker v="0 db" />
-					<marker v="-24 db" />
-				</ui:attributes>
+				<ui:with color="graph_sec">
+					<marker v="100"/>
+					<marker v="1000"/>
+					<marker v="10000"/>
+					<ui:with ox="1" oy="0">
+						<marker v="+24 db"/>
+						<marker v="0 db"/>
+						<marker v="-24 db"/>
+					</ui:with>
+				</ui:with>
 				
 				<!-- Meshes -->
 				<mesh id="fftg" width="2" color="mid_channel" visibility=":fftv" />
 				<mesh id="ag" width="3" color="mid_channel" fill="true" fcolor="mid_channel" fcolor.a="0.8" smooth="true" />
 				
 				<ui:if test=":num_filters ile 16">
-					<ui:attributes y.editable="true" pointer="vsize" bsize="4" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" >
+					<ui:with y.editable="true" pointer="vsize" bsize="4" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" >
 						<dot x="16" y.id="g_0" visibility=":fv_0" />
 						<dot x="25" y.id="g_1" visibility=":fv_1" />
 						<dot x="40" y.id="g_2" visibility=":fv_2" />
@@ -82,10 +80,10 @@
 						<dot x="6300" y.id="g_13" visibility=":fv_13" />
 						<dot x="10000" y.id="g_14" visibility=":fv_14" />
 						<dot x="16000" y.id="g_15" visibility=":fv_15" />
-					</ui:attributes>
+					</ui:with>
 				</ui:if>
 				<ui:if test=":num_filters igt 16">
-					<ui:attributes y.editable="true" pointer="vsize" bsize="4" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" >
+					<ui:with y.editable="true" pointer="vsize" bsize="4" color="mid_channel" hover.color="mid_channel" bcolor="mid_channel" hover.bcolor="mid_channel" >
 						<dot x="16" y.id="g_0" visibility=":fv_0" />
 						<dot x="20" y.id="g_1" visibility=":fv_1" />
 						<dot x="25" y.id="g_2" visibility=":fv_2" />
@@ -118,7 +116,7 @@
 						<dot x="12500" y.id="g_29" visibility=":fv_29" />
 						<dot x="16000" y.id="g_30" visibility=":fv_30" />
 						<dot x="20000" y.id="g_31" visibility=":fv_31" />
-					</ui:attributes>
+					</ui:with>
 				</ui:if>
 				
 				<!-- Boundaries -->
@@ -126,19 +124,19 @@
 				<marker ox="0" oy="1" v="24000" color="graph_prim" />
 				
 				<!-- Axis -->
-				<axis min="10" max="24000" color="graph_prim" angle="0.0" log="true" />
-				<axis min="-48 db / :zoom" max="48 db * :zoom" color="graph_prim" angle="0.5" log="true" /> <!-- -48..+48 dB -->
+				<axis min="10" max="24000" angle="0.0" log="true" />
+				<axis min="-48 db / :zoom" max="48 db * :zoom" angle="0.5" log="true" /> <!-- -48..+48 dB -->
 				<axis min="-1" max="1" visible="false" angle="0.5" />
 				
 				<!-- Text -->
-				<ui:attributes ox="0" oy="2" y="0" halign="1" valign="1"> 
+				<ui:with ox="0" oy="2" y="0" halign="1" valign="1"> 
 					<text x="10" text="graph.units.hz" />
 					<text x="100" text="100" />
 					<text x="1000" text="graph.values.x_k" text:value="1" />
 					<text x="10000" text="graph.values.x_k" text:value="10" />
-				</ui:attributes>
-				<ui:attributes x="10" halign="1">
-					<text y="36 db" text="+36" valign="-1" />
+				</ui:with>
+				<ui:with x="10" halign="1">
+					<text y="36 db" text="+36"/>
 					<text y="24 db" text="+24" valign="-1" />
 					<text y="12 db" text="+12" valign="-1" />
 					<text y="0 db" text="0" valign="1" />
@@ -146,19 +144,19 @@
 					<text y="-24 db" text="-24" valign="1" />
 					<text y="-36 db" text="-36" valign="1" />
 					<text y="1" ox="0" oy="2" text="graph.units.db" valign="-1" />
-				</ui:attributes>
-				<ui:attributes x="10" halign="1" visibility=":zoom le -18 db">
+				</ui:with>
+				<ui:with x="10" halign="1" visibility=":zoom le -18 db">
 					<text y="18 db" text="+18" valign="-1" />
 					<text y="6 db" text="+6" valign="-1" />
 					<text y="-6 db" text="-6" valign="1" />
 					<text y="-18 db" text="-18" valign="1" />
-				</ui:attributes>
-				<ui:attributes x="10" halign="1" visibility=":zoom le -33 db">
+				</ui:with>
+				<ui:with x="10" halign="1" visibility=":zoom le -33 db">
 					<text y="9 db" text="+9" valign="-1" />
 					<text y="3 db" text="+3" valign="-1" />
 					<text y="-3 db" text="-3" valign="1" />
 					<text y="-9 db" text="-9" valign="1" />
-				</ui:attributes>
+				</ui:with>
 			</graph>
 			<hbox spacing="4">
 				<label text="labels.mode" />
@@ -227,7 +225,7 @@
 							<label text="250" />
 							<label text="400" />
 							<label text="630" />
-							<ui:attributes text="labels.values.x_k">
+							<ui:with text="labels.values.x_k">
 								<label text:value="1" />
 								<label text:value="1.6" />
 								<label text:value="2.5" />
@@ -235,7 +233,7 @@
 								<label text:value="6.3" />
 								<label text:value="10" />
 								<label text:value="16" />
-							</ui:attributes>
+							</ui:with>
 						</ui:if>
 						<!-- x32 frequencies (part 1) -->
 						<ui:if test="(:num_filters igt 16) and (:f ieq 0)">
@@ -260,7 +258,7 @@
 						<ui:if test="(:num_filters igt 16) and (:f ieq 1)">
 							<label text="630" />
 							<label text="800" />
-							<ui:attributes text="labels.values.x_k">
+							<ui:with text="labels.values.x_k">
 								<label text:value="1" />
 								<label text:value="1.25" />
 								<label text:value="1.6" />
@@ -275,7 +273,7 @@
 								<label text:value="12.5" />
 								<label text:value="16" />
 								<label text:value="20" />
-							</ui:attributes>
+							</ui:with>
 						</ui:if>
 						
 						<label text="labels.ctl" halign="0" />
