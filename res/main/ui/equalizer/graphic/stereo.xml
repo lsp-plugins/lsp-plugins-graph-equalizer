@@ -52,49 +52,28 @@
 						<ui:if test=":num_filters ile 16">
 							<ui:for id="f" counter="i" list="16;25;40;63;100;160;250;400;630;1000;1600;2500;4000;6300;10000;16000">
 								<dot x="${f}" y.id="g_${i}"
-									pointer="hand" bsize="4"
+									pointer="hand"
+									bsize="4"
 									color="graph_mesh"
-									hover.color="graph_mesh" bcolor="graph_mesh"
-									hover.bcolor="graph_mesh" y.editable="true"										 
-									visibility=":fv_${i}" />
+									hover.color="graph_mesh"
+									bcolor="graph_mesh"
+									hover.bcolor="graph_mesh"
+									y.editable="true"
+									visibility=":fv_${i}"/>
 							</ui:for>
 						</ui:if>
 						<ui:if test=":num_filters igt 16">
-							<ui:with pointer="hand" color="graph_mesh"
-								bsize="4" hover.color="graph_mesh" bcolor="graph_mesh" hover.bcolor="graph_mesh" y.editable="true">
-								<dot x="16" y.id="g_0" visibility=":fv_0"/>
-								<dot x="20" y.id="g_1" visibility=":fv_1"/>
-								<dot x="25" y.id="g_2" visibility=":fv_2"/>
-								<dot x="31.5" y.id="g_3" visibility=":fv_3"/>
-								<dot x="40" y.id="g_4" visibility=":fv_4"/>
-								<dot x="50" y.id="g_5" visibility=":fv_5"/>
-								<dot x="63" y.id="g_6" visibility=":fv_6"/>
-								<dot x="80" y.id="g_7" visibility=":fv_7"/>
-								<dot x="100" y.id="g_8" visibility=":fv_8"/>
-								<dot x="125" y.id="g_9" visibility=":fv_9"/>
-								<dot x="160" y.id="g_10" visibility=":fv_10"/>
-								<dot x="200" y.id="g_11" visibility=":fv_11"/>
-								<dot x="250" y.id="g_12" visibility=":fv_12"/>
-								<dot x="315" y.id="g_13" visibility=":fv_13"/>
-								<dot x="400" y.id="g_14" visibility=":fv_14"/>
-								<dot x="500" y.id="g_15" visibility=":fv_15"/>
-								<dot x="630" y.id="g_16" visibility=":fv_16"/>
-								<dot x="800" y.id="g_17" visibility=":fv_17"/>
-								<dot x="1000" y.id="g_18" visibility=":fv_18"/>
-								<dot x="1250" y.id="g_19" visibility=":fv_19"/>
-								<dot x="1600" y.id="g_20" visibility=":fv_20"/>
-								<dot x="2000" y.id="g_21" visibility=":fv_21"/>
-								<dot x="2500" y.id="g_22" visibility=":fv_22"/>
-								<dot x="3150" y.id="g_23" visibility=":fv_23"/>
-								<dot x="4000" y.id="g_24" visibility=":fv_24"/>
-								<dot x="5000" y.id="g_25" visibility=":fv_25"/>
-								<dot x="6300" y.id="g_26" visibility=":fv_26"/>
-								<dot x="8000" y.id="g_27" visibility=":fv_27"/>
-								<dot x="10000" y.id="g_28" visibility=":fv_28"/>
-								<dot x="12500" y.id="g_29" visibility=":fv_29"/>
-								<dot x="16000" y.id="g_30" visibility=":fv_30"/>
-								<dot x="20000" y.id="g_31" visibility=":fv_31"/>
-							</ui:with>
+							<ui:for id="f" counter="i" list="16;20;25;31.5;40;50;63;80;100;125;160;200;250;315;400;500;630;800;1000;1250;1600;2000;2500;3150;4000;5000;6300;8000;10000;12500;16000;20000">
+								<dot x="${f}" y.id="g_${i}"
+									pointer="hand"
+									color="graph_mesh"
+									bsize="4"
+									hover.color="graph_mesh"
+									bcolor="graph_mesh"
+									hover.bcolor="graph_mesh"
+									y.editable="true"
+									visibility=":fv_${i}"/>
+							</ui:for>
 						</ui:if>
 
 						<!-- Boundaries -->
@@ -143,7 +122,7 @@
 				<align halign="1" expand="false">
 					<hbox spacing="4" bg.color="bg_schema" pad.l="6" pad.r="6" pad.b="4" pad.t="4">
 						<label text="labels.mode"/>
-						<combo id="slope" pad.r="12"/>
+						<combo id="slope" pad.r="6"/>
 						<combo id="mode" pad.r="12"/>
 						<button id="fftv_l" height="22" width="45" text="labels.chan.left" ui:inject="Button_left"/>
 						<button id="fftv_r" height="22" width="45" text="labels.chan.right" ui:inject="Button_right"/>
