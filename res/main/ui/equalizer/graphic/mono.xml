@@ -180,7 +180,7 @@
 		</vbox>
 
 		<cell cols="3">
-			<cgroup id="fsel" bg.color="bg" ipadding="0">
+			<cgroup id="fsel" text="groups.bands" bg.color="bg" ipadding="0">
 				<ui:for id="f" first="0" last=":num_blocks-1">
 					<grid rows="5" cols="33" hspacing="2">
 						<ui:with bg.color="bg_schema">
