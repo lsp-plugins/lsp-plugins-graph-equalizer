@@ -118,7 +118,7 @@
 			</group>
 
 			<align halign="1" expand="false">
-				<hbox spacing="4" bg.color="bg_schema" pad.l="6" pad.r="6" pad.b="4" pad.t="4">
+				<hbox spacing="4" bg.color="bg_schema" pad.h="6" pad.b="4" pad.t="4">
 					<label text="labels.mode"/>
 					<combo id="slope" pad.r="6"/>
 					<combo id="mode" pad.r="12"/>
@@ -235,7 +235,7 @@
 									<label text="labels.values.x_k" text:value="${f}"/>
 								</ui:for>
 							</ui:if>
-	
+
 							<label text="labels.ctl" fill="true" halign="0" pad="6"/>
 							<ui:for id="i" first=":f*16" last=":f*16+15">
 								<grid rows="2" cols="1" fill="false">
@@ -264,12 +264,12 @@
 									</hbox>
 								</grid>
 							</ui:for>
-	
+
 							<cell rows="2"><label text="labels.gain:db" fill="true" halign="0" pad="6"/></cell>
 							<ui:for id="i" first=":f*16" last=":f*16+15">
 								<knob id="g_${i}" size="20" scolor="mid"/>
 							</ui:for>
-	
+
 							<ui:for id="i" first=":f*16" last=":f*16+15">
 								<value id="g_${i}" detailed="false" pad.b="6"/>
 							</ui:for>

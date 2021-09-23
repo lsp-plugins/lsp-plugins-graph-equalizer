@@ -117,7 +117,7 @@
 			</group>
 
 			<align halign="1" expand="false">
-				<hbox spacing="4" bg.color="bg_schema" pad.l="6" pad.r="6" pad.b="4" pad.t="4">
+				<hbox spacing="4" bg.color="bg_schema" pad.h="6" pad.b="4" pad.t="4">
 					<label text="labels.mode"/>
 					<combo id="slope" pad.r="6"/>
 					<combo id="mode" pad.r="12"/>
@@ -146,16 +146,16 @@
 			<vbox vexpand="true" bg.color="bg_schema">
 				<label text="labels.chan.in" pad.b="3" pad.t="3"/>
 				<ledmeter vexpand="true" angle="1">
-					<ledchannel id="iml" min="-36 db" max="+6 db" log="true" type="rms_peak" peak.visibility="true" value.color="left_in"/>
-					<ledchannel id="imr" min="-36 db" max="+6 db" log="true" type="rms_peak" peak.visibility="true" value.color="right_in"/>
+					<ledchannel id="iml" min="-36 db" max="+6 db" log="true" type="rms_peak" peak.visibility="true" value.color="mid_in"/>
+					<ledchannel id="imr" min="-36 db" max="+6 db" log="true" type="rms_peak" peak.visibility="true" value.color="side_in"/>
 				</ledmeter>
 			</vbox>
 
 			<vbox vexpand="true" bg.color="bg_schema">
 				<label text="labels.chan.out" pad.b="3" pad.t="3"/>
 				<ledmeter vexpand="true" angle="1">
-					<ledchannel id="sml" min="-36 db" max="+6 db" log="true" type="rms_peak" peak.visibility="true" value.color="left"/>
-					<ledchannel id="smr" min="-36 db" max="+6 db" log="true" type="rms_peak" peak.visibility="true" value.color="right"/>
+					<ledchannel id="sml" min="-36 db" max="+6 db" log="true" type="rms_peak" peak.visibility="true" value.color="mid"/>
+					<ledchannel id="smr" min="-36 db" max="+6 db" log="true" type="rms_peak" peak.visibility="true" value.color="side"/>
 				</ledmeter>
 			</vbox>
 		</hbox>

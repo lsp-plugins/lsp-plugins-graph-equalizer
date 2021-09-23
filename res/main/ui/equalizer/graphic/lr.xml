@@ -1,378 +1,268 @@
 <plugin resizable="true">
-	<ui:eval id="num_filters" value="(ex :gl_16) ? 32 : 16" />
-	<ui:eval id="num_blocks" value="(ex :gl_16) ? 8 : 4" />
-	
+	<ui:eval id="num_filters" value="(ex :gl_16) ? 32 : 16"/>
+	<ui:eval id="num_blocks" value="(ex :gl_16) ? 8 : 4"/>
+
 	<grid rows="2" cols="3" spacing="4">
 		<vbox spacing="4" expand="true">
-			<!-- Signal meters -->
-			<hbox spacing="4">
-				<ledmeter hexpand="true" angle="0">
-					<ledchannel id="iml" min="-36 db" max="+6 db" log="true" type="rms_peak"
-						peak.visibility="true" 
-						value.color="left_channel" />
-					<ledchannel id="imr" min="-36 db" max="+6 db" log="true" type="rms_peak"
-						peak.visibility="true" 
-						value.color="right_channel" />
-				</ledmeter>
-				<label text="labels.input:db" />
-				<void min_width="64" />
-				<label text="labels.output:db" />
-				<ledmeter hexpand="true" angle="0">
-					<ledchannel id="sml" min="-36 db" max="+6 db" log="true" type="rms_peak"
-						peak.visibility="true" 
-						value.color="left_channel" />
-					<ledchannel id="smr" min="-36 db" max="+6 db" log="true" type="rms_peak"
-						peak.visibility="true" 
-						value.color="right_channel" />
-				</ledmeter>
-			</hbox>
-			
-			<!-- Graph -->
-			<graph width.min="640" height.min="340" expand="true" fill="true">
-				<origin hpos="-1" vpos="-1" visible="false" />
-				
-				<!-- Gray grid -->
-				<ui:with color="graph_alt_1">
-					<ui:for id="f" first="20" last="90" step="10">
-						<marker v="${:f}" />
-						<marker v="${:f*10}" />
-						<marker v="${:f*100}" />
-					</ui:for>
-					<marker value="20000" color="graph_alt_1"/>
-					<ui:with ox="1" oy="0">
-						<ui:for id="g" first="-36" last="36" step="24">
-							<marker v="${g} db" />
-						</ui:for>
-						<ui:for id="g" first="-18" last="18" step="12">
-							<marker v="${g} db" visibility=":zoom le -18 db"/>
-						</ui:for>
-						<ui:for id="g" first="-9" last="9" step="6">
-							<marker v="${g} db" visibility=":zoom le -33 db"/>
-						</ui:for>
-					</ui:with>
-				</ui:with>
 
-				<!-- Yellow grid -->
-				<ui:with color="graph_sec">
-					<marker v="100"/>
-					<marker v="1000"/>
-					<marker v="10000"/>
-					<ui:with ox="1" oy="0">
-						<marker v="+24 db"/>
-						<marker v="0 db"/>
-						<marker v="-24 db"/>
+			<!-- Graph -->
+			<group ui:inject="GraphGroup" ipadding="0" expand="true" fill="true" text="labels.graphs.spectrum">
+				<graph width.min="640" height.min="340" expand="true">
+					<origin hpos="-1" vpos="-1" visible="false"/>
+
+					<!-- Gray grid -->
+					<ui:with color="graph_alt_1">
+						<ui:for id="f" first="20" last="90" step="10">
+							<marker v="${:f}"/>
+							<marker v="${:f*10}"/>
+							<marker v="${:f*100}"/>
+						</ui:for>
+						<marker value="20000" color="graph_alt_1"/>
+						<ui:with ox="1" oy="0">
+							<ui:for id="g" first="-36" last="36" step="24">
+								<marker v="${g} db"/>
+							</ui:for>
+							<ui:for id="g" first="-18" last="18" step="12">
+								<marker v="${g} db" visibility=":zoom le -18 db"/>
+							</ui:for>
+							<ui:for id="g" first="-9" last="9" step="6">
+								<marker v="${g} db" visibility=":zoom le -33 db"/>
+							</ui:for>
+						</ui:with>
 					</ui:with>
-				</ui:with>
-				
-				<!-- Meshes -->
-				<mesh id="fftg_l" width="2" color="left_channel" visibility=":fftv_l" />
-				<mesh id="fftg_r" width="2" color="right_channel" visibility=":fftv_r" />
-				<mesh id="ag_l" width="3" color="left_channel" fill="true" fcolor="left_channel" fcolor.a="0.8" smooth="true" visibility=":fftv_l" />
-				<mesh id="ag_r" width="3" color="right_channel" fill="true" fcolor="right_channel" fcolor.a="0.8" smooth="true" visibility=":fftv_r" />
-				
-				<ui:if test=":num_filters ile 16">
-					<ui:with y.editable="true" pointer="vsize" bsize="4">
-						<dot x="14.62" y.id="gl_0" visibility=":fvl_0" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="17.10" y.id="gr_0" visibility=":fvr_0" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="23.27" y.id="gl_1" visibility=":fvl_1" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="27.07" y.id="gr_1" visibility=":fvr_1" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="36.74" y.id="gl_2" visibility=":fvl_2" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="42.86" y.id="gr_2" visibility=":fvr_2" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="58.48" y.id="gl_3" visibility=":fvl_3" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="68.40" y.id="gr_3" visibility=":fvr_3" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="92.83" y.id="gl_4" visibility=":fvl_4" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="107.72" y.id="gr_4" visibility=":fvr_4" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="146.20" y.id="gl_5" visibility=":fvl_5" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="171.00" y.id="gr_5" visibility=":fvr_5" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="232.70" y.id="gl_6" visibility=":fvl_6" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="270.74" y.id="gr_6" visibility=":fvr_6" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="367.45" y.id="gl_7" visibility=":fvl_7" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="428.63" y.id="gr_7" visibility=":fvr_7" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="584.80" y.id="gl_8" visibility=":fvl_8" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="683.99" y.id="gr_8" visibility=":fvr_8" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="928.32" y.id="gl_9" visibility=":fvl_9" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="1077.22" y.id="gr_9" visibility=":fvr_9" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="1462.01" y.id="gl_10" visibility=":fvl_10" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="1709.98" y.id="gr_10" visibility=":fvr_10" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="2326.97" y.id="gl_11" visibility=":fvl_11" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="2707.39" y.id="gr_11" visibility=":fvr_11" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="3674.49" y.id="gl_12" visibility=":fvl_12" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="4286.31" y.id="gr_12" visibility=":fvr_12" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="5848.04" y.id="gl_13" visibility=":fvl_13" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="6839.91" y.id="gr_13" visibility=":fvr_13" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="9283.18" y.id="gl_14" visibility=":fvl_14" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="10772.17" y.id="gr_14" visibility=":fvr_14" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="14620.09" y.id="gl_15" visibility=":fvl_15" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="17099.76" y.id="gr_15" visibility=":fvr_15" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+
+					<!-- Yellow grid -->
+					<ui:with color="graph_sec">
+						<marker v="100"/>
+						<marker v="1000"/>
+						<marker v="10000"/>
+						<ui:with ox="1" oy="0">
+							<marker v="+24 db"/>
+							<marker v="0 db"/>
+							<marker v="-24 db"/>
+						</ui:with>
 					</ui:with>
-				</ui:if>
-				<ui:if test=":num_filters igt 16">
-					<ui:with y.editable="true" pointer="vsize" bsize="4">
-						<dot x="14.91" y.id="gl_0" visibility=":fvl_0" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="16.77" y.id="gr_0" visibility=":fvr_0" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="18.91" y.id="gl_1" visibility=":fvl_1" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="21.15" y.id="gr_1" visibility=":fvr_1" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="23.71" y.id="gl_2" visibility=":fvl_2" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="26.57" y.id="gr_2" visibility=":fvr_2" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="29.82" y.id="gl_3" visibility=":fvl_3" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="33.54" y.id="gr_3" visibility=":fvr_3" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="37.46" y.id="gl_4" visibility=":fvl_4" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="42.05" y.id="gr_4" visibility=":fvr_4" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="47.43" y.id="gl_5" visibility=":fvl_5" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="53.13" y.id="gr_5" visibility=":fvr_5" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="59.64" y.id="gl_6" visibility=":fvl_6" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="67.07" y.id="gr_6" visibility=":fvr_6" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="74.92" y.id="gl_7" visibility=":fvl_7" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="84.09" y.id="gr_7" visibility=":fvr_7" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="94.57" y.id="gl_8" visibility=":fvl_8" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="105.74" y.id="gr_8" visibility=":fvr_8" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="119.27" y.id="gl_9" visibility=":fvl_9" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="134.15" y.id="gr_9" visibility=":fvr_9" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="149.09" y.id="gl_10" visibility=":fvl_10" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="167.68" y.id="gr_10" visibility=":fvr_10" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="189.15" y.id="gl_11" visibility=":fvl_11" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="211.47" y.id="gr_11" visibility=":fvr_11" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="237.14" y.id="gl_12" visibility=":fvl_12" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="265.66" y.id="gr_12" visibility=":fvr_12" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="298.18" y.id="gl_13" visibility=":fvl_13" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="335.36" y.id="gr_13" visibility=":fvr_13" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="374.59" y.id="gl_14" visibility=":fvl_14" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="420.46" y.id="gr_14" visibility=":fvr_14" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="474.29" y.id="gl_15" visibility=":fvl_15" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="531.33" y.id="gr_15" visibility=":fvr_15" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="596.37" y.id="gl_16" visibility=":fvl_16" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="670.73" y.id="gr_16" visibility=":fvr_16" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="749.18" y.id="gl_17" visibility=":fvl_17" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="840.92" y.id="gr_17" visibility=":fvr_17" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="945.74" y.id="gl_18" visibility=":fvl_18" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="1057.37" y.id="gr_18" visibility=":fvr_18" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="1192.74" y.id="gl_19" visibility=":fvl_19" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="1341.45" y.id="gr_19" visibility=":fvr_19" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="1490.92" y.id="gl_20" visibility=":fvl_20" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="1676.81" y.id="gr_20" visibility=":fvr_20" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="1891.48" y.id="gl_21" visibility=":fvl_21" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="2114.74" y.id="gr_21" visibility=":fvr_21" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="2371.43" y.id="gl_22" visibility=":fvl_22" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="2656.63" y.id="gr_22" visibility=":fvr_22" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="2981.84" y.id="gl_23" visibility=":fvl_23" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="3353.63" y.id="gr_23" visibility=":fvr_23" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="3745.92" y.id="gl_24" visibility=":fvl_24" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="4204.58" y.id="gr_24" visibility=":fvr_24" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="4742.86" y.id="gl_25" visibility=":fvl_25" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="5313.25" y.id="gr_25" visibility=":fvr_25" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="5963.69" y.id="gl_26" visibility=":fvl_26" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="6707.26" y.id="gr_26" visibility=":fvr_26" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="7491.83" y.id="gl_27" visibility=":fvl_27" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="8409.16" y.id="gr_27" visibility=":fvr_27" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="9457.42" y.id="gl_28" visibility=":fvl_28" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="10573.72" y.id="gr_28" visibility=":fvr_28" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="11927.37" y.id="gl_29" visibility=":fvl_29" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="13414.51" y.id="gr_29" visibility=":fvr_29" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="14909.23" y.id="gl_30" visibility=":fvl_30" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="16768.14" y.id="gr_30" visibility=":fvr_30" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
-						<dot x="18914.82" y.id="gl_31" visibility=":fvl_31" color="left_channel" hover.color="left_channel" bcolor="left_channel" hover.bcolor="left_channel" />
-						<dot x="21147.40" y.id="gr_31" visibility=":fvr_31" color="right_channel" hover.color="right_channel" bcolor="right_channel" hover.bcolor="right_channel" />
+
+					<!-- Meshes -->
+
+					<mesh id="fftg_l" width="2" color="left" visibility=":fftv_l"/>
+					<mesh id="fftg_r" width="2" color="right" visibility=":fftv_r"/>
+					<mesh id="ag_l" width="3" color="left" fill="true" fcolor="left" fcolor.a="0.8" smooth="true"/>
+					<mesh id="ag_r" width="3" color="right" fill="true" fcolor="right" fcolor.a="0.8" smooth="true"/>
+					<ui:if test=":num_filters ile 16">
+						<ui:for id="y" counter="i" list="14.62;23.27;36.74;58.48;92.83;146.20;232.70;367.45;584.80;928.32;1462.01;2326.97;3674.49;5848.04;9283.18;14620.09">
+							<dot x="${y}" y.id="gl_${i}" y.editable="true" pointer="hand" bsize="4" color="left" hover.color="left" bcolor="left" hover.bcolor="left" visibility=":fvl_${i}"/>
+						</ui:for>
+						<ui:for id="y" counter="i" list="17.10;27.07;42.86;68.40;107.72;171.00;270.74;428.63;683.99;1077.22;1709.98;2707.39;4286.31;6839.91;10772.17;17099.76">
+							<dot x="${y}" y.id="gr_${i}" y.editable="true" pointer="hand" bsize="4" color="right" hover.color="right" bcolor="right" hover.bcolor="right" visibility=":fvr_${i}"/>
+						</ui:for>
+					</ui:if>
+
+					<ui:if test=":num_filters igt 16">
+						<ui:for
+							id="y"
+							counter="i"
+							list="14.91;18.91;23.71;29.82;37.46;47.43;59.64;74.92;94.57;119.27;149.09;189.15;237.14;298.18;374.59;474.29;596.37;749.18;945.74;1192.74;1490.92;1891.48;2371.43;2981.84;3745.92;4742.86;5963.69;7491.83;9457.42;11927.37;14909.23;18914.82">
+							<dot x="${y}" y.id="gl_${i}" y.editable="true" pointer="hand" bsize="4" color="left" hover.color="left" bcolor="left" hover.bcolor="left" visibility=":fvl_${i}"/>
+						</ui:for>
+						<ui:for
+							id="y"
+							counter="i"
+							list="16.77;21.15;26.57;33.54;42.05;53.13;67.07;84.09;105.74;134.15;167.68;211.47;265.66;335.36;420.46;531.33;670.73;840.92;1057.37;1341.45;1676.81;2114.74;2656.63;3353.63;4204.58;5313.25;6707.26;8409.16;10573.72;13414.51;16768.14;21147.40">
+							<dot x="${y}" y.id="gr_${i}" y.editable="true" pointer="hand" bsize="4" color="right" hover.color="right" bcolor="right" hover.bcolor="right" visibility=":fvr_${i}"/>
+						</ui:for>
+					</ui:if>
+
+					<!-- Boundaries -->
+					<marker ox="2" oy="0" v="1" color="graph_prim" visibility="false"/>
+					<!-- +48 dB -->
+					<marker ox="0" oy="1" v="24000" color="graph_prim" visibility="false"/>
+
+					<!-- Axis -->
+					<axis min="10" max="24000" angle="0.0" log="true" visibility="false"/>
+					<axis min="-48 db / :zoom" max="48 db * :zoom" angle="0.5" log="true" visibility="false"/>
+					<!-- -48..+48 dB -->
+					<axis min="-1" max="1" visible="false" angle="0.5"/>
+
+					<!-- Text -->
+					<ui:with ox="0" oy="2" y="0" halign="1" valign="1">
+						<text x="10" text="graph.units.hz"/>
+						<text x="100" text="100"/>
+						<text x="1000" text="graph.values.x_k" text:value="1"/>
+						<text x="10000" text="graph.values.x_k" text:value="10"/>
 					</ui:with>
-				</ui:if>
-				
-				<!-- Boundaries -->
-				<marker ox="2" oy="0" v="1" color="graph_prim" /> <!-- +48 dB -->
-				<marker ox="0" oy="1" v="24000" color="graph_prim" />
-				
-				<!-- Axis -->
-				<axis min="10" max="24000" angle="0.0" log="true" />
-				<axis min="-48 db / :zoom" max="48 db * :zoom" angle="0.5" log="true" /> <!-- -48..+48 dB -->
-				<axis min="-1" max="1" visible="false" angle="0.5" />
-				
-				<!-- Text -->
-				<ui:with ox="0" oy="2" y="0" halign="1" valign="1"> 
-					<text x="10" text="graph.units.hz" />
-					<text x="100" text="100" />
-					<text x="1000" text="graph.values.x_k" text:value="1" />
-					<text x="10000" text="graph.values.x_k" text:value="10" />
-				</ui:with>
-				<ui:with x="10" halign="1">
-					<text y="36 db" text="+36" valign="-1" />
-					<text y="24 db" text="+24" valign="-1" />
-					<text y="12 db" text="+12" valign="-1" />
-					<text y="0 db" text="0" valign="1" />
-					<text y="-12 db" text="-12" valign="1" />
-					<text y="-24 db" text="-24" valign="1" />
-					<text y="-36 db" text="-36" valign="1" />
-					<text y="1" ox="0" oy="2" text="graph.units.db" valign="-1" />
-				</ui:with>
-				<ui:with x="10" halign="1" visibility=":zoom le -18 db">
-					<text y="18 db" text="+18" valign="-1" />
-					<text y="6 db" text="+6" valign="-1" />
-					<text y="-6 db" text="-6" valign="1" />
-					<text y="-18 db" text="-18" valign="1" />
-				</ui:with>
-				<ui:with x="10" halign="1" visibility=":zoom le -33 db">
-					<text y="9 db" text="+9" valign="-1" />
-					<text y="3 db" text="+3" valign="-1" />
-					<text y="-3 db" text="-3" valign="1" />
-					<text y="-9 db" text="-9" valign="1" />
-				</ui:with>
-			</graph>
-			<hbox spacing="4">
-				<label text="labels.mode" />
-				<combo id="slope" />
-				<combo id="mode" />
-				<align hpos="0.5" expand="true">
-					<hbox spacing="4">
-						<button id="fftv_l" size="16" color="left_channel" led="true" />
-						<label text="labels.chan.left" />
-						<button id="fftv_r" size="16" color="right_channel" led="true" />
-						<label text="labels.chan.right" />
-					</hbox>
-				</align>
-				<label text="labels.graphs.spectrum" />
-			</hbox>
+					<ui:with x="10" halign="1">
+						<text y="36 db" text="+36" valign="-1"/>
+						<text y="24 db" text="+24" valign="-1"/>
+						<text y="12 db" text="+12" valign="-1"/>
+						<text y="0 db" text="0" valign="1"/>
+						<text y="-12 db" text="-12" valign="1"/>
+						<text y="-24 db" text="-24" valign="1"/>
+						<text y="-36 db" text="-36" valign="1"/>
+						<text y="1" ox="0" oy="2" text="graph.units.db" valign="-1"/>
+					</ui:with>
+					<ui:with x="10" halign="1" visibility=":zoom le -18 db">
+						<text y="18 db" text="+18" valign="-1"/>
+						<text y="6 db" text="+6" valign="-1"/>
+						<text y="-6 db" text="-6" valign="1"/>
+						<text y="-18 db" text="-18" valign="1"/>
+					</ui:with>
+					<ui:with x="10" halign="1" visibility=":zoom le -33 db">
+						<text y="9 db" text="+9" valign="-1"/>
+						<text y="3 db" text="+3" valign="-1"/>
+						<text y="-3 db" text="-3" valign="1"/>
+						<text y="-9 db" text="-9" valign="1"/>
+					</ui:with>
+				</graph>
+			</group>
+
+			<align halign="1" expand="false">
+				<hbox spacing="4" bg.color="bg_schema" pad.h="6" pad.b="4" pad.t="4">
+					<label text="labels.mode"/>
+					<combo id="slope" pad.r="6"/>
+					<combo id="mode" pad.r="12"/>
+					<button id="fftv_l" height="22" width="48" text="labels.chan.left" ui:inject="Button_left"/>
+					<button id="fftv_r" height="22" width="48" text="labels.chan.right" ui:inject="Button_right"/>
+				</hbox>
+			</align>
 		</vbox>
-		<vbox>
-			<label font.name="lsp-icons" font.size="12" font.antialias="true" text="E" color="text_icon" padding.bottom="4" padding.top="4"/>
-			<fader id="zoom" angle="1" vexpand="true" />
-			<value id="zoom" width="40"/>
-		</vbox>
+
+		<!-- Zoom Fader -->
+		<hbox spacing="4" bg.color="bg">
+			<vbox vexpand="true" bg.color="bg_schema">
+				<label font.name="lsp-icons" font.size="12" font.antialias="true" text="E" color="text_icon" pad.b="4" pad.t="4"/>
+				<fader id="zoom" angle="1" vexpand="true" bg.inherit="true" flat="true"/>
+				<value id="zoom" width="40"/>
+			</vbox>
+
+			<!-- Signal meters -->
+
+			<vbox vexpand="true" bg.color="bg_schema">
+				<label text="labels.chan.in" pad.b="3" pad.t="3"/>
+				<ledmeter vexpand="true" angle="1">
+					<ledchannel id="iml" min="-36 db" max="+6 db" log="true" type="rms_peak" peak.visibility="true" value.color="left_in"/>
+					<ledchannel id="imr" min="-36 db" max="+6 db" log="true" type="rms_peak" peak.visibility="true" value.color="right_in"/>
+				</ledmeter>
+			</vbox>
+
+			<vbox vexpand="true" bg.color="bg_schema">
+				<label text="labels.chan.out" pad.b="3" pad.t="3"/>
+				<ledmeter vexpand="true" angle="1">
+					<ledchannel id="sml" min="-36 db" max="+6 db" log="true" type="rms_peak" peak.visibility="true" value.color="left"/>
+					<ledchannel id="smr" min="-36 db" max="+6 db" log="true" type="rms_peak" peak.visibility="true" value.color="right"/>
+				</ledmeter>
+			</vbox>
+		</hbox>
+
 		<vbox spacing="4">
 			<group text="groups.signal" expand="true">
 				<grid rows="3" cols="2" hspacing="4">
-					<knob id="g_in" />
+					<knob id="g_in" pad.r="4"/>
 					<vbox vfill="false">
-						<label text="labels.input" halign="0" />
-						<value id="g_in" same_line="true" halign="0" />
+						<label text="labels.input" halign="0"/>
+						<value id="g_in" sline="true" halign="0"/>
 					</vbox>
-					
-					<knob id="g_out" />
+
+					<knob id="g_out" pad.r="4"/>
 					<vbox vfill="false">
-						<label text="labels.output" expand="true" halign="0" />
-						<value id="g_out" same_line="true" halign="0" />
+						<label text="labels.output" expand="true" halign="0"/>
+						<value id="g_out" width.min="50" sline="true" halign="0"/>
 					</vbox>
-					
-					<knob id="bal" balance="0.5" scale_color="yellow" />
+
+					<knob id="bal" balance="0.5" scolor="balance" pad.r="4"/>
 					<vbox vfill="false">
-						<label text="labels.balance" halign="0" />
-						<value id="bal" same_line="true" halign="0" />
+						<label text="labels.balance" halign="0"/>
+						<value id="bal" width.min="50" sline="true" halign="0"/>
 					</vbox>
+
 				</grid>
 			</group>
 			<group text="groups.analysis" expand="true">
 				<vbox>
-					<label text="labels.fft.fft" halign="0" />
-					<combo id="fft" fill="true" />
-					
-					<grid rows="2" cols="2" transpose="false" expand="true" hspacing="4" >
-						<knob id="react" size="20" />
+					<label text="labels.fft.fft" halign="0"/>
+					<combo id="fft" fill="true"/>
+
+					<grid rows="2" cols="2" transpose="false" expand="true" hspacing="4">
+						<knob id="react" size="20" pad.r="4"/>
 						<vbox vfill="false">
-							<label text="labels.metering.reactivity" halign="0" />
-							<value id="react" same_line="true" halign="0" />
+							<label text="labels.metering.reactivity" halign="0"/>
+							<value id="react" width.min="50" sline="true" halign="0"/>
 						</vbox>
-						
-						<knob id="shift" size="20" />
+
+						<knob id="shift" size="20" pad.r="4"/>
 						<vbox vfill="false">
-							<label text="labels.metering.shift" halign="0" />
-							<value id="shift" same_line="true" halign="0" />
+							<label text="labels.metering.shift" halign="0"/>
+							<value id="shift" width.min="50" sline="true" halign="0"/>
 						</vbox>
 					</grid>
 				</vbox>
 			</group>
 		</vbox>
-		
+
 		<cell cols="3">
-			<cgroup id="fsel">
-				<ui:for id="blk" first="0" last="3">
-					<ui:eval id="chc" value="(:blk mod 2) ? 'right_channel' : 'left_channel'" />
-					<ui:eval id="chp" value="(:blk mod 2) ? 'r' : 'l'" />
-					<ui:eval id="f" value=":blk idiv 2" />
-					
-					<grid rows="5" cols="17">
-						<label text="labels.units.hz" fill="true" halign="0" />
-						<!-- x16 frequencies -->
-						<ui:if test=":num_channels ile 16">
-							<label text="16" />
-							<label text="25" />
-							<label text="40" />
-							<label text="63" />
-							<label text="100" />
-							<label text="160" />
-							<label text="250" />
-							<label text="400" />
-							<label text="630" />
-							<ui:with text="labels.values.x_k">
-								<label text:value="1" />
-								<label text:value="1.6" />
-								<label text:value="2.5" />
-								<label text:value="4" />
-								<label text:value="6.3" />
-								<label text:value="10" />
-								<label text:value="16" />
-							</ui:with>
-						</ui:if>
-						<!-- x32 frequencies (part 1) -->
-						<ui:if test="(:num_filters igt 16) and (:f ieq 0)">
-							<label text="16" />
-							<label text="20" />
-							<label text="25" />
-							<label text="31.5" />
-							<label text="40" />
-							<label text="50" />
-							<label text="63" />
-							<label text="80" />
-							<label text="100" />
-							<label text="125" />
-							<label text="160" />
-							<label text="200" />
-							<label text="250" />
-							<label text="315" />
-							<label text="400" />
-							<label text="500" />
-						</ui:if>
-						<!-- x32 frequencies (part 2) -->
-						<ui:if test="(:num_filters igt 16) and (:f ieq 1)">
-							<label text="630" />
-							<label text="800" />
-							<ui:with text="labels.values.x_k">
-								<label text:value="1" />
-								<label text:value="1.25" />
-								<label text:value="1.6" />
-								<label text:value="2" />
-								<label text:value="2.5" />
-								<label text:value="3.15" />
-								<label text:value="4" />
-								<label text:value="5" />
-								<label text:value="6.3" />
-								<label text:value="8" />
-								<label text:value="10" />
-								<label text:value="12.5" />
-								<label text:value="16" />
-								<label text:value="20" />
-							</ui:with>
-						</ui:if>
-						
-						<label text="labels.ctl" halign="0" />
-						<ui:for id="i" first=":f*16" last=":f*16+15">
-							<ui:set id="ch" value="${chp}_${i}" />
-							<grid rows="3" cols="2" fill="false">
-								<button id="xe${ch}" led="true" size="12" color="yellow" />
-								<label text="labels.chan.on" font_size="9" />
-								<button id="xs${ch}" led="true" size="12" color="green" />
-								<button id="xm${ch}" led="true" size="12" color="red" />
-								<label text="labels.chan.S_olo" font_size="9" />
-								<label text="labels.chan.M_ute" font_size="9" />
-							</grid>
-						</ui:for>
-						
-						<cell rows="2"><label text="labels.gain:db" halign="0" /></cell>
-						<ui:for id="i" first=":f*16" last=":f*16+15">
-							<knob id="g${chp}_${i}"  size="20" scolor="${chc}" />
-						</ui:for>
-						
-						<ui:for id="i" first=":f*16" last=":f*16+15">
-							<value id="g${chp}_${i}" detailed="false" />
-						</ui:for>
+			<cgroup id="fsel" bg.color="bg" ipadding="0">
+				<ui:for id="blk" first="0" last=":num_blocks - 1">
+					<ui:eval id="chc" value="(:blk mod 2) ? 'right' : 'left'"/>
+					<ui:eval id="chp" value="(:blk mod 2) ? 'r' : 'l'"/>
+					<ui:eval id="f" value=":blk idiv 2"/>
+
+					<grid rows="5" cols="33" hspacing="2">
+						<ui:with bg.color="bg_schema">
+							<label text="labels.units.hz" fill="true" halign="0" pad="6"/>
+							<!-- x16 frequencies -->
+							<ui:if test=":num_filters ile 16">
+								<ui:for id="f" list="16;25;40;63;100;160;250;400;630">
+									<cell rows="5" bg.color="bg" pad.v="6"><vsep pad="0"/></cell>
+									<label text="${f}"/>
+								</ui:for>
+								<ui:for id="f" list="1;'1.6';'2.5';4;'6.3';10;16">
+									<cell rows="5" bg.color="bg" pad.v="6"><vsep pad="0"/></cell>
+									<label text="labels.values.x_k" text:value="${f}"/>
+								</ui:for>
+							</ui:if>
+							<!-- x32 frequencies (part 1) -->
+							<ui:if test="(:num_filters igt 16) and (:f ieq 0)">
+								<ui:for id="f" list="16;20;25;'31.5';40;50;63;80;100;125;160;200;250;315;400;500">
+									<cell rows="5" bg.color="bg" pad.v="6"><vsep pad="0"/></cell>
+									<label text="${f}"/>
+								</ui:for>
+							</ui:if>
+							<!-- x32 frequencies (part 2) -->
+							<ui:if test="(:num_filters igt 16) and (:f ieq 1)">
+								<ui:for id="f" list="630;800">
+									<cell rows="5" bg.color="bg" pad.v="6"><vsep pad="0"/></cell>
+									<label text="${f}"/>
+								</ui:for>
+								<ui:for id="f" list="1;'1.25';'1.6';2;'2.5';'3.15';4;5;'6.3';8;10;'12.5';16;20">
+									<cell rows="5" bg.color="bg" pad.v="6"><vsep pad="0"/></cell>
+									<label text="labels.values.x_k" text:value="${f}"/>
+								</ui:for>
+							</ui:if>
+
+							<label text="labels.ctl" fill="true" halign="0" pad="6"/>
+							<ui:for id="i" first=":f*16" last=":f*16+15">
+								<ui:set id="ch" value="${chp}_${i}"/>
+								<grid rows="2" cols="1" fill="false">
+									<button ui:inject="Button_yellow_8" text="labels.chan.on" id="xe${ch}" width="42" height="10" pad="6"/>
+									<hbox fill="false" spacing="4" pad.b="14" width="37">
+										<button ui:inject="Button_green_8" id="xs${ch}" text="labels.chan.S_olo" height="10" width="19"/>
+										<button ui:inject="Button_red_8" id="xm${ch}" text="labels.chan.M_ute" height="10" width="19"/>
+									</hbox>
+								</grid>
+							</ui:for>
+
+							<cell rows="2"><label text="labels.gain:db" fill="true" halign="0" pad="6"/></cell>
+							<ui:for id="i" first=":f*16" last=":f*16+15">
+								<knob id="g${chp}_${i}" size="20" scolor="${chc}"/>
+							</ui:for>
+
+							<ui:for id="i" first=":f*16" last=":f*16+15">
+								<value id="g${chp}_${i}" detailed="false" pad.b="6"/>
+							</ui:for>
+						</ui:with>
 					</grid>
 				</ui:for>
 			</cgroup>
-		</cell>		
+		</cell>
 	</grid>
 </plugin>
