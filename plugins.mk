@@ -18,13 +18,6 @@
 # along with lsp-plugins-graph-equalizer.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-# Package version
-ARTIFACT_ID                 = LSP_PLUGINS_GRAPH_EQUALIZER
-ARTIFACT_NAME               = lsp-plugins-graph-equalizer
-ARTIFACT_TYPE               = plug
-ARTIFACT_DESC               = LSP Graphic Equalizer Plugin Series
-ARTIFACT_HEADERS            = lsp-plug.in
-ARTIFACT_VERSION            = 1.0.3-devel
-
-
-
+# Variables that describe dependencies
+PLUGIN_DEPENDENCIES     = LSP_PLUGINS_GRAPH_EQUALIZER
+PLUGIN_PACKAGE_NAME     = lsp-plugins
