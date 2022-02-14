@@ -320,6 +320,15 @@ namespace lsp
             PORTS_END
         };
 
+        const meta::bundle_t graph_equalizer_bundle =
+        {
+            "graph_equalizer",
+            "Graphic Equalizer",
+            B_EQUALIZERS,
+            "OQq5r1gr5tw",
+            "This plugin performs graphic equalization of signal. Overall 16 or 32\nfrequency bands are available for correction in range of 72 dB (-36..+36 dB)."
+        };
+
         const meta::plugin_t graph_equalizer_x16_mono =
         {
             "Grafischer Entzerrer x16 Mono",
@@ -338,7 +347,8 @@ namespace lsp
             graph_equalizer_x16_mono_ports,
             "equalizer/graphic/mono.xml",
             NULL,
-            mono_plugin_port_groups
+            mono_plugin_port_groups,
+            &graph_equalizer_bundle
         };
 
         const meta::plugin_t graph_equalizer_x32_mono =
@@ -359,7 +369,8 @@ namespace lsp
             graph_equalizer_x32_mono_ports,
             "equalizer/graphic/mono.xml",
             NULL,
-            mono_plugin_port_groups
+            mono_plugin_port_groups,
+            &graph_equalizer_bundle
         };
 
         const meta::plugin_t graph_equalizer_x16_stereo =
@@ -380,7 +391,8 @@ namespace lsp
             graph_equalizer_x16_stereo_ports,
             "equalizer/graphic/stereo.xml",
             NULL,
-            stereo_plugin_port_groups
+            stereo_plugin_port_groups,
+            &graph_equalizer_bundle
         };
 
         const meta::plugin_t graph_equalizer_x32_stereo =
@@ -401,7 +413,8 @@ namespace lsp
             graph_equalizer_x32_stereo_ports,
             "equalizer/graphic/stereo.xml",
             NULL,
-            stereo_plugin_port_groups
+            stereo_plugin_port_groups,
+            &graph_equalizer_bundle
         };
 
         const meta::plugin_t graph_equalizer_x16_lr =
@@ -422,7 +435,8 @@ namespace lsp
             graph_equalizer_x16_lr_ports,
             "equalizer/graphic/lr.xml",
             NULL,
-            stereo_plugin_port_groups
+            stereo_plugin_port_groups,
+            &graph_equalizer_bundle
         };
 
         const meta::plugin_t graph_equalizer_x32_lr =
@@ -443,7 +457,8 @@ namespace lsp
             graph_equalizer_x32_lr_ports,
             "equalizer/graphic/lr.xml",
             NULL,
-            stereo_plugin_port_groups
+            stereo_plugin_port_groups,
+            &graph_equalizer_bundle
         };
 
         const meta::plugin_t graph_equalizer_x16_ms =
@@ -464,7 +479,8 @@ namespace lsp
             graph_equalizer_x16_ms_ports,
             "equalizer/graphic/ms.xml",
             NULL,
-            stereo_plugin_port_groups
+            stereo_plugin_port_groups,
+            &graph_equalizer_bundle
         };
 
         const meta::plugin_t graph_equalizer_x32_ms =
@@ -485,7 +501,8 @@ namespace lsp
             graph_equalizer_x32_ms_ports,
             "equalizer/graphic/ms.xml",
             NULL,
-            stereo_plugin_port_groups
+            stereo_plugin_port_groups,
+            &graph_equalizer_bundle
         };
     } // namespace meta
 } // namespace lsp
