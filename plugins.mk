@@ -19,5 +19,11 @@
 #
 
 # Variables that describe dependencies
-PLUGIN_DEPENDENCIES     = LSP_PLUGINS_GRAPH_EQUALIZER
 PLUGIN_PACKAGE_NAME     = lsp-plugins
+
+PLUGIN_SHARED = \
+  LSP_PLUGINS_SHARED
+
+PLUGIN_DEPENDENCIES = lsp-plugins-graph-equalizer
+  LSP_PLUGINS_PLUGIN_TEMPLATE
+
