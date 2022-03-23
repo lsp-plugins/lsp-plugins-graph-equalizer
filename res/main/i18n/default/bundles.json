@@ -1,0 +1,7 @@
+{
+	"graph_equalizer": {
+		"name": "Graphic Equalizer",
+		"description": "This plugin performs graphic equalization of signal. Overall 16 or 32\nfrequency bands are available for correction in range of 72 dB (-36..+36 dB)."
+	}
+}
+
