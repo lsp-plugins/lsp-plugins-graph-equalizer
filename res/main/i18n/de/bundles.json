@@ -1,0 +1,7 @@
+{
+	"graph_equalizer": {
+		"name": "Graphischer Equalizer",
+		"description": "Dieses Plugin dient als grafischer Equalizer des Signals. Insgesamt 16 bzw. 32\nFrequenzbänder sind verfügbar um Korrekturen im Umfang von 72 dB (-36 dB bis +36 dB) \ndurch zu führen."
+	}
+}
+
