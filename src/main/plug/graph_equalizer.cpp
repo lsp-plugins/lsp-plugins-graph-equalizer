@@ -382,6 +382,12 @@ namespace lsp
                 vChannels       = NULL;
             }
 
+            if (vIndexes != NULL)
+            {
+                delete [] vIndexes;
+                vIndexes    = NULL;
+            }
+
             if (vFreqs != NULL)
             {
                 delete [] vFreqs;
