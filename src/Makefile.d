@@ -7,6 +7,7 @@ $(LSP_PLUGINS_GRAPH_EQUALIZER_BIN)/main/meta/graph_equalizer.o: \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/meta/types.h \
  $(LSP_COMMON_LIB_INC)/lsp-plug.in/common/types.h \
  $(LSP_COMMON_LIB_INC)/lsp-plug.in/common/version.h \
+ $(LSP_COMMON_LIB_INC)/lsp-plug.in/common/finally.h \
  $(LSP_PLUGINS_SHARED_INC)/lsp-plug.in/shared/meta/developers.h \
  $(LSP_PLUGINS_SHARED_INC)/lsp-plug.in/shared/version.h \
  $(LSP_PLUGINS_GRAPH_EQUALIZER_INC)/private/meta/graph_equalizer.h \
@@ -21,6 +22,7 @@ $(LSP_PLUGINS_GRAPH_EQUALIZER_BIN)/main/plug/graph_equalizer.o: \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/meta/types.h \
  $(LSP_COMMON_LIB_INC)/lsp-plug.in/common/types.h \
  $(LSP_COMMON_LIB_INC)/lsp-plug.in/common/version.h \
+ $(LSP_COMMON_LIB_INC)/lsp-plug.in/common/finally.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/plug/data.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/const.h \
  $(LSP_DSP_UNITS_INC)/lsp-plug.in/dsp-units/const.h \
@@ -88,7 +90,6 @@ $(LSP_PLUGINS_GRAPH_EQUALIZER_BIN)/main/plug/graph_equalizer.o: \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/hmath.h \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/hmath/hdotp.h \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/hmath/hsum.h \
- $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/misc.h \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/mix.h \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/msmatrix.h \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/pcomplex.h \
@@ -99,6 +100,7 @@ $(LSP_PLUGINS_GRAPH_EQUALIZER_BIN)/main/plug/graph_equalizer.o: \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/pmath/fmop_vv.h \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/pmath/log.h \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/pmath/minmax.h \
+ $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/pmath/normalize.h \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/pmath/op_kx.h \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/pmath/op_vv.h \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/pmath/pow.h \
@@ -125,6 +127,7 @@ $(LSP_PLUGINS_GRAPH_EQUALIZER_BIN)/main/ui/graph_equalizer.o: \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/meta/types.h \
  $(LSP_COMMON_LIB_INC)/lsp-plug.in/common/types.h \
  $(LSP_COMMON_LIB_INC)/lsp-plug.in/common/version.h \
+ $(LSP_COMMON_LIB_INC)/lsp-plug.in/common/finally.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/plug/data.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/const.h \
  $(LSP_DSP_UNITS_INC)/lsp-plug.in/dsp-units/const.h \
@@ -192,7 +195,6 @@ $(LSP_PLUGINS_GRAPH_EQUALIZER_BIN)/main/ui/graph_equalizer.o: \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/hmath.h \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/hmath/hdotp.h \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/hmath/hsum.h \
- $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/misc.h \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/mix.h \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/msmatrix.h \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/pcomplex.h \
@@ -203,6 +205,7 @@ $(LSP_PLUGINS_GRAPH_EQUALIZER_BIN)/main/ui/graph_equalizer.o: \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/pmath/fmop_vv.h \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/pmath/log.h \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/pmath/minmax.h \
+ $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/pmath/normalize.h \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/pmath/op_kx.h \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/pmath/op_vv.h \
  $(LSP_DSP_LIB_INC)/lsp-plug.in/dsp/common/pmath/pow.h \
@@ -244,6 +247,10 @@ $(LSP_PLUGINS_GRAPH_EQUALIZER_BIN)/main/ui/graph_equalizer.o: \
  $(LSP_WS_LIB_INC)/lsp-plug.in/ws/ISurface.h \
  $(LSP_WS_LIB_INC)/lsp-plug.in/ws/IDisplay.h \
  $(LSP_RUNTIME_LIB_INC)/lsp-plug.in/ipc/Library.h \
+ $(LSP_RUNTIME_LIB_INC)/lsp-plug.in/ipc/Mutex.h \
+ $(LSP_COMMON_LIB_INC)/lsp-plug.in/common/atomic.h \
+ $(LSP_COMMON_LIB_INC)/lsp-plug.in/common/arch/x86/atomic.h \
+ $(LSP_RUNTIME_LIB_INC)/lsp-plug.in/ipc/Thread.h \
  $(LSP_R3D_IFACE_INC)/lsp-plug.in/r3d/iface/backend.h \
  $(LSP_R3D_IFACE_INC)/lsp-plug.in/r3d/iface/version.h \
  $(LSP_R3D_IFACE_INC)/lsp-plug.in/r3d/iface/types.h \
@@ -255,6 +262,7 @@ $(LSP_PLUGINS_GRAPH_EQUALIZER_BIN)/main/ui/graph_equalizer.o: \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/prop/collection/CollectionListener.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/style/IStyleListener.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/prop/base/Property.h \
+ $(LSP_COMMON_LIB_INC)/lsp-plug.in/common/variadic.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/prop/base/Ptr.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/prop/base/SimpleProperty.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/prop/base/MultiProperty.h \
@@ -330,9 +338,6 @@ $(LSP_PLUGINS_GRAPH_EQUALIZER_BIN)/main/ui/graph_equalizer.o: \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/sys/SlotSet.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/sys/Timer.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/sys/Display.h \
- $(LSP_RUNTIME_LIB_INC)/lsp-plug.in/ipc/Mutex.h \
- $(LSP_COMMON_LIB_INC)/lsp-plug.in/common/atomic.h \
- $(LSP_COMMON_LIB_INC)/lsp-plug.in/common/arch/x86/atomic.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/util/KeyboardHandler.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/util/TextCursor.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/util/TextDataSink.h \
@@ -395,6 +400,7 @@ $(LSP_PLUGINS_GRAPH_EQUALIZER_BIN)/main/ui/graph_equalizer.o: \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/dialogs/FileDialog.h \
  $(LSP_RUNTIME_LIB_INC)/lsp-plug.in/fmt/bookmarks.h \
  $(LSP_RUNTIME_LIB_INC)/lsp-plug.in/io/IOutSequence.h \
+ $(LSP_RUNTIME_LIB_INC)/lsp-plug.in/runtime/system.h \
  $(LSP_RUNTIME_LIB_INC)/lsp-plug.in/expr/Variables.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ui/Module.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ui/SwitchedPort.h \
