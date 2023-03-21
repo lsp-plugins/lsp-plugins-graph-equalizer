@@ -57,7 +57,8 @@
 								bcolor="graph_mesh"
 								hover.bcolor="graph_mesh"
 								y.editable="true"
-								visibility=":fv_${i}"/>
+								visibility=":fv_${i}"
+								y.astep="1"/>
 						</ui:for>
 					</ui:if>
 					<ui:if test=":num_filters igt 16">
@@ -70,7 +71,8 @@
 								bcolor="graph_mesh"
 								hover.bcolor="graph_mesh"
 								y.editable="true"
-								visibility=":fv_${i}"/>
+								visibility=":fv_${i}"
+								y.astep="1"/>
 						</ui:for>
 					</ui:if>
 

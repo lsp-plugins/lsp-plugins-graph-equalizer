@@ -20,6 +20,7 @@
  */
 
 #include <private/plugins/graph_equalizer.h>
+#include <lsp-plug.in/common/debug.h>
 #include <lsp-plug.in/dsp/dsp.h>
 #include <lsp-plug.in/stdlib/math.h>
 

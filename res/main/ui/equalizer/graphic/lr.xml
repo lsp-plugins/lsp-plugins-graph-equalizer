@@ -51,10 +51,28 @@
 					<mesh id="ag_r" width="3" color="right" fill="true" fcolor="right" fcolor.a="0.8" smooth="true"/>
 					<ui:if test=":num_filters ile 16">
 						<ui:for id="y" counter="i" list="14.62;23.27;36.74;58.48;92.83;146.20;232.70;367.45;584.80;928.32;1462.01;2326.97;3674.49;5848.04;9283.18;14620.09">
-							<dot x="${y}" y.id="gl_${i}" y.editable="true" pointer="hand" bsize="4" color="left" hover.color="left" bcolor="left" hover.bcolor="left" visibility=":fvl_${i}"/>
+							<dot x="${y}" y.id="gl_${i}" 
+								y.editable="true" 
+								pointer="hand" 
+								bsize="4" 
+								color="left" 
+								hover.color="left" 
+								bcolor="left" 
+								hover.bcolor="left" 
+								visibility=":fvl_${i}"
+								y.astep="1"/>
 						</ui:for>
 						<ui:for id="y" counter="i" list="17.10;27.07;42.86;68.40;107.72;171.00;270.74;428.63;683.99;1077.22;1709.98;2707.39;4286.31;6839.91;10772.17;17099.76">
-							<dot x="${y}" y.id="gr_${i}" y.editable="true" pointer="hand" bsize="4" color="right" hover.color="right" bcolor="right" hover.bcolor="right" visibility=":fvr_${i}"/>
+							<dot x="${y}" y.id="gr_${i}" 
+								y.editable="true" 
+								pointer="hand" 
+								bsize="4" 
+								color="right" 
+								hover.color="right" 
+								bcolor="right" 
+								hover.bcolor="right" 
+								visibility=":fvr_${i}"
+								y.astep="1"/>
 						</ui:for>
 					</ui:if>
 
