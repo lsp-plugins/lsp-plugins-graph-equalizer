@@ -102,7 +102,7 @@
 					<!-- -48..+48 dB -->
 					<axis min="-1" max="1" visible="false" angle="0.5"/>
 
-					<!-- Text -
+					<!-- Text -->
 					<ui:with ox="0" oy="2" y="0" halign="1" valign="1">
 						<text x="10" text="graph.units.hz"/>
 						<text x="20" text="20"/>
@@ -145,34 +145,50 @@
 					<ui:if test=":num_filters ile 16">
 						<ui:for id="y" counter="i"
 							list="14.62;23.27;36.74;58.48;92.83;146.20;232.70;367.45;584.80;928.32;1462.01;2326.97;3674.49;5848.04;9283.18;14620.09">
-							<text x="${y}" y=":gm_${i}" color="mid" visibility=":fvm_${i}"
-								text="XXX" />
+							<text 
+								x="${y}" y=":gm_${i}" 
+								color="mid" 
+								visibility=":fvm_${i}" 
+								text="MMM"
+								halign="${(:y lt 500) ? 1 : -1}" valign="(:gm_${i} ge 0 db) ? 1 : -1"
+								text.halign="${(:y lt 500) ? -1 : 1}"
+							/>
 						</ui:for>
 						<ui:for id="y" counter="i"
 							list="17.10;27.07;42.86;68.40;107.72;171.00;270.74;428.63;683.99;1077.22;1709.98;2707.39;4286.31;6839.91;10772.17;17099.76">
-							<text x="${y}" y=":gs_${i}" color="side" visibility=":fvs_${i}"
-								text="XXX" />
-						</ui:for>
-					</ui:if>
-					-->
-				
-					<ui:if test=":num_filters igt 16">
-						<ui:for id="y" counter="i"
-							list="1000">
-							<text 
-							x="${y}" 
-							y=":gm_${i}" 
-							color="mid" 
-							visibility=":fvm_${i}" 
-							text="MMM"
-							halign="${(:y lt 500) ? 1 : -1}" text.halign="${(:y lt 500) ? -1 : 1}"
+							<text
+								x="${y}" y=":gs_${i}"
+								color="side"
+								visibility=":fvs_${i}"
+								text="SSS"
+								halign="${(:y lt 500) ? 1 : -1}" valign="(:gs_${i} ge 0 db) ? 1 : -1"
+								text.halign="${(:y lt 500) ? -1 : 1}"
 							/>
 						</ui:for>
-						<!-- <ui:for id="y" counter="i"
+					</ui:if>
+				
+					<ui:if test=":num_filters igt 16">
+						<ui:for id="y" counter="i" list="14.91;18.91;23.71;29.82;37.46;47.43;59.64;74.92;94.57;119.27;149.09;189.15;237.14;298.18;374.59;474.29;596.37;749.18;945.74;1192.74;1490.92;1891.48;2371.43;2981.84;3745.92;4742.86;5963.69;7491.83;9457.42;11927.37;14909.23;18914.82">
+							<text 
+								x="${y}" y=":gm_${i}" 
+								color="mid" 
+								visibility=":fvm_${i}" 
+								text="MMM"
+								halign="${(:y lt 500) ? 1 : -1}" valign="(:gm_${i} ge 0 db) ? 1 : -1"
+								text.halign="${(:y lt 500) ? -1 : 1}"
+							/>
+						</ui:for>
+						<ui:for id="y" counter="i"
 							list="16.77;21.15;26.57;33.54;42.05;53.13;67.07;84.09;105.74;134.15;167.68;211.47;265.66;335.36;420.46;531.33;670.73;840.92;1057.37;1341.45;1676.81;2114.74;2656.63;3353.63;4204.58;5313.25;6707.26;8409.16;10573.72;13414.51;16768.14;21147.40">
-							<text x="${y}" y=":gs_${i}" color="side"
-								visibility=":fvs_${i}" text="XXX" />
-						</ui:for>-->
+							<text
+								x="${y}" y=":gs_${i}"
+								color="side"
+								visibility=":fvs_${i}"
+								text="SSS"
+								halign="${(:y lt 500) ? 1 : -1}" valign="(:gs_${i} ge 0 db) ? 1 : -1"
+								text.halign="${(:y lt 500) ? -1 : 1}"
+							/>
+						</ui:for>
 					</ui:if>
 					
 				</graph>
