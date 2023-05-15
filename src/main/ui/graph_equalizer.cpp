@@ -22,6 +22,9 @@
 #include <private/plugins/graph_equalizer.h>
 #include <lsp-plug.in/plug-fw/ui.h>
 
+#include <private/meta/graph_equalizer.h>
+#include <private/ui/graph_equalizer.h>
+
 namespace lsp
 {
     namespace plugui
@@ -40,7 +43,42 @@ namespace lsp
             &meta::graph_equalizer_x32_ms
         };
 
-        static ui::Factory factory(plugin_uis, 8);
+        static ui::Module *ui_factory(const meta::plugin_t *meta)
+        {
+            return new graph_equalizer_ui(meta);
+        }
+
+        static ui::Factory factory(ui_factory, plugin_uis, 8);
+
+        //---------------------------------------------------------------------
+        graph_equalizer_ui::graph_equalizer_ui(const meta::plugin_t *meta): ui::Module(meta)
+        {
+
+        }
+
+        graph_equalizer_ui::~graph_equalizer_ui()
+        {
+
+        }
+
+        status_t graph_equalizer_ui::post_init()
+        {
+            status_t res = ui::Module::post_init();
+            if (res != STATUS_OK)
+                return res;
+
+            return STATUS_OK;
+        }
+
+        status_t graph_equalizer_ui::pre_destroy()
+        {
+            return ui::Module::pre_destroy();
+        }
+
+        void graph_equalizer_ui::notify(ui::IPort *port)
+        {
+
+        }
 
     } // namespace plugui
 } // namespace lsp
