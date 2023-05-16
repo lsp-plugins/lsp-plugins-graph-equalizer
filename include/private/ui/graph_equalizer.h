@@ -36,6 +36,38 @@ namespace lsp
         class graph_equalizer_ui: public ui::Module, public ui::IPortListener
         {
 
+            protected:
+                typedef struct filter_t
+                {
+                    graph_equalizer_ui *pUI;
+                    ws::rectangle_t sRect; // The overall rectangle over the grid
+
+                    bool bMouseIn;       // Mouse is over filter indicator
+
+                    float fFreq;
+
+                    ui::IPort *pGain;
+
+                    tk::Widget *wGrid;    // Grid associated with the filter
+                    tk::GraphDot *wDot;           // Graph dot for editing
+                    tk::GraphText *wInfo;    // Text with note and frequency
+
+                    tk::Knob *wGain;          // Gain button
+                } filter_t;
+
+            protected:
+                const char        **fmtStrings;
+                size_t              nFilters;
+                lltl::darray<filter_t> vFilters;
+
+            protected:
+                void add_filters();
+
+                template <class T>
+                T *find_filter_widget(const char *fmt, const char *base, size_t id);
+
+                ui::IPort *find_port(const char *fmt, const char *base, size_t id);
+
             public:
                 explicit graph_equalizer_ui(const meta::plugin_t *meta);
                 virtual ~graph_equalizer_ui() override;
