@@ -47,6 +47,8 @@ namespace lsp
                     float fFreq;
 
                     ui::IPort *pGain;
+                    ui::IPort *pOn;
+                    ui::IPort *pMute;
 
                     tk::Widget *wGrid;    // Grid associated with the filter
                     tk::GraphDot *wDot;           // Graph dot for editing
@@ -56,12 +58,22 @@ namespace lsp
                 } filter_t;
 
             protected:
-                const char        **fmtStrings;
-                size_t              nFilters;
-                lltl::darray<filter_t> vFilters;
+                const char            **fmtStrings;
+                size_t                  nFilters;
+                lltl::darray<filter_t>  vFilters;
+                filter_t               *pCurrFilter;
+
+            protected:
+                static status_t slot_filter_mouse_in(tk::Widget *sender, void *ptr, void *data);
+                static status_t slot_filter_mouse_out(tk::Widget *sender, void *ptr, void *data);
 
             protected:
                 void add_filters();
+
+                void on_filter_mouse_in(filter_t *f);
+                void on_filter_mouse_out();
+
+                void update_filter_info_text();
 
                 template <class T>
                 T *find_filter_widget(const char *fmt, const char *base, size_t id);

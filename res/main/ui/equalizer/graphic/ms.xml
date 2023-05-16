@@ -153,8 +153,7 @@
 								ui:id="filter_infom_${i}"
 								x="${y}" y=":gm_${i}" 
 								color="mid" 
-								visibility=":fvm_${i}" 
-								text="MMM"
+								visibility="false"						
 								halign="${(:y lt 500) ? 1 : -1}" valign="(:gm_${i} ge 0 db) ? 1 : -1"
 								text.halign="${(:y lt 500) ? -1 : 1}"
 							/>
@@ -165,8 +164,7 @@
 								ui:id="filter_infos_${i}"
 								x="${y}" y=":gs_${i}"
 								color="side"
-								visibility=":fvs_${i}"
-								text="SSS"
+								visibility="false"
 								halign="${(:y lt 500) ? 1 : -1}" valign="(:gs_${i} ge 0 db) ? 1 : -1"
 								text.halign="${(:y lt 500) ? -1 : 1}"
 							/>
@@ -179,8 +177,7 @@
 								ui:id="filter_infom_${i}"
 								x="${y}" y=":gm_${i}" 
 								color="mid" 
-								visibility=":fvm_${i}" 
-								text="MMM"
+								visibility="false"
 								halign="${(:y lt 500) ? 1 : -1}" valign="(:gm_${i} ge 0 db) ? 1 : -1"
 								text.halign="${(:y lt 500) ? -1 : 1}"
 							/>
@@ -191,8 +188,7 @@
 								ui:id="filter_infos_${i}"
 								x="${y}" y=":gs_${i}"
 								color="side"
-								visibility=":fvs_${i}"
-								text="SSS"
+								visibility="false"
 								halign="${(:y lt 500) ? 1 : -1}" valign="(:gs_${i} ge 0 db) ? 1 : -1"
 								text.halign="${(:y lt 500) ? -1 : 1}"
 							/>
