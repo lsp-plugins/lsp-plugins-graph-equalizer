@@ -40,38 +40,55 @@ namespace lsp
                 typedef struct filter_t
                 {
                     graph_equalizer_ui *pUI;
-                    ws::rectangle_t sRect; // The overall rectangle over the grid
+                    ws::rectangle_t sRect;      // The overall rectangle over the grid
 
-                    bool bMouseIn;       // Mouse is over filter indicator
+                    bool bMouseIn;              // Mouse is over filter indicator
 
                     float fFreq;
 
                     ui::IPort *pGain;
                     ui::IPort *pOn;
                     ui::IPort *pMute;
+                    ui::IPort *pVisible;
 
-                    tk::Widget *wGrid;    // Grid associated with the filter
-                    tk::GraphDot *wDot;           // Graph dot for editing
-                    tk::GraphText *wInfo;    // Text with note and frequency
+                    tk::Widget *wGrid;          // Grid associated with the filter
+                    tk::GraphMarker *wMarker;   // Graph dot for editing
+                    tk::GraphDot *wDot;         // Graph dot for editing
+                    tk::GraphText *wInfo;       // Text with note and frequency
 
-                    tk::Knob *wGain;          // Gain button
+                    tk::Knob *wGain;            // Gain button
                 } filter_t;
 
             protected:
                 const char            **fmtStrings;
                 size_t                  nFilters;
                 lltl::darray<filter_t>  vFilters;
+                lltl::parray<tk::Widget> vFilterGrids;   // List of filter grids
                 filter_t               *pCurrFilter;
 
             protected:
                 static status_t slot_filter_mouse_in(tk::Widget *sender, void *ptr, void *data);
                 static status_t slot_filter_mouse_out(tk::Widget *sender, void *ptr, void *data);
 
+                static status_t slot_main_grid_realized(tk::Widget *sender, void *ptr, void *data);
+                static status_t slot_main_grid_mouse_in(tk::Widget *sender, void *ptr, void *data);
+                static status_t slot_main_grid_mouse_out(tk::Widget *sender, void *ptr, void *data);
+                static status_t slot_main_grid_mouse_move(tk::Widget *sender, void *ptr, void *data);
+
             protected:
                 void add_filters();
 
                 void on_filter_mouse_in(filter_t *f);
                 void on_filter_mouse_out();
+
+                filter_t *find_filter_by_rect(tk::Widget *grid, ssize_t x, ssize_t y);
+                void on_main_grid_realized(tk::Widget *w);
+
+                void on_main_grid_mouse_in(tk::Widget *w, ssize_t x, ssize_t y);
+                void on_main_grid_mouse_out(tk::Widget *w, ssize_t x, ssize_t y);
+                void on_main_grid_mouse_move(tk::Widget *w, ssize_t x, ssize_t y);
+
+                tk::Widget *find_filter_grid(filter_t *f);
 
                 void update_filter_info_text();
 

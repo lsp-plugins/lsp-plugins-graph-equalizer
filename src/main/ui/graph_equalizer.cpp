@@ -111,6 +111,17 @@ namespace lsp
             if (res != STATUS_OK)
                 return res;
 
+            // Find main filter grids
+            pWrapper->controller()->widgets()->query_group("filters", &vFilterGrids);
+            for (size_t i=0, n=vFilterGrids.size(); i<n; ++i)
+            {
+                tk::Widget *g = vFilterGrids.uget(i);
+                g->slots()->bind(tk::SLOT_REALIZED, slot_main_grid_realized, this);
+                g->slots()->bind(tk::SLOT_MOUSE_IN, slot_main_grid_mouse_in, this);
+                g->slots()->bind(tk::SLOT_MOUSE_OUT, slot_main_grid_mouse_out, this);
+                g->slots()->bind(tk::SLOT_MOUSE_MOVE, slot_main_grid_mouse_move, this);
+            }
+
             add_filters();
 
             return STATUS_OK;
@@ -154,22 +165,22 @@ namespace lsp
 
                     f.bMouseIn      = false;
 
+                    f.wMarker       = find_filter_widget<tk::GraphMarker>(*fmt, "filter_marker", port_id);
                     f.wDot          = find_filter_widget<tk::GraphDot>(*fmt, "filter_dot", port_id);
                     f.wInfo         = find_filter_widget<tk::GraphText>(*fmt, "filter_info", port_id);
 
                     f.wGain         = find_filter_widget<tk::Knob>(*fmt, "filter_gain", port_id);
-                    f.wGrid         = NULL; //find_filter_grid(&f);
+                    f.wGrid         = find_filter_grid(&f);
 
                     f.fFreq         = meta::graph_equalizer_metadata::band_frequencies[port_id*step];
                     f.pGain         = find_port(*fmt, "g", port_id);
+                    if (f.pGain != NULL)
+                        f.pGain->bind(this);
                     f.pOn           = find_port(*fmt, "xe", port_id);
                     f.pMute         = find_port(*fmt, "xm", port_id);
-
-//                    if (f.wDot != NULL)
-//                        f.wDot->slots()->bind(tk::SLOT_MOUSE_CLICK, slot_filter_dot_click, this);
-
-//                    bind_filter_edit(f.wDot);
-//                    bind_filter_edit(f.wGain);
+                    f.pVisible      = find_port(*fmt, "fv", port_id);
+                    if (f.pVisible != NULL)
+                        f.pVisible->bind(this);
 
                     vFilters.add(&f);
                 }
@@ -191,20 +202,20 @@ namespace lsp
                         f->wDot->slots()->bind(tk::SLOT_MOUSE_OUT, slot_filter_mouse_out, f);
                     }
 
-//                    // Get all filter-related widgets
-//                    LSPString grp_name;
-//                    grp_name.fmt_utf8(*fmt, "grp_filter", int(port_id));
-//                    lltl::parray<tk::Widget> all_widgets;
-//                    pWrapper->controller()->widgets()->query_group(&grp_name, &all_widgets);
-//                    for (size_t i=0, n=all_widgets.size(); i<n; ++i)
-//                    {
-//                        tk::Widget *w = all_widgets.uget(i);
-//                        if (w != NULL)
-//                        {
-//                            w->slots()->bind(tk::SLOT_MOUSE_IN, slot_filter_mouse_in, f);
-//                            w->slots()->bind(tk::SLOT_MOUSE_OUT, slot_filter_mouse_out, f);
-//                        }
-//                    }
+                    // Get all filter-related widgets
+                    LSPString grp_name;
+                    grp_name.fmt_utf8(*fmt, "grp_filter", int(port_id));
+                    lltl::parray<tk::Widget> all_widgets;
+                    pWrapper->controller()->widgets()->query_group(&grp_name, &all_widgets);
+                    for (size_t i=0, n=all_widgets.size(); i<n; ++i)
+                    {
+                        tk::Widget *w = all_widgets.uget(i);
+                        if (w != NULL)
+                        {
+                            w->slots()->bind(tk::SLOT_MOUSE_IN, slot_filter_mouse_in, f);
+                            w->slots()->bind(tk::SLOT_MOUSE_OUT, slot_filter_mouse_out, f);
+                        }
+                    }
                 }
             }
         }
@@ -214,12 +225,18 @@ namespace lsp
             // Determine which frequency/note to show: of inspected filter or of selected filter
             filter_t *f = pCurrFilter;
 
+            if (f != NULL && f->pVisible != NULL && f->pVisible->value() < 0.5f)
+                f = NULL;
+
             // Commit current filter pointer and update note text
             for (size_t i=0, n=vFilters.size(); i<n; ++i)
             {
                 filter_t *xf = vFilters.uget(i);
                 if (xf != NULL)
+                {
                     xf->wInfo->visibility()->set(xf == f);
+                    xf->wMarker->visibility()->set(xf == f);
+                }
             }
 
             // Check that we have the widget to display
@@ -231,14 +248,16 @@ namespace lsp
             if (freq < 0.0f)
             {
                 f->wInfo->visibility()->set(false);
+                f->wMarker->visibility()->set(false);
                 return;
             }
 
             // Get the gain
-            float gain = (f->pGain != NULL) ? dspu::gain_to_db(f->pGain->value()) : -1.0f;
+            float gain = (f->pGain != NULL) ? f->pGain->value() : -1.0f;
             if (gain < 0.0f)
             {
                 f->wInfo->visibility()->set(false);
+                f->wMarker->visibility()->set(false);
                 return;
             }
 
@@ -247,6 +266,7 @@ namespace lsp
             if (!on)
             {
                 f->wInfo->visibility()->set(false);
+                f->wMarker->visibility()->set(false);
                 return;
             }
 
@@ -262,8 +282,8 @@ namespace lsp
                 text.fmt_ascii("%.2f", freq);
                 params.set_string("frequency", &text);
 
-                // Frequency
-                text.fmt_ascii("%.2f", gain);
+                // Gain
+                text.fmt_ascii("%.2f", dspu::gain_to_db(gain));
                 params.set_string("gain", &text);
 
                 // Filter number and audio channel
@@ -286,8 +306,93 @@ namespace lsp
             }
         }
 
+        graph_equalizer_ui::filter_t *graph_equalizer_ui::find_filter_by_rect(tk::Widget *grid, ssize_t x, ssize_t y)
+        {
+            for (size_t i=0, n=vFilters.size(); i<n; ++i)
+            {
+                filter_t *d = vFilters.uget(i);
+                if (d->wGrid != grid)
+                    continue;
+                if (tk::Position::inside(&d->sRect, x, y))
+                    return d;
+            }
+            return NULL;
+        }
+
+        void graph_equalizer_ui::on_main_grid_mouse_in(tk::Widget *w, ssize_t x, ssize_t y)
+        {
+            filter_t *f = find_filter_by_rect(w, x, y);
+            if (f != NULL)
+                on_filter_mouse_in(f);
+            else
+                on_filter_mouse_out();
+        }
+
+        void graph_equalizer_ui::on_main_grid_mouse_out(tk::Widget *w, ssize_t x, ssize_t y)
+        {
+            on_filter_mouse_out();
+        }
+
+        void graph_equalizer_ui::on_main_grid_mouse_move(tk::Widget *w, ssize_t x, ssize_t y)
+        {
+            filter_t *f = find_filter_by_rect(w, x, y);
+            if (f != NULL)
+                on_filter_mouse_in(f);
+            else
+                on_filter_mouse_out();
+        }
+
+        void graph_equalizer_ui::on_main_grid_realized(tk::Widget *w)
+        {
+            // Bind events
+            size_t index = 0;
+            for (const char **fmt = fmtStrings; *fmt != NULL; ++fmt)
+            {
+                for (size_t port_id=0; port_id<nFilters; ++port_id)
+                {
+                    filter_t *f = vFilters.uget(index++);
+                    if ((f == NULL) || (f->wGrid != w))
+                        continue;
+
+                    // Get all filter-related widgets
+                    LSPString grp_name;
+                    grp_name.fmt_utf8(*fmt, "grp_filter", int(port_id));
+                    lltl::parray<tk::Widget> all_widgets;
+                    pWrapper->controller()->widgets()->query_group(&grp_name, &all_widgets);
+
+                    // Estimate the surrounding rectangle size
+                    ws::rectangle_t r;
+                    ssize_t min_x = 0, max_x = 0;
+                    ssize_t min_y = 0, max_y = 0;
+                    for (size_t i=0, n=all_widgets.size(); i<n; ++i)
+                    {
+                        tk::Widget *w = all_widgets.uget(i);
+                        if (w != NULL)
+                        {
+                            w->get_rectangle(&r);
+                            min_x = lsp_min(min_x, r.nLeft);
+                            min_y = lsp_min(min_y, r.nTop);
+                            max_x = lsp_max(max_x, r.nLeft + r.nWidth);
+                            max_y = lsp_max(max_y, r.nTop + r.nHeight);
+                        }
+                    }
+
+                    // Update allocation rectangle
+                    f->sRect.nLeft      = min_x;
+                    f->sRect.nTop       = min_y;
+                    f->sRect.nWidth     = max_x - min_x;
+                    f->sRect.nHeight    = max_y - min_y;
+                }
+            }
+        }
+
         void graph_equalizer_ui::notify(ui::IPort *port)
         {
+            if (pCurrFilter != NULL)
+            {
+                if (pCurrFilter->pVisible == port || pCurrFilter->pGain == port)
+                    update_filter_info_text();
+            }
 
         }
 
@@ -315,6 +420,63 @@ namespace lsp
             return STATUS_OK;
         }
 
+        status_t graph_equalizer_ui::slot_main_grid_realized(tk::Widget *sender, void *ptr, void *data)
+        {
+            // Fetch parameters
+            graph_equalizer_ui *_this = static_cast<graph_equalizer_ui *>(ptr);
+            if (_this == NULL)
+                return STATUS_BAD_STATE;
+
+            _this->on_main_grid_realized(sender);
+
+            return STATUS_OK;
+        }
+
+        status_t graph_equalizer_ui::slot_main_grid_mouse_in(tk::Widget *sender, void *ptr, void *data)
+        {
+            // Fetch parameters
+            graph_equalizer_ui *_this = static_cast<graph_equalizer_ui *>(ptr);
+            if (_this == NULL)
+                return STATUS_BAD_STATE;
+            ws::event_t *ev = static_cast<ws::event_t *>(data);
+            if (ev == NULL)
+                return STATUS_BAD_STATE;
+
+            _this->on_main_grid_mouse_in(sender, ev->nLeft, ev->nTop);
+
+            return STATUS_OK;
+        }
+
+        status_t graph_equalizer_ui::slot_main_grid_mouse_out(tk::Widget *sender, void *ptr, void *data)
+        {
+            // Fetch parameters
+            graph_equalizer_ui *_this = static_cast<graph_equalizer_ui *>(ptr);
+            if (_this == NULL)
+                return STATUS_BAD_STATE;
+            ws::event_t *ev = static_cast<ws::event_t *>(data);
+            if (ev == NULL)
+                return STATUS_BAD_STATE;
+
+            _this->on_main_grid_mouse_out(sender, ev->nLeft, ev->nTop);
+
+            return STATUS_OK;
+        }
+
+        status_t graph_equalizer_ui::slot_main_grid_mouse_move(tk::Widget *sender, void *ptr, void *data)
+        {
+            // Fetch parameters
+            graph_equalizer_ui *_this = static_cast<graph_equalizer_ui *>(ptr);
+            if (_this == NULL)
+                return STATUS_BAD_STATE;
+            ws::event_t *ev = static_cast<ws::event_t *>(data);
+            if (ev == NULL)
+                return STATUS_BAD_STATE;
+
+            _this->on_main_grid_mouse_move(sender, ev->nLeft, ev->nTop);
+
+            return STATUS_OK;
+        }
+
         void graph_equalizer_ui::on_filter_mouse_in(filter_t *f)
         {
             pCurrFilter   = (f->pMute->value() >= 0.5) ? NULL : f;
@@ -332,6 +494,28 @@ namespace lsp
                     f->bMouseIn = false;
             }
             update_filter_info_text();
+        }
+
+        tk::Widget *graph_equalizer_ui::find_filter_grid(filter_t *f)
+        {
+            tk::Widget *list[] =
+            {
+                f->wGain
+            };
+
+            for (size_t i=0, n=vFilterGrids.size(); i<n; ++i)
+            {
+                tk::Widget *g = vFilterGrids.uget(i);
+
+                for (size_t j=0, m=sizeof(list)/sizeof(list[0]); j<m; ++j)
+                {
+                    tk::Widget *w = list[j];
+                    if ((w != NULL) && (w->has_parent(g)))
+                        return g;
+                }
+            }
+
+            return NULL;
         }
 
     } // namespace plugui
