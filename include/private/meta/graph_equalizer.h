@@ -74,6 +74,8 @@ namespace lsp
                 PEM_FFT,
                 PEM_SPM
             };
+
+            static const float band_frequencies[];
         };
 
         extern const meta::plugin_t graph_equalizer_x16_mono;
