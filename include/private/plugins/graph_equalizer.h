@@ -106,9 +106,6 @@ namespace lsp
                 } eq_channel_t;
 
             protected:
-                static const float band_frequencies[];
-
-            protected:
                 inline dspu::equalizer_mode_t   get_eq_mode();
                 void                            dump_channel(dspu::IStateDumper *v, const eq_channel_t *c) const;
                 static void                     dump_band(dspu::IStateDumper *v, const eq_band_t *b);

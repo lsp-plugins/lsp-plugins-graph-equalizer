@@ -49,7 +49,10 @@
 					<mesh id="ag" width="3" color="graph_mesh" fill="true" fcolor="graph_mesh" fcolor.a="0.8" smooth="true"/>
 					<ui:if test=":num_filters ile 16">
 						<ui:for id="f" counter="i" list="16;25;40;63;100;160;250;400;630;1000;1600;2500;4000;6300;10000;16000">
-							<dot x="${f}" y.id="g_${i}"
+							<marker ui:id="filter_marker_${i}" v="${f}" ox="0" oy="1" color="graph_mesh" visibility="false"/>
+							<dot
+								ui:id="filter_dot_${i}"
+								x="${f}" y.id="g_${i}"
 								pointer="hand"
 								bsize="4"
 								color="graph_mesh"
@@ -63,7 +66,10 @@
 					</ui:if>
 					<ui:if test=":num_filters igt 16">
 						<ui:for id="f" counter="i" list="16;20;25;31.5;40;50;63;80;100;125;160;200;250;315;400;500;630;800;1000;1250;1600;2000;2500;3150;4000;5000;6300;8000;10000;12500;16000;20000">
-							<dot x="${f}" y.id="g_${i}"
+							<marker ui:id="filter_marker_${i}" v="${f}" ox="0" oy="1" color="graph_mesh" visibility="false"/>
+							<dot
+								ui:id="filter_dot_${i}"
+								x="${f}" y.id="g_${i}"
 								pointer="hand"
 								color="graph_mesh"
 								bsize="4"
@@ -126,6 +132,39 @@
 						<text y="-3 db" text="-3" valign="1"/>
 						<text y="-9 db" text="-9" valign="1"/>
 					</ui:with>
+
+					<ui:if test=":num_filters ile 16">
+						<ui:for id="y" counter="i"
+							list="16;25;40;63;100;160;250;400;630;1000;1600;2500;4000;6300;10000;16000">
+							<text
+								ui:id="filter_info_${i}"
+								oy="2"
+								x="${y}" y="1"
+								color="graph_mesh"
+								visibility="false"
+								halign="${(:y lt 500) ? 1 : -1}"
+								valign="-1"
+								text.halign="${(:y lt 500) ? -1 : 1}"
+								pad.h="4"
+							/>
+						</ui:for>
+					</ui:if>
+
+					<ui:if test=":num_filters igt 16">
+						<ui:for id="y" counter="i" list="16;20;25;31.5;40;50;63;80;100;125;160;200;250;315;400;500;630;800;1000;1250;1600;2000;2500;3150;4000;5000;6300;8000;10000;12500;16000;20000">
+							<text
+								ui:id="filter_info_${i}"
+								oy="2"
+								x="${y}" y="1"
+								color="graph_mesh"
+								visibility="false"
+								halign="${(:y lt 500) ? 1 : -1}"
+								valign="-1"
+								text.halign="${(:y lt 500) ? -1 : 1}"
+								pad.h="4"
+							/>
+						</ui:for>
+					</ui:if>
 				</graph>
 			</group>
 
@@ -215,41 +254,42 @@
 		<cell cols="3">
 			<cgroup id="fsel" bg.color="bg" ipadding="0">
 				<ui:for id="f" first="0" last=":num_blocks-1">
-					<grid rows="5" cols="33" hspacing="2">
+					<grid ui:group="filters" rows="5" cols="33" hspacing="2">
 						<ui:with bg.color="bg_schema">
 							<label text="labels.units.hz" fill="true" halign="0" pad="6"/>
 							<!-- x16 frequencies -->
 							<ui:if test=":num_filters ile 16">
-								<ui:for id="f" list="16;25;40;63;100;160;250;400;630">
+								<ui:for id="f" counter="k" list="16;25;40;63;100;160;250;400;630">
 									<cell rows="5" bg.color="bg" pad.v="6"><vsep pad="0"/></cell>
-									<label text="${f}"/>
+									<label ui:group="grp_filter_${k}" text="${f}"/>
 								</ui:for>
-								<ui:for id="f" list="1;'1.6';'2.5';4;'6.3';10;16">
+								<ui:for id="f" counter="k" list="1;'1.6';'2.5';4;'6.3';10;16">
 									<cell rows="5" bg.color="bg" pad.v="6"><vsep pad="0"/></cell>
-									<label text="labels.values.x_k" text:value="${f}"/>
+									<label ui:group="grp_filter_${:k+9}" text="labels.values.x_k" text:value="${f}"/>
 								</ui:for>
 							</ui:if>
 							<!-- x32 frequencies (part 1) -->
 							<ui:if test="(:num_filters igt 16) and (:f ieq 0)">
-								<ui:for id="f" list="16;20;25;'31.5';40;50;63;80;100;125;160;200;250;315;400;500">
+								<ui:for id="f" counter="k" list="16;20;25;'31.5';40;50;63;80;100;125;160;200;250;315;400;500">
 									<cell rows="5" bg.color="bg" pad.v="6"><vsep pad="0"/></cell>
-									<label text="${f}"/>
+									<label ui:group="grp_filter_${k}" text="${f}"/>
 								</ui:for>
 							</ui:if>
 							<!-- x32 frequencies (part 2) -->
 							<ui:if test="(:num_filters igt 16) and (:f ieq 1)">
-								<ui:for id="f" list="630;800">
+								<ui:for id="f" counter="k" list="630;800">
 									<cell rows="5" bg.color="bg" pad.v="6"><vsep pad="0"/></cell>
-									<label text="${f}"/>
+									<label ui:group="grp_filter_${:k+16}" text="${f}"/>
 								</ui:for>
-								<ui:for id="f" list="1;'1.25';'1.6';2;'2.5';'3.15';4;5;'6.3';8;10;'12.5';16;20">
+								<ui:for id="f" counter="k" list="1;'1.25';'1.6';2;'2.5';'3.15';4;5;'6.3';8;10;'12.5';16;20">
 									<cell rows="5" bg.color="bg" pad.v="6"><vsep pad="0"/></cell>
-									<label text="labels.values.x_k" text:value="${f}"/>
+									<label ui:group="grp_filter_${:k+18}" text="labels.values.x_k" text:value="${f}"/>
 								</ui:for>
 							</ui:if>
 
 							<label text="labels.ctl" fill="true" halign="0" pad="6"/>
 							<ui:for id="i" first=":f*16" last=":f*16+15">
+								<ui:with ui:group="grp_filter_${i}">
 								<grid rows="2" cols="1" fill="false">
 									<button
 										ui:inject="Button_yellow_8"
@@ -275,15 +315,17 @@
 											width="19"/>
 									</hbox>
 								</grid>
+								</ui:with>
 							</ui:for>
 
 							<cell rows="2"><label text="labels.gain:db" fill="true" halign="0" pad="6"/></cell>
 							<ui:for id="i" first=":f*16" last=":f*16+15">
-								<knob id="g_${i}" size="20" scolor="mid"/>
+								<knob ui:group="grp_filter_${i}"
+									ui:id="filter_gain_${i}" id="g_${i}" size="20" scolor="mid"/>
 							</ui:for>
 
 							<ui:for id="i" first=":f*16" last=":f*16+15">
-								<value id="g_${i}" detailed="false" pad.b="6"/>
+								<value ui:group="grp_filter_${i}" id="g_${i}" detailed="false" pad.b="6"/>
 							</ui:for>
 						</ui:with>
 					</grid>

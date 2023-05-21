@@ -2,6 +2,10 @@
 * RECENT CHANGES
 *******************************************************************************
 
+=== 1.0.13 ===
+* Added frequency display and gain for each filter.
+* Updated build scripts and dependencies.
+
 === 1.0.12 ===
 * Updated build scripts and dependencies.
 
