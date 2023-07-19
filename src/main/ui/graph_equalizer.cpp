@@ -397,14 +397,13 @@ namespace lsp
             }
         }
 
-        void graph_equalizer_ui::notify(ui::IPort *port)
+        void graph_equalizer_ui::notify(ui::IPort *port, size_t flags)
         {
             if (pCurrFilter != NULL)
             {
                 if (pCurrFilter->pVisible == port || pCurrFilter->pGain == port)
                     update_filter_info_text();
             }
-
         }
 
         status_t graph_equalizer_ui::slot_filter_mouse_in(tk::Widget *sender, void *ptr, void *data)
