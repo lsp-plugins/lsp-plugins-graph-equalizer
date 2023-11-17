@@ -89,6 +89,7 @@ namespace lsp
                     eq_band_t          *vBands;         // Bands
                     float              *vIn;            // Input buffer
                     float              *vOut;           // Output buffer
+                    float              *vAnalyzer;      // Buffer for analyzer
                     float              *vDryBuf;        // Dry buffer
                     float              *vBuffer;        // Temporary buffer
 
@@ -99,7 +100,10 @@ namespace lsp
                     plug::IPort        *pOut;           // Output port
                     plug::IPort        *pInGain;        // Input gain
                     plug::IPort        *pTrAmp;         // Amplitude chart
-                    plug::IPort        *pFft;           // FFT chart
+                    plug::IPort        *pFftInSwitch;   // FFT input switch
+                    plug::IPort        *pFftOutSwitch;  // FFT output switch
+                    plug::IPort        *pFftInMesh;     // FFT input mesh
+                    plug::IPort        *pFftOutMesh;    // FFT output mesh
                     plug::IPort        *pVisible;       // Visibility flag
                     plug::IPort        *pInMeter;       // Output level meter
                     plug::IPort        *pOutMeter;      // Output level meter
@@ -115,7 +119,6 @@ namespace lsp
                 eq_channel_t       *vChannels;      // Equalizer channels
                 size_t              nBands;         // Number of bands
                 size_t              nMode;          // Equalize mode
-                size_t              nFftPosition;   // FFT analysis position
                 size_t              nSlope;         // Slope
                 bool                bListen;        // Listen
                 bool                bMatched;       // Matched transorm/Bilinear transform flag
@@ -131,7 +134,6 @@ namespace lsp
                 plug::IPort        *pInGain;        // Input gain
                 plug::IPort        *pOutGain;       // Output gain
                 plug::IPort        *pBypass;        // Bypass
-                plug::IPort        *pFftMode;       // FFT mode
                 plug::IPort        *pReactivity;    // FFT reactivity
                 plug::IPort        *pShiftGain;     // Shift gain
                 plug::IPort        *pZoom;          // Graph zoom
@@ -139,6 +141,7 @@ namespace lsp
 
             protected:
                 void                do_destroy();
+                void                perform_analysis(size_t samples);
 
             public:
                 explicit graph_equalizer(const meta::plugin_t *metadata, size_t bands, size_t mode);

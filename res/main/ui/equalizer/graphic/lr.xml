@@ -47,8 +47,8 @@
 
 					<mesh id="fftg_l" width="2" color="left" visibility=":fftv_l"/>
 					<mesh id="fftg_r" width="2" color="right" visibility=":fftv_r"/>
-					<mesh id="ag_l" width="3" color="left" fill="true" fcolor="left" fcolor.a="0.8" smooth="true"/>
-					<mesh id="ag_r" width="3" color="right" fill="true" fcolor="right" fcolor.a="0.8" smooth="true"/>
+					<mesh id="ag_l" width="3" color="left" fill="true" fcolor="left" fcolor.a="0.8" smooth="true" visibility=":fltv_l"/>
+					<mesh id="ag_r" width="3" color="right" fill="true" fcolor="right" fcolor.a="0.8" smooth="true" visibility=":fltv_r"/>
 					<ui:if test=":num_filters ile 16">
 						<ui:for id="y" counter="i" list="14.62;23.27;36.74;58.48;92.83;146.20;232.70;367.45;584.80;928.32;1462.01;2326.97;3674.49;5848.04;9283.18;14620.09">
 							<marker ui:id="filter_markerl_${i}" v="${y}" ox="0" oy="1" color="left" visibility="false"/>
@@ -219,8 +219,8 @@
 					<label text="labels.mode"/>
 					<combo id="slope" pad.r="6"/>
 					<combo id="mode" pad.r="12"/>
-					<button id="fftv_l" height="22" width="48" text="labels.chan.left" ui:inject="Button_left"/>
-					<button id="fftv_r" height="22" width="48" text="labels.chan.right" ui:inject="Button_right"/>
+					<button id="fltv_l" height="22" width="48" text="labels.chan.left" ui:inject="Button_left"/>
+					<button id="fltv_r" height="22" width="48" text="labels.chan.right" ui:inject="Button_right"/>
 				</hbox>
 			</align>
 		</vbox>

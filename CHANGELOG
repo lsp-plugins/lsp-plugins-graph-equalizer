@@ -3,7 +3,7 @@
 *******************************************************************************
 
 === 1.0.20 ===
-
+* Implemented separate input and output signal spectrum analysis.
 
 === 1.0.19 ===
 * Updated build scripts and dependencies.
