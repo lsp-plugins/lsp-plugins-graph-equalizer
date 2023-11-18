@@ -767,11 +767,11 @@ namespace lsp
                     mesh->pvData[1][meta::graph_equalizer_metadata::MESH_POINTS+1] = 0.0f;
 
                     // Copy frequency points
-                    dsp::copy(mesh->pvData[0], vFreqs, meta::graph_equalizer_metadata::MESH_POINTS);
+                    dsp::copy(&mesh->pvData[0][1], vFreqs, meta::graph_equalizer_metadata::MESH_POINTS);
                     sAnalyzer.get_spectrum(i*2, &mesh->pvData[1][1], vIndexes, meta::graph_equalizer_metadata::MESH_POINTS);
 
                     // Mark mesh containing data
-                    mesh->data(2, meta::graph_equalizer_metadata::MESH_POINTS);
+                    mesh->data(2, meta::graph_equalizer_metadata::MESH_POINTS+2);
                 }
 
                 // Output FFT mesh

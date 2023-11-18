@@ -248,8 +248,8 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
-            CHANNEL_ANALYSIS("l", " Left"),
-            CHANNEL_ANALYSIS("r", " Right"),
+            CHANNEL_ANALYSIS("_l", " Left"),
+            CHANNEL_ANALYSIS("_r", " Right"),
             EQ_STEREO_PORTS,
             EQ_BANDS_16X(EQ_BAND_STEREO),
 
@@ -260,8 +260,8 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
-            CHANNEL_ANALYSIS("l", " Left"),
-            CHANNEL_ANALYSIS("r", " Right"),
+            CHANNEL_ANALYSIS("_l", " Left"),
+            CHANNEL_ANALYSIS("_r", " Right"),
             BAND_SELECT(band_select_16lr),
             EQ_LR_PORTS,
             EQ_BANDS_16X(EQ_BAND_LR),
@@ -273,8 +273,8 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
-            CHANNEL_ANALYSIS("m", " Mid"),
-            CHANNEL_ANALYSIS("s", " Side"),
+            CHANNEL_ANALYSIS("_m", " Mid"),
+            CHANNEL_ANALYSIS("_s", " Side"),
             BAND_SELECT(band_select_16ms),
             EQ_MS_PORTS,
             EQ_BANDS_16X(EQ_BAND_MS),
@@ -298,8 +298,8 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
-            CHANNEL_ANALYSIS("l", " Left"),
-            CHANNEL_ANALYSIS("r", " Right"),
+            CHANNEL_ANALYSIS("_l", " Left"),
+            CHANNEL_ANALYSIS("_r", " Right"),
             BAND_SELECT(band_select_32),
             EQ_STEREO_PORTS,
             EQ_BANDS_32X(EQ_BAND_STEREO),
@@ -311,8 +311,8 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
-            CHANNEL_ANALYSIS("l", " Left"),
-            CHANNEL_ANALYSIS("r", " Right"),
+            CHANNEL_ANALYSIS("_l", " Left"),
+            CHANNEL_ANALYSIS("_r", " Right"),
             BAND_SELECT(band_select_32lr),
             EQ_LR_PORTS,
             EQ_BANDS_32X(EQ_BAND_LR),
@@ -324,8 +324,8 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
-            CHANNEL_ANALYSIS("m", " Mid"),
-            CHANNEL_ANALYSIS("s", " Side"),
+            CHANNEL_ANALYSIS("_m", " Mid"),
+            CHANNEL_ANALYSIS("_s", " Side"),
             BAND_SELECT(band_select_32ms),
             EQ_MS_PORTS,
             EQ_BANDS_32X(EQ_BAND_MS),

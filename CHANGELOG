@@ -4,6 +4,7 @@
 
 === 1.0.20 ===
 * Implemented separate input and output signal spectrum analysis.
+* Implemented automatic scale of spectrum graph switch.
 
 === 1.0.19 ===
 * Updated build scripts and dependencies.
