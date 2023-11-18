@@ -139,7 +139,7 @@ namespace lsp
                 return;
 
             // Allocate buffer
-            size_t allocate     = (EQ_BUFFER_SIZE*2 + (nBands + 1)*meta::graph_equalizer_metadata::MESH_POINTS*3) * channels + meta::graph_equalizer_metadata::MESH_POINTS;
+            size_t allocate     = (EQ_BUFFER_SIZE*3 + (nBands + 1)*meta::graph_equalizer_metadata::MESH_POINTS*2) * channels + meta::graph_equalizer_metadata::MESH_POINTS;
             float *abuf         = new float[allocate];
             if (abuf == NULL)
                 return;
@@ -165,7 +165,7 @@ namespace lsp
                 c->vIn              = NULL;
                 c->vOut             = NULL;
                 c->vAnalyzer        = abuf;
-                abuf               += meta::graph_equalizer_metadata::MESH_POINTS;
+                abuf               += EQ_BUFFER_SIZE;
                 c->vDryBuf          = abuf;
                 abuf               += EQ_BUFFER_SIZE;
                 c->vBuffer          = abuf;
