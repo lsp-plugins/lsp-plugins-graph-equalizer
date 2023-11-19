@@ -24,6 +24,7 @@
 #include <lsp-plug.in/dsp/dsp.h>
 #include <lsp-plug.in/stdlib/math.h>
 
+#include <lsp-plug.in/shared/debug.h>
 #include <lsp-plug.in/shared/id_colors.h>
 
 #include <private/plugins/graph_equalizer.h>
@@ -34,12 +35,6 @@ namespace lsp
 {
     namespace plugins
     {
-        static plug::IPort *TRACE_PORT(plug::IPort *p)
-        {
-            lsp_trace("  port id=%s", (p)->metadata()->id);
-            return p;
-        }
-
         //-------------------------------------------------------------------------
         typedef struct plugin_settings_t
         {
@@ -221,49 +216,49 @@ namespace lsp
             // Bind audio ports
             lsp_trace("Binding audio ports");
             for (size_t i=0; i<channels; ++i)
-                vChannels[i].pIn        =   TRACE_PORT(ports[port_id++]);
+                vChannels[i].pIn        =   trace_port(ports[port_id++]);
 
             for (size_t i=0; i<channels; ++i)
-                vChannels[i].pOut       =   TRACE_PORT(ports[port_id++]);
+                vChannels[i].pOut       =   trace_port(ports[port_id++]);
 
             // Bind common ports
             lsp_trace("Binding common ports");
-            pBypass                 = TRACE_PORT(ports[port_id++]);
-            pInGain                 = TRACE_PORT(ports[port_id++]);
-            pOutGain                = TRACE_PORT(ports[port_id++]);
-            pEqMode                 = TRACE_PORT(ports[port_id++]);
-            pSlope                  = TRACE_PORT(ports[port_id++]);
-            pReactivity             = TRACE_PORT(ports[port_id++]);
-            pShiftGain              = TRACE_PORT(ports[port_id++]);
-            pZoom                   = TRACE_PORT(ports[port_id++]);
+            pBypass                 = trace_port(ports[port_id++]);
+            pInGain                 = trace_port(ports[port_id++]);
+            pOutGain                = trace_port(ports[port_id++]);
+            pEqMode                 = trace_port(ports[port_id++]);
+            pSlope                  = trace_port(ports[port_id++]);
+            pReactivity             = trace_port(ports[port_id++]);
+            pShiftGain              = trace_port(ports[port_id++]);
+            pZoom                   = trace_port(ports[port_id++]);
 
             // Meters
             for (size_t i=0; i<channels; ++i)
             {
                 eq_channel_t *c     = &vChannels[i];
 
-                c->pFftInSwitch         = TRACE_PORT(ports[port_id++]);
-                c->pFftOutSwitch        = TRACE_PORT(ports[port_id++]);
-                c->pFftInMesh           = TRACE_PORT(ports[port_id++]);
-                c->pFftOutMesh          = TRACE_PORT(ports[port_id++]);
+                c->pFftInSwitch         = trace_port(ports[port_id++]);
+                c->pFftOutSwitch        = trace_port(ports[port_id++]);
+                c->pFftInMesh           = trace_port(ports[port_id++]);
+                c->pFftOutMesh          = trace_port(ports[port_id++]);
             }
 
             // Skip band select port
             if (nBands > 16)
-                TRACE_PORT(ports[port_id++]);
+                trace_port(ports[port_id++]);
             else if ((nMode != EQ_MONO) && (nMode != EQ_STEREO))
-                TRACE_PORT(ports[port_id++]);
+                trace_port(ports[port_id++]);
 
             // Balance
             if (channels > 1)
-                pBalance                = TRACE_PORT(ports[port_id++]);
+                pBalance                = trace_port(ports[port_id++]);
 
             // Listen port
             if (nMode == EQ_MID_SIDE)
             {
-                pListen                 = TRACE_PORT(ports[port_id++]);
-                vChannels[0].pInGain    = TRACE_PORT(ports[port_id++]);
-                vChannels[1].pInGain    = TRACE_PORT(ports[port_id++]);
+                pListen                 = trace_port(ports[port_id++]);
+                vChannels[0].pInGain    = trace_port(ports[port_id++]);
+                vChannels[1].pInGain    = trace_port(ports[port_id++]);
             }
 
             for (size_t i=0; i<channels; ++i)
@@ -271,12 +266,12 @@ namespace lsp
                 if ((nMode == EQ_STEREO) && (i > 0))
                     vChannels[i].pTrAmp     =   NULL;
                 else
-                    vChannels[i].pTrAmp     =   TRACE_PORT(ports[port_id++]);
+                    vChannels[i].pTrAmp     =   trace_port(ports[port_id++]);
 
-                vChannels[i].pInMeter   =   TRACE_PORT(ports[port_id++]);
-                vChannels[i].pOutMeter  =   TRACE_PORT(ports[port_id++]);
+                vChannels[i].pInMeter   =   trace_port(ports[port_id++]);
+                vChannels[i].pOutMeter  =   trace_port(ports[port_id++]);
                 if ((nMode == EQ_LEFT_RIGHT) || (nMode == EQ_MID_SIDE))
-                    vChannels[i].pVisible   = TRACE_PORT(ports[port_id++]); // Skip eq curve visibility
+                    vChannels[i].pVisible   = trace_port(ports[port_id++]); // Skip eq curve visibility
                 else
                     vChannels[i].pVisible   = NULL;
             }
@@ -304,11 +299,11 @@ namespace lsp
                     else
                     {
                         // 1 port controls 1 band
-                        b->pSolo            = TRACE_PORT(ports[port_id++]);
-                        b->pMute            = TRACE_PORT(ports[port_id++]);
-                        b->pEnable          = TRACE_PORT(ports[port_id++]);
-                        b->pVisibility      = TRACE_PORT(ports[port_id++]);
-                        b->pGain            = TRACE_PORT(ports[port_id++]);
+                        b->pSolo            = trace_port(ports[port_id++]);
+                        b->pMute            = trace_port(ports[port_id++]);
+                        b->pEnable          = trace_port(ports[port_id++]);
+                        b->pVisibility      = trace_port(ports[port_id++]);
+                        b->pGain            = trace_port(ports[port_id++]);
                     }
                 }
             }
