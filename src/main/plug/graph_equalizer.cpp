@@ -984,6 +984,7 @@ namespace lsp
 
                 v->write("vIn", c->vIn);
                 v->write("vOut", c->vOut);
+                v->write("vAnalyzer", c->vAnalyzer);
                 v->write("vDryBuf", c->vDryBuf);
                 v->write("vBuffer", c->vBuffer);
                 v->write("vTrRe", c->vTrRe);
