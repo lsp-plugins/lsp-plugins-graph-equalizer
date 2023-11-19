@@ -22,6 +22,7 @@
 #include <private/plugins/graph_equalizer.h>
 #include <lsp-plug.in/plug-fw/ui.h>
 #include <lsp-plug.in/dsp-units/units.h>
+#include <lsp-plug.in/stdlib/locale.h>
 #include <lsp-plug.in/stdlib/stdio.h>
 #include <lsp-plug.in/stdlib/string.h>
 
@@ -277,6 +278,7 @@ namespace lsp
                 tk::prop::String lc_string;
                 LSPString text;
                 lc_string.bind(f->wInfo->style(), pDisplay->dictionary());
+                SET_LOCALE_SCOPED(LC_NUMERIC, "C");
 
                 // Frequency
                 text.fmt_ascii("%.2f", freq);
