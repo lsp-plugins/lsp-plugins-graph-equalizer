@@ -19,12 +19,14 @@
  * along with lsp-plugins-graph-equalizer. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <private/plugins/graph_equalizer.h>
+#include <lsp-plug.in/common/alloc.h>
 #include <lsp-plug.in/common/debug.h>
 #include <lsp-plug.in/dsp/dsp.h>
 #include <lsp-plug.in/stdlib/math.h>
 
 #include <lsp-plug.in/shared/id_colors.h>
+
+#include <private/plugins/graph_equalizer.h>
 
 #define EQ_BUFFER_SIZE          0x400U
 
@@ -143,6 +145,7 @@ namespace lsp
             float *abuf         = new float[allocate];
             if (abuf == NULL)
                 return;
+            lsp_guard_assert(float *save = &abuf[allocate]);
 
             // Clear all floating-point buffers
             dsp::fill_zero(abuf, allocate);
@@ -164,16 +167,11 @@ namespace lsp
 
                 c->vIn              = NULL;
                 c->vOut             = NULL;
-                c->vAnalyzer        = abuf;
-                abuf               += EQ_BUFFER_SIZE;
-                c->vDryBuf          = abuf;
-                abuf               += EQ_BUFFER_SIZE;
-                c->vBuffer          = abuf;
-                abuf               += EQ_BUFFER_SIZE;
-                c->vTrRe            = abuf;
-                abuf               += meta::graph_equalizer_metadata::MESH_POINTS;
-                c->vTrIm            = abuf;
-                abuf               += meta::graph_equalizer_metadata::MESH_POINTS;
+                c->vAnalyzer        = advance_ptr<float>(abuf, EQ_BUFFER_SIZE);
+                c->vDryBuf          = advance_ptr<float>(abuf, EQ_BUFFER_SIZE);
+                c->vBuffer          = advance_ptr<float>(abuf, EQ_BUFFER_SIZE);
+                c->vTrRe            = advance_ptr<float>(abuf, meta::graph_equalizer_metadata::MESH_POINTS);
+                c->vTrIm            = advance_ptr<float>(abuf, meta::graph_equalizer_metadata::MESH_POINTS);
 
                 c->pIn              = NULL;
                 c->pOut             = NULL;
@@ -197,10 +195,8 @@ namespace lsp
 
                     b->bSolo        = false;
                     b->nSync        = CS_UPDATE;
-                    b->vTrRe        = abuf;
-                    abuf           += meta::graph_equalizer_metadata::MESH_POINTS;
-                    b->vTrIm        = abuf;
-                    abuf           += meta::graph_equalizer_metadata::MESH_POINTS;
+                    b->vTrRe        = advance_ptr<float>(abuf, meta::graph_equalizer_metadata::MESH_POINTS);
+                    b->vTrIm        = advance_ptr<float>(abuf, meta::graph_equalizer_metadata::MESH_POINTS);
 
                     b->pGain        = NULL;
                     b->pSolo        = NULL;
@@ -209,6 +205,7 @@ namespace lsp
                     b->pVisibility  = NULL;
                 }
             }
+            lsp_assert(abuf <= save);
 
             // Initialize latency compensation delay
             for (size_t i=0; i<channels; ++i)
