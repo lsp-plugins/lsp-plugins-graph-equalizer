@@ -346,6 +346,7 @@ namespace lsp
         {
             "Grafischer Entzerrer x16 Mono",
             "Graphic Equalizer x16 Mono",
+            "Graphic Equalizer x16 Mono",
             "GE16M",
             &developers::v_sadovnikov,
             "graph_equalizer_x16_mono",
@@ -369,6 +370,7 @@ namespace lsp
         const meta::plugin_t graph_equalizer_x32_mono =
         {
             "Grafischer Entzerrer x32 Mono",
+            "Graphic Equalizer x32 Mono",
             "Graphic Equalizer x32 Mono",
             "GE32M",
             &developers::v_sadovnikov,
@@ -394,6 +396,7 @@ namespace lsp
         {
             "Grafischer Entzerrer x16 Stereo",
             "Graphic Equalizer x16 Stereo",
+            "Graphic Equalizer x16 Stereo",
             "GE16S",
             &developers::v_sadovnikov,
             "graph_equalizer_x16_stereo",
@@ -417,6 +420,7 @@ namespace lsp
         const meta::plugin_t graph_equalizer_x32_stereo =
         {
             "Grafischer Entzerrer x32 Stereo",
+            "Graphic Equalizer x32 Stereo",
             "Graphic Equalizer x32 Stereo",
             "GE32S",
             &developers::v_sadovnikov,
@@ -442,6 +446,7 @@ namespace lsp
         {
             "Grafischer Entzerrer x16 LeftRight",
             "Graphic Equalizer x16 LeftRight",
+            "Graphic Equalizer x16 L/R",
             "GE16LR",
             &developers::v_sadovnikov,
             "graph_equalizer_x16_lr",
@@ -466,6 +471,7 @@ namespace lsp
         {
             "Grafischer Entzerrer x32 LeftRight",
             "Graphic Equalizer x32 LeftRight",
+            "Graphic Equalizer x32 L/R",
             "GE32LR",
             &developers::v_sadovnikov,
             "graph_equalizer_x32_lr",
@@ -490,6 +496,7 @@ namespace lsp
         {
             "Grafischer Entzerrer x16 MidSide",
             "Graphic Equalizer x16 MidSide",
+            "Graphic Equalizer x16 M/S",
             "GE16MS",
             &developers::v_sadovnikov,
             "graph_equalizer_x16_ms",
@@ -514,6 +521,7 @@ namespace lsp
         {
             "Grafischer Entzerrer x32 MidSide",
             "Graphic Equalizer x32 MidSide",
+            "Graphic Equalizer x32 M/S",
             "GE32MS",
             &developers::v_sadovnikov,
             "graph_equalizer_x32_ms",
