@@ -6,6 +6,7 @@
 * Implemented separate input and output signal spectrum analysis.
 * Implemented automatic scale of spectrum graph switch.
 * Updated zoom fader.
+* Added support of variable size of filter dots.
 * Added gain level display for filter info.
 
 === 1.0.19 ===

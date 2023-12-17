@@ -65,6 +65,8 @@
 								x="${y}" y.id="gm_${i}"
 								y.editable="true"
 								pointer="hand"
+								size="1 + 2*:_ui_filter_point_thickness"
+								hover.size="1 + 2*:_ui_filter_point_thickness"
 								bsize="4"
 								color="mid"
 								hover.color="mid"
@@ -80,6 +82,8 @@
 								x="${y}" y.id="gs_${i}"
 								y.editable="true"
 								pointer="hand"
+								size="1 + 2*:_ui_filter_point_thickness"
+								hover.size="1 + 2*:_ui_filter_point_thickness"
 								bsize="4"
 								color="side"
 								hover.color="side"
@@ -90,22 +94,46 @@
 						</ui:for>
 					</ui:if>
 
-
-
 					<ui:if test=":num_filters igt 16">
 						<ui:for
 							id="y"
 							counter="i"
 							list="14.91;18.91;23.71;29.82;37.46;47.43;59.64;74.92;94.57;119.27;149.09;189.15;237.14;298.18;374.59;474.29;596.37;749.18;945.74;1192.74;1490.92;1891.48;2371.43;2981.84;3745.92;4742.86;5963.69;7491.83;9457.42;11927.37;14909.23;18914.82">
 							<marker ui:id="filter_markerm_${i}" v="${y}" ox="0" oy="1" color="mid" visibility="false"/>
-							<dot ui:id="filter_dotm_${i}" x="${y}" y.id="gm_${i}" y.editable="true" pointer="hand" bsize="4" color="mid" hover.color="mid" bcolor="mid" hover.bcolor="mid" visibility=":fvm_${i}"/>
+							<dot
+								ui:id="filter_dotm_${i}"
+								x="${y}" y.id="gm_${i}"
+								y.editable="true"
+								pointer="hand"
+								size="1 + 2*:_ui_filter_point_thickness"
+								hover.size="1 + 2*:_ui_filter_point_thickness"
+								bsize="4"
+								color="mid"
+								hover.color="mid"
+								bcolor="mid"
+								hover.bcolor="mid"
+								visibility=":fvm_${i}"
+								y.astep="1"/>
 						</ui:for>
 						<ui:for
 							id="y"
 							counter="i"
 							list="16.77;21.15;26.57;33.54;42.05;53.13;67.07;84.09;105.74;134.15;167.68;211.47;265.66;335.36;420.46;531.33;670.73;840.92;1057.37;1341.45;1676.81;2114.74;2656.63;3353.63;4204.58;5313.25;6707.26;8409.16;10573.72;13414.51;16768.14;21147.40">
 							<marker ui:id="filter_markers_${i}" v="${y}" ox="0" oy="1" color="side" visibility="false"/>
-							<dot ui:id="filter_dots_${i}" x="${y}" y.id="gs_${i}" y.editable="true" pointer="hand" bsize="4" color="side" hover.color="side" bcolor="side" hover.bcolor="side" visibility=":fvs_${i}"/>
+							<dot
+								ui:id="filter_dots_${i}"
+								x="${y}" y.id="gs_${i}"
+								y.editable="true"
+								pointer="hand"
+								size="1 + 2*:_ui_filter_point_thickness"
+								hover.size="1 + 2*:_ui_filter_point_thickness"
+								bsize="4"
+								color="side"
+								hover.color="side"
+								bcolor="side"
+								hover.bcolor="side"
+								visibility=":fvs_${i}"
+								y.astep="1"/>
 						</ui:for>
 					</ui:if>
 
