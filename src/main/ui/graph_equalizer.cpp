@@ -281,12 +281,10 @@ namespace lsp
                 SET_LOCALE_SCOPED(LC_NUMERIC, "C");
 
                 // Frequency
-                text.fmt_ascii("%.2f", freq);
-                params.set_string("frequency", &text);
+                params.set_float("frequency", freq);
 
                 // Gain
-                text.fmt_ascii("%.2f", dspu::gain_to_db(gain));
-                params.set_string("gain", &text);
+                params.set_float("gain", dspu::gain_to_db(gain));
 
                 // Filter number and audio channel
                 text.set_ascii(f->pGain->id());

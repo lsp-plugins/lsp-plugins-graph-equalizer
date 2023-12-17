@@ -15,7 +15,7 @@
 		"bands_s_0:15": "Bands Side 0-15",
 		"bands_s_16:31": "Bands Side 16-31",
 		
-		"filter_info" : "{@filter}\n{@frequency} Hz\n{@gain} dB",
+		"filter_info" : "{@filter}\n{@frequency%.2f} Hz\n{@gain%.2f} dB",
 		
 		"slope": {
 			"bt48": "BT48",
