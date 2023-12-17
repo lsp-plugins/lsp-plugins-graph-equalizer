@@ -3,7 +3,7 @@
  *           (C) 2021 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-graph-equalizer
- * Created on: 3 авг. 2021 г.
+ * Created on: 3 авг. 2023 г.
  *
  * lsp-plugins-graph-equalizer is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -46,19 +46,19 @@ namespace lsp
             static constexpr size_t         FFT_WINDOW          = dspu::windows::HANN;
             static constexpr size_t         FFT_ENVELOPE        = dspu::envelope::PINK_NOISE;
 
-            static constexpr float          REACT_TIME_MIN      = 0.000;
-            static constexpr float          REACT_TIME_MAX      = 1.000;
-            static constexpr float          REACT_TIME_DFL      = 0.200;
-            static constexpr float          REACT_TIME_STEP     = 0.001;
+            static constexpr float          REACT_TIME_MIN      = 0.000f;
+            static constexpr float          REACT_TIME_MAX      = 1.000f;
+            static constexpr float          REACT_TIME_DFL      = 0.200f;
+            static constexpr float          REACT_TIME_STEP     = 0.001f;
 
             static constexpr float          BAND_GAIN_MIN       = GAIN_AMP_M_36_DB;
             static constexpr float          BAND_GAIN_MAX       = GAIN_AMP_P_36_DB;
             static constexpr float          BAND_GAIN_DFL       = GAIN_AMP_0_DB;
             static constexpr float          BAND_GAIN_STEP      = 0.025f;
 
-            static constexpr float          ZOOM_MIN            = GAIN_AMP_M_36_DB;
+            static constexpr float          ZOOM_MIN            = GAIN_AMP_M_42_DB;
             static constexpr float          ZOOM_MAX            = GAIN_AMP_0_DB;
-            static constexpr float          ZOOM_DFL            = GAIN_AMP_0_DB;
+            static constexpr float          ZOOM_DFL            = GAIN_AMP_M_36_DB;
             static constexpr float          ZOOM_STEP           = 0.025f;
 
             static constexpr float          IN_GAIN_DFL         = 1.0f;
