@@ -22,6 +22,7 @@
 #include <private/plugins/graph_equalizer.h>
 #include <lsp-plug.in/plug-fw/ui.h>
 #include <lsp-plug.in/dsp-units/units.h>
+#include <lsp-plug.in/stdlib/locale.h>
 #include <lsp-plug.in/stdlib/stdio.h>
 #include <lsp-plug.in/stdlib/string.h>
 
@@ -277,14 +278,13 @@ namespace lsp
                 tk::prop::String lc_string;
                 LSPString text;
                 lc_string.bind(f->wInfo->style(), pDisplay->dictionary());
+                SET_LOCALE_SCOPED(LC_NUMERIC, "C");
 
                 // Frequency
-                text.fmt_ascii("%.2f", freq);
-                params.set_string("frequency", &text);
+                params.set_float("frequency", freq);
 
                 // Gain
-                text.fmt_ascii("%.2f", dspu::gain_to_db(gain));
-                params.set_string("gain", &text);
+                params.set_float("gain", dspu::gain_to_db(gain));
 
                 // Filter number and audio channel
                 text.set_ascii(f->pGain->id());

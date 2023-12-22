@@ -2,6 +2,14 @@
 * RECENT CHANGES
 *******************************************************************************
 
+=== 1.0.20 ===
+* Implemented separate input and output signal spectrum analysis.
+* Implemented automatic scale of spectrum graph switch.
+* Updated zoom fader.
+* Added support of variable size of filter dots.
+* Added gain level display for filter info.
+* Updated build scripts and dependencies.
+
 === 1.0.19 ===
 * Updated build scripts and dependencies.
 
