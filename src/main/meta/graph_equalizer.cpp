@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2023 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2023 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2024 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2024 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-graph-equalizer
  * Created on: 3 авг. 2021 г.
@@ -25,7 +25,7 @@
 
 #define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION_MAJOR       1
 #define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION_MINOR       0
-#define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION_MICRO       20
+#define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION_MICRO       21
 
 #define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION  \
     LSP_MODULE_VERSION( \
@@ -353,6 +353,8 @@ namespace lsp
             LSP_LV2_URI("graph_equalizer_x16_mono"),
             LSP_LV2UI_URI("graph_equalizer_x16_mono"),
             "rvwk",
+            LSP_VST3_UID("ge16m   rvwk"),
+            LSP_VST3UI_UID("ge16m   rvwk"),
             LSP_LADSPA_GRAPH_EQUALIZER_BASE + 0,
             LSP_LADSPA_URI("graph_equalizer_x16_mono"),
             LSP_CLAP_URI("graph_equalizer_x16_mono"),
@@ -378,6 +380,8 @@ namespace lsp
             LSP_LV2_URI("graph_equalizer_x32_mono"),
             LSP_LV2UI_URI("graph_equalizer_x32_mono"),
             "vnca",
+            LSP_VST3_UID("ge32m   vnca"),
+            LSP_VST3UI_UID("ge32m   vnca"),
             LSP_LADSPA_GRAPH_EQUALIZER_BASE + 1,
             LSP_LADSPA_URI("graph_equalizer_x32_mono"),
             LSP_CLAP_URI("graph_equalizer_x32_mono"),
@@ -403,6 +407,8 @@ namespace lsp
             LSP_LV2_URI("graph_equalizer_x16_stereo"),
             LSP_LV2UI_URI("graph_equalizer_x16_stereo"),
             "argl",
+            LSP_VST3_UID("ge16s   argl"),
+            LSP_VST3UI_UID("ge16s   argl"),
             LSP_LADSPA_GRAPH_EQUALIZER_BASE + 2,
             LSP_LADSPA_URI("graph_equalizer_x16_stereo"),
             LSP_CLAP_URI("graph_equalizer_x16_stereo"),
@@ -428,6 +434,8 @@ namespace lsp
             LSP_LV2_URI("graph_equalizer_x32_stereo"),
             LSP_LV2UI_URI("graph_equalizer_x32_stereo"),
             "nvsd",
+            LSP_VST3_UID("ge32s   nvsd"),
+            LSP_VST3UI_UID("ge32s   nvsd"),
             LSP_LADSPA_GRAPH_EQUALIZER_BASE + 3,
             LSP_LADSPA_URI("graph_equalizer_x32_stereo"),
             LSP_CLAP_URI("graph_equalizer_x32_stereo"),
@@ -453,6 +461,8 @@ namespace lsp
             LSP_LV2_URI("graph_equalizer_x16_lr"),
             LSP_LV2UI_URI("graph_equalizer_x16_lr"),
             "zefi",
+            LSP_VST3_UID("ge16lr  zefi"),
+            LSP_VST3UI_UID("ge16lr  zefi"),
             LSP_LADSPA_GRAPH_EQUALIZER_BASE + 4,
             LSP_LADSPA_URI("graph_equalizer_x16_lr"),
             LSP_CLAP_URI("graph_equalizer_x16_lr"),
@@ -478,6 +488,8 @@ namespace lsp
             LSP_LV2_URI("graph_equalizer_x32_lr"),
             LSP_LV2UI_URI("graph_equalizer_x32_lr"),
             "0heu",
+            LSP_VST3_UID("ge32lr  0heu"),
+            LSP_VST3UI_UID("ge32lr  0heu"),
             LSP_LADSPA_GRAPH_EQUALIZER_BASE + 5,
             LSP_LADSPA_URI("graph_equalizer_x32_lr"),
             LSP_CLAP_URI("graph_equalizer_x32_lr"),
@@ -503,6 +515,8 @@ namespace lsp
             LSP_LV2_URI("graph_equalizer_x16_ms"),
             LSP_LV2UI_URI("graph_equalizer_x16_ms"),
             "woys",
+            LSP_VST3_UID("ge16ms  woys"),
+            LSP_VST3UI_UID("ge16ms  woys"),
             LSP_LADSPA_GRAPH_EQUALIZER_BASE + 6,
             LSP_LADSPA_URI("graph_equalizer_x16_ms"),
             LSP_CLAP_URI("graph_equalizer_x16_ms"),
@@ -528,6 +542,8 @@ namespace lsp
             LSP_LV2_URI("graph_equalizer_x32_ms"),
             LSP_LV2UI_URI("graph_equalizer_x32_ms"),
             "ku8j",
+            LSP_VST3_UID("ge32ms  ku8j"),
+            LSP_VST3UI_UID("ge32ms  ku8j"),
             LSP_LADSPA_GRAPH_EQUALIZER_BASE + 7,
             LSP_LADSPA_URI("graph_equalizer_x32_ms"),
             LSP_CLAP_URI("graph_equalizer_x32_ms"),

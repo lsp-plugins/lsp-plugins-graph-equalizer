@@ -66,7 +66,7 @@ namespace lsp
                 typedef struct eq_band_t
                 {
                     bool                bSolo;          // Solo
-                    size_t              nSync;          // Chart state
+                    uint32_t            nSync;          // Chart state
                     float              *vTrRe;          // Transfer function (real part)
                     float              *vTrIm;          // Transfer function (imaginary part)
 
@@ -83,15 +83,16 @@ namespace lsp
                     dspu::Bypass        sBypass;        // Bypass
                     dspu::Delay         sDryDelay;      // Dry delay
 
-                    size_t              nSync;          // Chart state
+                    uint32_t            nSync;          // Chart state
                     float               fInGain;        // Input gain
                     float               fOutGain;       // Output gain
                     eq_band_t          *vBands;         // Bands
                     float              *vIn;            // Input buffer
                     float              *vOut;           // Output buffer
-                    float              *vAnalyzer;      // Buffer for analyzer
+                    float              *vInPtr;         // Actual pointer to input data (for eliminatioon of unnecessary memory copies)
                     float              *vDryBuf;        // Dry buffer
-                    float              *vBuffer;        // Temporary buffer
+                    float              *vInBuffer;      // Input buffer (input signal passed to analyzer)
+                    float              *vOutBuffer;     // Output buffer
 
                     float              *vTrRe;          // Transfer function (real part)
                     float              *vTrIm;          // Transfer function (imaginary part)
@@ -117,9 +118,9 @@ namespace lsp
             protected:
                 dspu::Analyzer      sAnalyzer;      // Analyzer
                 eq_channel_t       *vChannels;      // Equalizer channels
-                size_t              nBands;         // Number of bands
-                size_t              nMode;          // Equalize mode
-                size_t              nSlope;         // Slope
+                uint32_t            nBands;         // Number of bands
+                uint32_t            nMode;          // Equalize mode
+                uint32_t            nSlope;         // Slope
                 bool                bListen;        // Listen
                 bool                bMatched;       // Matched transorm/Bilinear transform flag
                 float               fInGain;        // Input gain
