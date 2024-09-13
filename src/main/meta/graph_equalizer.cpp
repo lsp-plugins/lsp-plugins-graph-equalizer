@@ -175,11 +175,27 @@ namespace lsp
         #define BAND_SELECT(fselect) \
             COMBO("fsel", "Band select", 0, fselect)
 
+        #define EQ_COMMUNICATION_MONO \
+            OPT_SEND_NAME("send", "Audio send"), \
+            OPT_AUDIO_SEND("snd", "Audio send output", 0, "send"), \
+            OPT_RETURN_NAME("return", "Audio return"), \
+            OPT_AUDIO_RETURN("rtn", "Audio return input", 0, "return")
+
+        #define EQ_COMMUNICATION_STEREO \
+            OPT_SEND_NAME("send", "Audio send"), \
+            OPT_AUDIO_SEND("snd_l", "Audio send output left", 0, "send"), \
+            OPT_AUDIO_SEND("snd_r", "Audio send output right", 1, "send"), \
+            OPT_RETURN_NAME("return", "Audio return"), \
+            OPT_AUDIO_RETURN("rtn_l", "Audio return input left", 0, "return"), \
+            OPT_AUDIO_RETURN("rtn_r", "Audio return input right", 1, "return")
+
         #define CHANNEL_ANALYSIS(id, label) \
             SWITCH("ife" id, "Input FFT graph enable" label, 1.0f), \
             SWITCH("ofe" id, "Output FFT graph enable" label, 1.0f), \
+            SWITCH("rfe" id, "Return FFT graph enable" label, 1.0f), \
             MESH("ifg" id, "Input FFT graph" label, 2, graph_equalizer_metadata::MESH_POINTS + 2), \
-            MESH("ofg" id, "Output FFT graph" label, 2, graph_equalizer_metadata::MESH_POINTS)
+            MESH("ofg" id, "Output FFT graph" label, 2, graph_equalizer_metadata::MESH_POINTS), \
+            MESH("rfg" id, "Return FFT graph" label, 2, graph_equalizer_metadata::MESH_POINTS)
 
         #define EQ_BANDS_32X(band) \
             band(0, "16"), \
@@ -237,6 +253,7 @@ namespace lsp
         {
             PORTS_MONO_PLUGIN,
             EQ_COMMON,
+            EQ_COMMUNICATION_MONO,
             CHANNEL_ANALYSIS("", ""),
             EQ_MONO_PORTS,
             EQ_BANDS_16X(EQ_BAND_MONO),
@@ -248,6 +265,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
+            EQ_COMMUNICATION_STEREO,
             CHANNEL_ANALYSIS("_l", " Left"),
             CHANNEL_ANALYSIS("_r", " Right"),
             EQ_STEREO_PORTS,
@@ -260,6 +278,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
+            EQ_COMMUNICATION_STEREO,
             CHANNEL_ANALYSIS("_l", " Left"),
             CHANNEL_ANALYSIS("_r", " Right"),
             BAND_SELECT(band_select_16lr),
@@ -273,6 +292,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
+            EQ_COMMUNICATION_STEREO,
             CHANNEL_ANALYSIS("_m", " Mid"),
             CHANNEL_ANALYSIS("_s", " Side"),
             BAND_SELECT(band_select_16ms),
@@ -286,6 +306,7 @@ namespace lsp
         {
             PORTS_MONO_PLUGIN,
             EQ_COMMON,
+            EQ_COMMUNICATION_MONO,
             CHANNEL_ANALYSIS("", ""),
             BAND_SELECT(band_select_32),
             EQ_MONO_PORTS,
@@ -298,6 +319,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
+            EQ_COMMUNICATION_STEREO,
             CHANNEL_ANALYSIS("_l", " Left"),
             CHANNEL_ANALYSIS("_r", " Right"),
             BAND_SELECT(band_select_32),
@@ -311,6 +333,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
+            EQ_COMMUNICATION_STEREO,
             CHANNEL_ANALYSIS("_l", " Left"),
             CHANNEL_ANALYSIS("_r", " Right"),
             BAND_SELECT(band_select_32lr),
@@ -324,6 +347,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
+            EQ_COMMUNICATION_STEREO,
             CHANNEL_ANALYSIS("_m", " Mid"),
             CHANNEL_ANALYSIS("_s", " Side"),
             BAND_SELECT(band_select_32ms),
