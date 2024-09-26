@@ -2,8 +2,7 @@
 	<ui:eval id="num_filters" value="(ex :gl_16) ? 32 : 16"/>
 	<ui:eval id="num_blocks" value="(ex :gl_16) ? 8 : 4"/>
 
-	<grid rows="2" cols="3" spacing="4">
-		<vbox spacing="4" expand="true">
+	<grid rows="3" cols="3" spacing="4">
 
 			<!-- Graph -->
 			<group ui:inject="GraphGroup" ipadding="0" expand="true" fill="true" text="labels.graphs.spectrum">
@@ -172,7 +171,7 @@
 					<ui:with x="10" halign="1" pgroup="0" priority="10">
 						<text y="0 db" text="0" valign="1" priority="0" />
 						<text y="1" ox="0" oy="2" text="graph.units.db" valign="-1" priority="0" />
-						
+
 						<ui:for id="g" counter="i" list="+36;+24;+12;-12;-24;-36">
 							<text y="${g} db" text="${g}" valign="-1" />
 						</ui:for>
@@ -251,16 +250,8 @@
 				</graph>
 			</group>
 
-			<align halign="1" expand="false">
-				<hbox spacing="4" bg.color="bg_schema" pad.h="6" pad.b="4" pad.t="4">
-					<label text="labels.mode"/>
-					<combo id="slope" pad.r="6"/>
-					<combo id="mode" pad.r="12"/>
-					<button id="fltv_l" height="22" width="48" text="labels.chan.left" ui:inject="Button_left"/>
-					<button id="fltv_r" height="22" width="48" text="labels.chan.right" ui:inject="Button_right"/>
-				</hbox>
-			</align>
-		</vbox>
+
+
 
 		<!-- Zoom Fader -->
 		<hbox spacing="4" bg.color="bg">
@@ -291,7 +282,7 @@
 
 		<vbox spacing="4">
 			<group text="groups.signal" expand="true">
-				<grid rows="4" cols="2" hspacing="4">
+				<grid rows="3" cols="2" hspacing="4">
 					<knob id="g_in" pad.r="4"/>
 					<vbox vfill="false">
 						<label text="labels.input" halign="0"/>
@@ -310,15 +301,12 @@
 						<value id="bal" width.min="50" sline="true" halign="0"/>
 					</vbox>
 
-					<cell cols="2">
-						<shmlink id="send" />
-					</cell>
 				</grid>
 			</group>
 			<!-- Analysis -->
 			<group text="groups.analysis" expand="true" ipadding="0">
 				<vbox>
-					<grid rows="7" cols="2">
+					<grid rows="6" cols="2">
 						<align halign="-1" pad.t="4" pad.l="6">
 							<label text="labels.fft.fft_in"/>
 						</align>
@@ -336,17 +324,14 @@
 							<button id="ofe_r" text="labels.chan.R_ight" size="19" ui:inject="Button_right_8"/>
 						</hbox>
 						<cell cols="2"><hsep pad.v="2" bg.color="bg" vreduce="true"/></cell>
-						
+
 						<align halign="-1" pad.t="4" pad.l="6">
-							<label text="labels.fft.fft_ext" halign="0"/>
+							<label text="labels.fft.fft_link" halign="0"/>
 						</align>
 						<hbox spacing="4" pad.v="4" pad.h="6" hfill="false">
 							<button id="rfe_l" text="labels.chan.L_eft" size="19" ui:inject="Button_left_8"/>
 							<button id="rfe_r" text="labels.chan.R_ight" size="19" ui:inject="Button_right_8"/>
 						</hbox>
-						<cell cols="2">
-							<shmlink id="return" />
-						</cell>
 						<cell cols="2"><hsep pad.v="2" bg.color="bg" vreduce="true"/></cell>
 					</grid>
 
@@ -366,6 +351,24 @@
 				</vbox>
 			</group>
 		</vbox>
+
+		<!-- bottom line -->
+		<cell cols="3">
+			<hbox spacing="4" bg.color="bg_schema" pad.h="6">
+					<label text="labels.mode" pad.v="4"/>
+					<combo id="slope" pad.r="6" pad.v="4"/>
+					<combo id="mode" pad.r="12" pad.v="4"/>
+					<button id="fltv_l" height="22" width="48" text="labels.chan.left" ui:inject="Button_left" pad.v="4"/>
+					<button id="fltv_r" height="22" width="48" text="labels.chan.right" ui:inject="Button_right" pad.v="4"/>
+					
+				<void hexpand="true"/>
+
+				<vsep bg.color="bg" pad.h="2" hreduce="true" hexpand="false"/>
+
+				<shmlink id="return" pad.v="4"/>
+				<shmlink id="send" pad.v="4"/>
+			</hbox>
+		</cell>
 
 		<cell cols="3">
 			<cgroup id="fsel" bg.color="bg" ipadding="0">
