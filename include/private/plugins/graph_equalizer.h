@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2023 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2023 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2024 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2024 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-graph-equalizer
  * Created on: 3 авг. 2021 г.
@@ -89,22 +89,30 @@ namespace lsp
                     eq_band_t          *vBands;         // Bands
                     float              *vIn;            // Input buffer
                     float              *vOut;           // Output buffer
+                    float              *vSend;          // Send buffer
+                    float              *vReturn;        // Return buffer
                     float              *vInPtr;         // Actual pointer to input data (for eliminatioon of unnecessary memory copies)
+                    float              *vExtPtr;        // External (send) data pointer
                     float              *vDryBuf;        // Dry buffer
                     float              *vInBuffer;      // Input buffer (input signal passed to analyzer)
                     float              *vOutBuffer;     // Output buffer
+                    float              *vExtBuffer;     // External (send) buffer
 
                     float              *vTrRe;          // Transfer function (real part)
                     float              *vTrIm;          // Transfer function (imaginary part)
 
                     plug::IPort        *pIn;            // Input port
                     plug::IPort        *pOut;           // Output port
+                    plug::IPort        *pSend;          // Send port
+                    plug::IPort        *pReturn;        // Return port
                     plug::IPort        *pInGain;        // Input gain
                     plug::IPort        *pTrAmp;         // Amplitude chart
                     plug::IPort        *pFftInSwitch;   // FFT input switch
                     plug::IPort        *pFftOutSwitch;  // FFT output switch
+                    plug::IPort        *pFftExtSwitch;  // FFT external switch
                     plug::IPort        *pFftInMesh;     // FFT input mesh
                     plug::IPort        *pFftOutMesh;    // FFT output mesh
+                    plug::IPort        *pFftExtMesh;    // FFT external mesh
                     plug::IPort        *pVisible;       // Visibility flag
                     plug::IPort        *pInMeter;       // Output level meter
                     plug::IPort        *pOutMeter;      // Output level meter

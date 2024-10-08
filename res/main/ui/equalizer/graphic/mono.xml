@@ -2,8 +2,7 @@
 	<ui:eval id="num_filters" value="(ex :g_16) ? 32 : 16"/>
 	<ui:eval id="num_blocks" value="(ex :g_16) ? 2 : 1"/>
 
-	<grid rows="2" cols="3" spacing="4">
-		<vbox spacing="4" expand="true">
+	<grid rows="3" cols="3" spacing="4">
 
 			<!-- Graph -->
 			<group ui:inject="GraphGroup" ipadding="0" expand="true" fill="true" text="labels.graphs.spectrum">
@@ -50,6 +49,7 @@
 
 					<!-- Meshes -->
 					<mesh id="ifg" oy=":_ui_zoomable_spectrum_graph ? 1 : 3" width="0" color="mono_in" color.a="0.8" fcolor.a="0.8" fill="true" fcolor="mono_in" visibility=":ife"/>
+					<mesh id="rfg" oy=":_ui_zoomable_spectrum_graph ? 1 : 3" width="2" color="mono_in" visibility=":rfe"/>
 					<mesh id="ofg" oy=":_ui_zoomable_spectrum_graph ? 1 : 3" width="2" color="mono" visibility=":ofe"/>
 
 					<mesh id="ag" width="3" color="graph_mesh" fill="true" fcolor="graph_mesh" fcolor.a="0.8" smooth="true"/>
@@ -125,7 +125,7 @@
 					<ui:with x="10" halign="1" pgroup="0" priority="10">
 						<text y="0 db" text="0" valign="1" priority="0" />
 						<text y="1" ox="0" oy="2" text="graph.units.db" valign="-1" priority="0" />
-						
+
 						<ui:for id="g" counter="i" list="+36;+24;+12;-12;-24;-36">
 							<text y="${g} db" text="${g}" valign="-1" />
 						</ui:for>
@@ -175,15 +175,6 @@
 				</graph>
 			</group>
 
-			<align halign="1" expand="false">
-				<hbox spacing="4" bg.color="bg_schema" pad.h="6" pad.b="4" pad.t="4">
-					<label text="labels.mode"/>
-					<combo id="slope" pad.r="6"/>
-					<combo id="mode"/>
-				</hbox>
-			</align>
-		</vbox>
-
 		<!-- Zoom Fader -->
 		<hbox spacing="4" bg.color="bg">
 			<vbox vexpand="true" bg.color="bg_schema">
@@ -223,22 +214,20 @@
 						<label text="labels.output" expand="true" halign="0"/>
 						<value id="g_out" width.min="50" sline="true" halign="0"/>
 					</vbox>
+
 				</grid>
 			</group>
 
 			<!-- Analysis -->
 			<group text="groups.analysis" expand="true" ipadding="0">
 				<vbox>
-					<grid rows="2" cols="2">
-						<align halign="-1" pad.t="4" pad.l="6">
-							<label text="labels.fft.fft"/>
-						</align>
+					<grid rows="3" cols="1">
 						<hbox spacing="4" pad.v="4" pad.h="6" hfill="false">
 							<button id="ife" text="labels.chan.in" height="19" width="30" ui:inject="Button_mono_8"/>
 							<button id="ofe" text="labels.chan.out" height="19" width="30" ui:inject="Button_mono_8"/>
+							<button id="rfe" text="labels.chan.link" height="19" width="30" ui:inject="Button_mono_8"/>
 						</hbox>
-
-						<cell cols="2"><hsep pad.v="2" bg.color="bg" vreduce="true"/></cell>
+						<hsep pad.v="2" bg.color="bg" vreduce="true"/>
 					</grid>
 
 					<grid rows="2" cols="2" transpose="false" hspacing="4">
@@ -257,6 +246,21 @@
 				</vbox>
 			</group>
 		</vbox>
+
+		<!-- bottom line -->
+		<cell cols="3">
+			<hbox spacing="4" bg.color="bg_schema" pad.h="6">
+				<label text="labels.mode" pad.v="4"/>
+				<combo id="slope" pad.r="6" pad.v="4"/>
+				<combo id="mode" pad.v="4"/>
+				<void hexpand="true"/>
+
+				<vsep bg.color="bg" pad.h="2" hreduce="true" hexpand="false"/>
+
+				<shmlink id="return" pad.v="4" pad.l="2"/>
+				<shmlink id="send" pad.v="4"/>
+			</hbox>
+		</cell>
 
 		<cell cols="3">
 			<cgroup id="fsel" text="groups.bands" bg.color="bg" ipadding="0">
