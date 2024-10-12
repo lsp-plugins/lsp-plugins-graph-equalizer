@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2023 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2023 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2024 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2024 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-graph-equalizer
  * Created on: 3 авг. 2021 г.
@@ -37,48 +37,51 @@ namespace lsp
     namespace plugins
     {
         //-------------------------------------------------------------------------
-        typedef struct plugin_settings_t
+        inline namespace
         {
-            const meta::plugin_t   *metadata;
-            uint8_t                 bands;
-            uint8_t                 mode;
-        } plugin_settings_t;
+            typedef struct plugin_settings_t
+            {
+                const meta::plugin_t   *metadata;
+                uint8_t                 bands;
+                uint8_t                 mode;
+            } plugin_settings_t;
 
-        static const meta::plugin_t *plugins[] =
-        {
-            &meta::graph_equalizer_x16_mono,
-            &meta::graph_equalizer_x16_stereo,
-            &meta::graph_equalizer_x16_lr,
-            &meta::graph_equalizer_x16_ms,
-            &meta::graph_equalizer_x32_mono,
-            &meta::graph_equalizer_x32_stereo,
-            &meta::graph_equalizer_x32_lr,
-            &meta::graph_equalizer_x32_ms
-        };
+            static const meta::plugin_t *plugins[] =
+            {
+                &meta::graph_equalizer_x16_mono,
+                &meta::graph_equalizer_x16_stereo,
+                &meta::graph_equalizer_x16_lr,
+                &meta::graph_equalizer_x16_ms,
+                &meta::graph_equalizer_x32_mono,
+                &meta::graph_equalizer_x32_stereo,
+                &meta::graph_equalizer_x32_lr,
+                &meta::graph_equalizer_x32_ms
+            };
 
-        static const plugin_settings_t plugin_settings[] =
-        {
-            { &meta::graph_equalizer_x16_mono,   16, graph_equalizer::EQ_MONO         },
-            { &meta::graph_equalizer_x16_stereo, 16, graph_equalizer::EQ_STEREO       },
-            { &meta::graph_equalizer_x16_lr,     16, graph_equalizer::EQ_LEFT_RIGHT   },
-            { &meta::graph_equalizer_x16_ms,     16, graph_equalizer::EQ_MID_SIDE     },
-            { &meta::graph_equalizer_x32_mono,   32, graph_equalizer::EQ_MONO         },
-            { &meta::graph_equalizer_x32_stereo, 32, graph_equalizer::EQ_STEREO       },
-            { &meta::graph_equalizer_x32_lr,     32, graph_equalizer::EQ_LEFT_RIGHT   },
-            { &meta::graph_equalizer_x32_ms,     32, graph_equalizer::EQ_MID_SIDE     },
+            static const plugin_settings_t plugin_settings[] =
+            {
+                { &meta::graph_equalizer_x16_mono,   16, graph_equalizer::EQ_MONO         },
+                { &meta::graph_equalizer_x16_stereo, 16, graph_equalizer::EQ_STEREO       },
+                { &meta::graph_equalizer_x16_lr,     16, graph_equalizer::EQ_LEFT_RIGHT   },
+                { &meta::graph_equalizer_x16_ms,     16, graph_equalizer::EQ_MID_SIDE     },
+                { &meta::graph_equalizer_x32_mono,   32, graph_equalizer::EQ_MONO         },
+                { &meta::graph_equalizer_x32_stereo, 32, graph_equalizer::EQ_STEREO       },
+                { &meta::graph_equalizer_x32_lr,     32, graph_equalizer::EQ_LEFT_RIGHT   },
+                { &meta::graph_equalizer_x32_ms,     32, graph_equalizer::EQ_MID_SIDE     },
 
-            { NULL, 0, false }
-        };
+                { NULL, 0, false }
+            };
 
-        static plug::Module *plugin_factory(const meta::plugin_t *meta)
-        {
-            for (const plugin_settings_t *s = plugin_settings; s->metadata != NULL; ++s)
-                if (s->metadata == meta)
-                    return new graph_equalizer(s->metadata, s->bands, s->mode);
-            return NULL;
-        }
+            static plug::Module *plugin_factory(const meta::plugin_t *meta)
+            {
+                for (const plugin_settings_t *s = plugin_settings; s->metadata != NULL; ++s)
+                    if (s->metadata == meta)
+                        return new graph_equalizer(s->metadata, s->bands, s->mode);
+                return NULL;
+            }
 
-        static plug::Factory factory(plugin_factory, plugins, 8);
+            static plug::Factory factory(plugin_factory, plugins, 8);
+        } /* inline namespace */
 
         //-------------------------------------------------------------------------
         graph_equalizer::graph_equalizer(const meta::plugin_t *metadata, size_t bands, size_t mode):
