@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2024 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2024 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2025 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2025 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-graph-equalizer
  * Created on: 3 авг. 2021 г.
@@ -112,17 +112,17 @@ namespace lsp
             { NULL, NULL }
         };
 
-        #define EQ_BAND(id, label, x, f) \
+        #define EQ_BAND(id, label, alias, x, f) \
             SWITCH("xs" id "_" #x, "Band solo" label " " f, 0.0f), \
             SWITCH("xm" id "_" #x, "Band mute" label " " f, 0.0f), \
             SWITCH("xe" id "_" #x, "Band on" label " " f, 1.0f), \
             BLINK("fv" id "_" #x, "Filter visibility " label " " f), \
-            LOG_CONTROL("g" id "_" #x, "Band gain" label " " f, U_GAIN_AMP, graph_equalizer_metadata::BAND_GAIN)
+            LOG_CONTROL("g" id "_" #x, "Band gain" label " " f, "Gain " f alias, U_GAIN_AMP, graph_equalizer_metadata::BAND_GAIN)
 
-        #define EQ_BAND_MONO(x, f)      EQ_BAND("", "", x, f)
-        #define EQ_BAND_STEREO(x, f)    EQ_BAND("", "", x, f)
-        #define EQ_BAND_LR(x, f)        EQ_BAND("l", " Left", x, f), EQ_BAND("r", " Right", x, f)
-        #define EQ_BAND_MS(x, f)        EQ_BAND("m", " Mid", x, f), EQ_BAND("s", " Side", x, f)
+        #define EQ_BAND_MONO(x, f)      EQ_BAND("", "", "", x, f)
+        #define EQ_BAND_STEREO(x, f)    EQ_BAND("", "", "", x, f)
+        #define EQ_BAND_LR(x, f)        EQ_BAND("l", " Left", " L", x, f), EQ_BAND("r", " Right", " R", x, f)
+        #define EQ_BAND_MS(x, f)        EQ_BAND("m", " Mid", " M", x, f), EQ_BAND("s", " Side", " S", x, f)
 
         #define EQ_MONO_PORTS \
             MESH("ag", "Amplitude graph", 2, graph_equalizer_metadata::FILTER_MESH_POINTS), \
@@ -168,9 +168,9 @@ namespace lsp
             AMP_GAIN("g_out", "Output gain", graph_equalizer_metadata::OUT_GAIN_DFL, 10.0f), \
             COMBO("mode", "Equalizer mode", 0, band_eq_modes), \
             COMBO("slope", "Filter slope", 0, band_slopes), \
-            LOG_CONTROL("react", "FFT reactivity", U_MSEC, graph_equalizer_metadata::REACT_TIME), \
+            LOG_CONTROL("react", "FFT reactivity", "Reactivity", U_MSEC, graph_equalizer_metadata::REACT_TIME), \
             AMP_GAIN("shift", "Shift gain", 1.0f, 100.0f), \
-            LOG_CONTROL("zoom", "Graph zoom", U_GAIN_AMP, graph_equalizer_metadata::ZOOM)
+            LOG_CONTROL("zoom", "Graph zoom", "Zoom", U_GAIN_AMP, graph_equalizer_metadata::ZOOM)
 
         #define BAND_SELECT(fselect) \
             COMBO("fsel", "Band select", 0, fselect)
