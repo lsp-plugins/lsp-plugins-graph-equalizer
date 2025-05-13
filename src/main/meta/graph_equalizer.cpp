@@ -130,7 +130,7 @@ namespace lsp
             METER_GAIN("sm", "Output signal meter", GAIN_AMP_P_12_DB)
 
         #define EQ_STEREO_PORTS \
-            PAN_CTL("bal", "Output balance", 0.0f), \
+            PAN_CTL("bal", "Output balance", "Out balance", 0.0f), \
             MESH("ag", "Amplitude graph", 2, graph_equalizer_metadata::FILTER_MESH_POINTS), \
             METER_GAIN("iml", "Input signal meter Left", GAIN_AMP_P_12_DB), \
             METER_GAIN("sml", "Output signal meter Left", GAIN_AMP_P_12_DB), \
@@ -138,7 +138,7 @@ namespace lsp
             METER_GAIN("smr", "Output signal meter Right", GAIN_AMP_P_12_DB)
 
         #define EQ_LR_PORTS \
-            PAN_CTL("bal", "Output balance", 0.0f), \
+            PAN_CTL("bal", "Output balance", "Out balance", 0.0f), \
             MESH("ag_l", "Amplitude graph Left", 2, graph_equalizer_metadata::FILTER_MESH_POINTS), \
             METER_GAIN("iml", "Input signal meter Left", GAIN_AMP_P_12_DB), \
             METER_GAIN("sml", "Output signal meter Left", GAIN_AMP_P_12_DB), \
@@ -149,10 +149,10 @@ namespace lsp
             SWITCH("fltv_r", "Filter visibility Right", "Show flt R", 1.0f)
 
         #define EQ_MS_PORTS \
-            PAN_CTL("bal", "Output balance", 0.0f), \
+            PAN_CTL("bal", "Output balance", "Out balance", 0.0f), \
             SWITCH("lstn", "Mid/Side listen", "M/S listen", 0.0f), \
-            AMP_GAIN100("gain_m", "Mid gain", GAIN_AMP_0_DB), \
-            AMP_GAIN100("gain_s", "Side gain", GAIN_AMP_0_DB), \
+            AMP_GAIN100("gain_m", "Mid gain", "Gain M", GAIN_AMP_0_DB), \
+            AMP_GAIN100("gain_s", "Side gain", "Gain S", GAIN_AMP_0_DB), \
             MESH("ag_m", "Amplitude graph Mid", 2, graph_equalizer_metadata::FILTER_MESH_POINTS), \
             METER_GAIN("iml", "Input signal meter Left", GAIN_AMP_P_12_DB), \
             METER_GAIN("sml", "Output signal meter Left", GAIN_AMP_P_12_DB), \
@@ -164,12 +164,12 @@ namespace lsp
 
         #define EQ_COMMON \
             BYPASS, \
-            AMP_GAIN("g_in", "Input gain", graph_equalizer_metadata::IN_GAIN_DFL, 10.0f), \
-            AMP_GAIN("g_out", "Output gain", graph_equalizer_metadata::OUT_GAIN_DFL, 10.0f), \
+            AMP_GAIN("g_in", "Input gain", "Input gain", graph_equalizer_metadata::IN_GAIN_DFL, 10.0f), \
+            AMP_GAIN("g_out", "Output gain", "Output gain", graph_equalizer_metadata::OUT_GAIN_DFL, 10.0f), \
             COMBO("mode", "Equalizer mode", "Eq mode", 0, band_eq_modes), \
             COMBO("slope", "Filter slope", "Flt slope", 0, band_slopes), \
             LOG_CONTROL("react", "FFT reactivity", "Reactivity", U_MSEC, graph_equalizer_metadata::REACT_TIME), \
-            AMP_GAIN("shift", "Shift gain", 1.0f, 100.0f), \
+            AMP_GAIN("shift", "Shift gain", "Shift", 1.0f, 100.0f), \
             LOG_CONTROL("zoom", "Graph zoom", "Zoom", U_GAIN_AMP, graph_equalizer_metadata::ZOOM)
 
         #define BAND_SELECT(fselect) \
