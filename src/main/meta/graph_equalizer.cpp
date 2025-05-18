@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2024 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2024 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2025 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2025 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-graph-equalizer
  * Created on: 3 авг. 2021 г.
@@ -25,7 +25,7 @@
 
 #define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION_MAJOR       1
 #define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION_MINOR       0
-#define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION_MICRO       28
+#define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION_MICRO       29
 
 #define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION  \
     LSP_MODULE_VERSION( \
@@ -112,17 +112,17 @@ namespace lsp
             { NULL, NULL }
         };
 
-        #define EQ_BAND(id, label, x, f) \
-            SWITCH("xs" id "_" #x, "Band solo" label " " f, 0.0f), \
-            SWITCH("xm" id "_" #x, "Band mute" label " " f, 0.0f), \
-            SWITCH("xe" id "_" #x, "Band on" label " " f, 1.0f), \
+        #define EQ_BAND(id, label, alias, x, f) \
+            SWITCH("xs" id "_" #x, "Band solo" label " " f, "Solo " f alias, 0.0f), \
+            SWITCH("xm" id "_" #x, "Band mute" label " " f, "Mute " f alias, 0.0f), \
+            SWITCH("xe" id "_" #x, "Band on" label " " f, "On " f alias, 1.0f), \
             BLINK("fv" id "_" #x, "Filter visibility " label " " f), \
-            LOG_CONTROL("g" id "_" #x, "Band gain" label " " f, U_GAIN_AMP, graph_equalizer_metadata::BAND_GAIN)
+            LOG_CONTROL("g" id "_" #x, "Band gain" label " " f, "Gain " f alias, U_GAIN_AMP, graph_equalizer_metadata::BAND_GAIN)
 
-        #define EQ_BAND_MONO(x, f)      EQ_BAND("", "", x, f)
-        #define EQ_BAND_STEREO(x, f)    EQ_BAND("", "", x, f)
-        #define EQ_BAND_LR(x, f)        EQ_BAND("l", " Left", x, f), EQ_BAND("r", " Right", x, f)
-        #define EQ_BAND_MS(x, f)        EQ_BAND("m", " Mid", x, f), EQ_BAND("s", " Side", x, f)
+        #define EQ_BAND_MONO(x, f)      EQ_BAND("", "", "", x, f)
+        #define EQ_BAND_STEREO(x, f)    EQ_BAND("", "", "", x, f)
+        #define EQ_BAND_LR(x, f)        EQ_BAND("l", " Left", " L", x, f), EQ_BAND("r", " Right", " R", x, f)
+        #define EQ_BAND_MS(x, f)        EQ_BAND("m", " Mid", " M", x, f), EQ_BAND("s", " Side", " S", x, f)
 
         #define EQ_MONO_PORTS \
             MESH("ag", "Amplitude graph", 2, graph_equalizer_metadata::FILTER_MESH_POINTS), \
@@ -130,7 +130,7 @@ namespace lsp
             METER_GAIN("sm", "Output signal meter", GAIN_AMP_P_12_DB)
 
         #define EQ_STEREO_PORTS \
-            PAN_CTL("bal", "Output balance", 0.0f), \
+            PAN_CTL("bal", "Output balance", "Out balance", 0.0f), \
             MESH("ag", "Amplitude graph", 2, graph_equalizer_metadata::FILTER_MESH_POINTS), \
             METER_GAIN("iml", "Input signal meter Left", GAIN_AMP_P_12_DB), \
             METER_GAIN("sml", "Output signal meter Left", GAIN_AMP_P_12_DB), \
@@ -138,42 +138,42 @@ namespace lsp
             METER_GAIN("smr", "Output signal meter Right", GAIN_AMP_P_12_DB)
 
         #define EQ_LR_PORTS \
-            PAN_CTL("bal", "Output balance", 0.0f), \
+            PAN_CTL("bal", "Output balance", "Out balance", 0.0f), \
             MESH("ag_l", "Amplitude graph Left", 2, graph_equalizer_metadata::FILTER_MESH_POINTS), \
             METER_GAIN("iml", "Input signal meter Left", GAIN_AMP_P_12_DB), \
             METER_GAIN("sml", "Output signal meter Left", GAIN_AMP_P_12_DB), \
-            SWITCH("fltv_l", "Filter visibility Left", 1.0f), \
+            SWITCH("fltv_l", "Filter visibility Left", "Show flt L", 1.0f), \
             MESH("ag_r", "Amplitude graph Right", 2, graph_equalizer_metadata::FILTER_MESH_POINTS), \
             METER_GAIN("imr", "Input signal meter Right", GAIN_AMP_P_12_DB), \
             METER_GAIN("smr", "Output signal meter Right", GAIN_AMP_P_12_DB), \
-            SWITCH("fltv_r", "Filter visibility Right", 1.0f)
+            SWITCH("fltv_r", "Filter visibility Right", "Show flt R", 1.0f)
 
         #define EQ_MS_PORTS \
-            PAN_CTL("bal", "Output balance", 0.0f), \
-            SWITCH("lstn", "Mid/Side listen", 0.0f), \
-            AMP_GAIN100("gain_m", "Mid gain", GAIN_AMP_0_DB), \
-            AMP_GAIN100("gain_s", "Side gain", GAIN_AMP_0_DB), \
+            PAN_CTL("bal", "Output balance", "Out balance", 0.0f), \
+            SWITCH("lstn", "Mid/Side listen", "M/S listen", 0.0f), \
+            AMP_GAIN100("gain_m", "Mid gain", "Gain M", GAIN_AMP_0_DB), \
+            AMP_GAIN100("gain_s", "Side gain", "Gain S", GAIN_AMP_0_DB), \
             MESH("ag_m", "Amplitude graph Mid", 2, graph_equalizer_metadata::FILTER_MESH_POINTS), \
             METER_GAIN("iml", "Input signal meter Left", GAIN_AMP_P_12_DB), \
             METER_GAIN("sml", "Output signal meter Left", GAIN_AMP_P_12_DB), \
-            SWITCH("fltv_m", "Filter visibility Mid", 1.0f), \
+            SWITCH("fltv_m", "Filter visibility Mid", "Show flt M", 1.0f), \
             MESH("ag_s", "Amplitude graph Side", 2, graph_equalizer_metadata::FILTER_MESH_POINTS), \
             METER_GAIN("imr", "Input signal meter Right", GAIN_AMP_P_12_DB), \
             METER_GAIN("smr", "Output signal meter Right", GAIN_AMP_P_12_DB), \
-            SWITCH("fltv_s", "Filter visibility Side", 1.0f)
+            SWITCH("fltv_s", "Filter visibility Side", "Show flt S", 1.0f)
 
         #define EQ_COMMON \
             BYPASS, \
-            AMP_GAIN("g_in", "Input gain", graph_equalizer_metadata::IN_GAIN_DFL, 10.0f), \
-            AMP_GAIN("g_out", "Output gain", graph_equalizer_metadata::OUT_GAIN_DFL, 10.0f), \
-            COMBO("mode", "Equalizer mode", 0, band_eq_modes), \
-            COMBO("slope", "Filter slope", 0, band_slopes), \
-            LOG_CONTROL("react", "FFT reactivity", U_MSEC, graph_equalizer_metadata::REACT_TIME), \
-            AMP_GAIN("shift", "Shift gain", 1.0f, 100.0f), \
-            LOG_CONTROL("zoom", "Graph zoom", U_GAIN_AMP, graph_equalizer_metadata::ZOOM)
+            AMP_GAIN("g_in", "Input gain", "Input gain", graph_equalizer_metadata::IN_GAIN_DFL, 10.0f), \
+            AMP_GAIN("g_out", "Output gain", "Output gain", graph_equalizer_metadata::OUT_GAIN_DFL, 10.0f), \
+            COMBO("mode", "Equalizer mode", "Eq mode", 0, band_eq_modes), \
+            COMBO("slope", "Filter slope", "Flt slope", 0, band_slopes), \
+            LOG_CONTROL("react", "FFT reactivity", "Reactivity", U_MSEC, graph_equalizer_metadata::REACT_TIME), \
+            AMP_GAIN("shift", "Shift gain", "Shift", 1.0f, 100.0f), \
+            LOG_CONTROL("zoom", "Graph zoom", "Zoom", U_GAIN_AMP, graph_equalizer_metadata::ZOOM)
 
         #define BAND_SELECT(fselect) \
-            COMBO("fsel", "Band select", 0, fselect)
+            COMBO("fsel", "Band select", "Band select", 0, fselect)
 
         #define EQ_COMMUNICATION_MONO \
             OPT_SEND_NAME("send", "Audio send"), \
@@ -189,10 +189,10 @@ namespace lsp
             OPT_AUDIO_RETURN("rtn_l", "Audio return input left", 0, "return"), \
             OPT_AUDIO_RETURN("rtn_r", "Audio return input right", 1, "return")
 
-        #define CHANNEL_ANALYSIS(id, label) \
-            SWITCH("ife" id, "Input FFT graph enable" label, 1.0f), \
-            SWITCH("ofe" id, "Output FFT graph enable" label, 1.0f), \
-            SWITCH("rfe" id, "Return FFT graph enable" label, 1.0f), \
+        #define CHANNEL_ANALYSIS(id, label, alias) \
+            SWITCH("ife" id, "Input FFT graph enable" label, "FFT In" alias, 1.0f), \
+            SWITCH("ofe" id, "Output FFT graph enable" label, "FFT Out" alias, 1.0f), \
+            SWITCH("rfe" id, "Return FFT graph enable" label, "FFT Ret" alias, 1.0f), \
             MESH("ifg" id, "Input FFT graph" label, 2, graph_equalizer_metadata::MESH_POINTS + 2), \
             MESH("ofg" id, "Output FFT graph" label, 2, graph_equalizer_metadata::MESH_POINTS), \
             MESH("rfg" id, "Return FFT graph" label, 2, graph_equalizer_metadata::MESH_POINTS)
@@ -254,7 +254,7 @@ namespace lsp
             PORTS_MONO_PLUGIN,
             EQ_COMMON,
             EQ_COMMUNICATION_MONO,
-            CHANNEL_ANALYSIS("", ""),
+            CHANNEL_ANALYSIS("", "", ""),
             EQ_MONO_PORTS,
             EQ_BANDS_16X(EQ_BAND_MONO),
 
@@ -266,8 +266,8 @@ namespace lsp
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
             EQ_COMMUNICATION_STEREO,
-            CHANNEL_ANALYSIS("_l", " Left"),
-            CHANNEL_ANALYSIS("_r", " Right"),
+            CHANNEL_ANALYSIS("_l", " Left", " L"),
+            CHANNEL_ANALYSIS("_r", " Right", " R"),
             EQ_STEREO_PORTS,
             EQ_BANDS_16X(EQ_BAND_STEREO),
 
@@ -279,8 +279,8 @@ namespace lsp
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
             EQ_COMMUNICATION_STEREO,
-            CHANNEL_ANALYSIS("_l", " Left"),
-            CHANNEL_ANALYSIS("_r", " Right"),
+            CHANNEL_ANALYSIS("_l", " Left", " L"),
+            CHANNEL_ANALYSIS("_r", " Right", " R"),
             BAND_SELECT(band_select_16lr),
             EQ_LR_PORTS,
             EQ_BANDS_16X(EQ_BAND_LR),
@@ -293,8 +293,8 @@ namespace lsp
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
             EQ_COMMUNICATION_STEREO,
-            CHANNEL_ANALYSIS("_m", " Mid"),
-            CHANNEL_ANALYSIS("_s", " Side"),
+            CHANNEL_ANALYSIS("_m", " Mid", " M"),
+            CHANNEL_ANALYSIS("_s", " Side", " S"),
             BAND_SELECT(band_select_16ms),
             EQ_MS_PORTS,
             EQ_BANDS_16X(EQ_BAND_MS),
@@ -307,7 +307,7 @@ namespace lsp
             PORTS_MONO_PLUGIN,
             EQ_COMMON,
             EQ_COMMUNICATION_MONO,
-            CHANNEL_ANALYSIS("", ""),
+            CHANNEL_ANALYSIS("", "", ""),
             BAND_SELECT(band_select_32),
             EQ_MONO_PORTS,
             EQ_BANDS_32X(EQ_BAND_MONO),
@@ -320,8 +320,8 @@ namespace lsp
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
             EQ_COMMUNICATION_STEREO,
-            CHANNEL_ANALYSIS("_l", " Left"),
-            CHANNEL_ANALYSIS("_r", " Right"),
+            CHANNEL_ANALYSIS("_l", " Left", " L"),
+            CHANNEL_ANALYSIS("_r", " Right", " R"),
             BAND_SELECT(band_select_32),
             EQ_STEREO_PORTS,
             EQ_BANDS_32X(EQ_BAND_STEREO),
@@ -334,8 +334,8 @@ namespace lsp
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
             EQ_COMMUNICATION_STEREO,
-            CHANNEL_ANALYSIS("_l", " Left"),
-            CHANNEL_ANALYSIS("_r", " Right"),
+            CHANNEL_ANALYSIS("_l", " Left", " L"),
+            CHANNEL_ANALYSIS("_r", " Right", " R"),
             BAND_SELECT(band_select_32lr),
             EQ_LR_PORTS,
             EQ_BANDS_32X(EQ_BAND_LR),
@@ -348,8 +348,8 @@ namespace lsp
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
             EQ_COMMUNICATION_STEREO,
-            CHANNEL_ANALYSIS("_m", " Mid"),
-            CHANNEL_ANALYSIS("_s", " Side"),
+            CHANNEL_ANALYSIS("_m", " Mid", " M"),
+            CHANNEL_ANALYSIS("_s", " Side", " S"),
             BAND_SELECT(band_select_32ms),
             EQ_MS_PORTS,
             EQ_BANDS_32X(EQ_BAND_MS),
