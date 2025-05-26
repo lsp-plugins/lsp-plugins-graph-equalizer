@@ -172,6 +172,9 @@ namespace lsp
             AMP_GAIN("shift", "Shift gain", "Shift", 1.0f, 100.0f), \
             LOG_CONTROL("zoom", "Graph zoom", "Zoom", U_GAIN_AMP, graph_equalizer_metadata::ZOOM)
 
+        #define EQ_LINK(id, label, alias) \
+            SWITCH(id, label, alias, 0.0f)
+
         #define BAND_SELECT(fselect) \
             COMBO("fsel", "Band select", "Band select", 0, fselect)
 
@@ -278,6 +281,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
+            EQ_LINK("clink", "Left/Right controls link", "L/R link"),
             EQ_COMMUNICATION_STEREO,
             CHANNEL_ANALYSIS("_l", " Left", " L"),
             CHANNEL_ANALYSIS("_r", " Right", " R"),
@@ -292,6 +296,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
+            EQ_LINK("clink", "Mid/Side controls link", "M/S link"),
             EQ_COMMUNICATION_STEREO,
             CHANNEL_ANALYSIS("_m", " Mid", " M"),
             CHANNEL_ANALYSIS("_s", " Side", " S"),
@@ -333,6 +338,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
+            EQ_LINK("clink", "Left/Right controls link", "L/R link"),
             EQ_COMMUNICATION_STEREO,
             CHANNEL_ANALYSIS("_l", " Left", " L"),
             CHANNEL_ANALYSIS("_r", " Right", " R"),
@@ -347,6 +353,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
+            EQ_LINK("clink", "Mid/Side controls link", "M/S link"),
             EQ_COMMUNICATION_STEREO,
             CHANNEL_ANALYSIS("_m", " Mid", " M"),
             CHANNEL_ANALYSIS("_s", " Side", " S"),
