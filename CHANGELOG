@@ -4,6 +4,7 @@
 
 === 1.0.30 ===
 * Added left/right and mid/side linking in the UI.
+* Updated build scripts and dependencies.
 
 === 1.0.29 ===
 * Updated build scripts and dependencies.
