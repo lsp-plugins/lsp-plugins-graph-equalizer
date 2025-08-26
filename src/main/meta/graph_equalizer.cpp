@@ -25,7 +25,7 @@
 
 #define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION_MAJOR       1
 #define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION_MINOR       0
-#define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION_MICRO       29
+#define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION_MICRO       30
 
 #define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION  \
     LSP_MODULE_VERSION( \
@@ -89,26 +89,26 @@ namespace lsp
 
         static const port_item_t band_select_32[] =
         {
-            { "Bands 0-15",             "graph_eq.bands_0:15" },
-            { "Bands 16-31",            "graph_eq.bands_16:31" },
+            { "Bands 1-16",             "graph_eq.bands_1:16" },
+            { "Bands 17-32",            "graph_eq.bands_17:32" },
             { NULL, NULL }
         };
 
         static const port_item_t band_select_32lr[] =
         {
-            { "Bands Left 0-15",        "graph_eq.bands_l_0:15" },
-            { "Bands Right 0-15",       "graph_eq.bands_r_0:15" },
-            { "Bands Left 16-31",       "graph_eq.bands_l_16:31" },
-            { "Bands Right 16-31",      "graph_eq.bands_r_16:31" },
+            { "Bands Left 1-16",        "graph_eq.bands_l_1:16" },
+            { "Bands Right 1-16",       "graph_eq.bands_r_1:16" },
+            { "Bands Left 17-32",       "graph_eq.bands_l_17:32" },
+            { "Bands Right 17-32",      "graph_eq.bands_r_17:32" },
             { NULL, NULL }
         };
 
         static const port_item_t band_select_32ms[] =
         {
-            { "Bands Middle 0-15",      "graph_eq.bands_m_0:15" },
-            { "Bands Side 0-15",        "graph_eq.bands_s_0:15" },
-            { "Bands Middle 16-31",     "graph_eq.bands_m_16:31" },
-            { "Bands Side 16-31",       "graph_eq.bands_s_16:31" },
+            { "Bands Middle 1-16",      "graph_eq.bands_m_1:16" },
+            { "Bands Side 1-16",        "graph_eq.bands_s_1:16" },
+            { "Bands Middle 17-32",     "graph_eq.bands_m_17:32" },
+            { "Bands Side 17-32",       "graph_eq.bands_s_17:32" },
             { NULL, NULL }
         };
 
@@ -171,6 +171,9 @@ namespace lsp
             LOG_CONTROL("react", "FFT reactivity", "Reactivity", U_MSEC, graph_equalizer_metadata::REACT_TIME), \
             AMP_GAIN("shift", "Shift gain", "Shift", 1.0f, 100.0f), \
             LOG_CONTROL("zoom", "Graph zoom", "Zoom", U_GAIN_AMP, graph_equalizer_metadata::ZOOM)
+
+        #define EQ_LINK(id, label, alias) \
+            SWITCH(id, label, alias, 0.0f)
 
         #define BAND_SELECT(fselect) \
             COMBO("fsel", "Band select", "Band select", 0, fselect)
@@ -278,6 +281,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
+            EQ_LINK("clink", "Left/Right controls link", "L/R link"),
             EQ_COMMUNICATION_STEREO,
             CHANNEL_ANALYSIS("_l", " Left", " L"),
             CHANNEL_ANALYSIS("_r", " Right", " R"),
@@ -292,6 +296,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
+            EQ_LINK("clink", "Mid/Side controls link", "M/S link"),
             EQ_COMMUNICATION_STEREO,
             CHANNEL_ANALYSIS("_m", " Mid", " M"),
             CHANNEL_ANALYSIS("_s", " Side", " S"),
@@ -333,6 +338,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
+            EQ_LINK("clink", "Left/Right controls link", "L/R link"),
             EQ_COMMUNICATION_STEREO,
             CHANNEL_ANALYSIS("_l", " Left", " L"),
             CHANNEL_ANALYSIS("_r", " Right", " R"),
@@ -347,6 +353,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             EQ_COMMON,
+            EQ_LINK("clink", "Mid/Side controls link", "M/S link"),
             EQ_COMMUNICATION_STEREO,
             CHANNEL_ANALYSIS("_m", " Mid", " M"),
             CHANNEL_ANALYSIS("_s", " Side", " S"),

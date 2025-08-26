@@ -2,6 +2,16 @@
 	<ui:eval id="num_filters" value="(ex :gm_16) ? 32 : 16"/>
 	<ui:eval id="num_blocks" value="(ex :gm_16) ? 4 : 2"/>
 
+	<!-- Control linking -->
+	<ui:for id="port" list="'xs'; 'xm'; 'xe'; 'g'">
+		<ui:for id="i" first="0" count=":num_filters">
+			<ctl:link
+				id.1="${port}m_${i}" value.1=":${port}s_${i}"
+				id.2="${port}s_${i}" value.2=":${port}m_${i}"
+				activity=":clink" />
+		</ui:for>
+	</ui:for>
+
 	<grid rows="3" cols="3" spacing="4">
 
 		<!-- Graph -->
@@ -321,6 +331,7 @@
 				<label text="labels.mode"/>
 				<combo id="slope" pad.r="6" pad.v="4"/>
 				<combo id="mode" pad.r="12" pad.v="4"/>
+				<button id="clink" ui:inject="Button_green" text="labels.chan.ms_link" />
 				<button id="fltv_m" height="22" width="48" text="labels.chan.middle" ui:inject="Button_mid" pad.v="4"/>
 				<knob id="gain_m" scale.size="3" size="10" scolor="mid" pad.l="6"/>
 				<value id="gain_m" width.min="48" same_line="true" fill="true" halign="1" pad.r="12"/>

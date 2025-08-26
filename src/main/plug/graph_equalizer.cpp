@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2024 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2024 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2025 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2025 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-graph-equalizer
  * Created on: 3 авг. 2021 г.
@@ -244,6 +244,8 @@ namespace lsp
             BIND_PORT(pReactivity);
             BIND_PORT(pShiftGain);
             BIND_PORT(pZoom);
+            if ((nMode == EQ_LEFT_RIGHT) || (nMode == EQ_MID_SIDE))
+                SKIP_PORT("Separate channels link");
 
             // Communication
             SKIP_PORT("Send name");
