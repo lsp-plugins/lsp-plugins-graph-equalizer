@@ -2,6 +2,9 @@
 * RECENT CHANGES
 *******************************************************************************
 
+=== 1.0.31 ===
+* Updated build scripts and dependencies.
+
 === 1.0.30 ===
 * Fixed band naming, counding bands from 1 instead of 0.
 * Added left/right and mid/side linking in the UI.
