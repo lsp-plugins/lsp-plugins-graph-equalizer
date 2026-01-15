@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2021 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2021 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2026 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2026 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-graph-equalizer
  * Created on: 15 мая 2023 г.
@@ -99,7 +99,12 @@ namespace lsp
 
             public:
                 explicit graph_equalizer_ui(const meta::plugin_t *meta);
+                graph_equalizer_ui(const graph_equalizer_ui &) = delete;
+                graph_equalizer_ui(graph_equalizer_ui &&) = delete;
                 virtual ~graph_equalizer_ui() override;
+
+                graph_equalizer_ui & operator = (const graph_equalizer_ui &) = delete;
+                graph_equalizer_ui & operator = (graph_equalizer_ui &&) = delete;
 
                 virtual status_t    post_init() override;
                 virtual status_t    pre_destroy() override;
