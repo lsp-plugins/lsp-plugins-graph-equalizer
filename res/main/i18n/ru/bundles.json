@@ -1,0 +1,17 @@
+{
+	"graph_equalizer": {
+		"description": "Этот плагин выполняет графическую эквализацию сигнала. Для коррекции доступно\n16 либо 32 частотные полосы с диапазоном регулировки 72 дБ (-36..+36 дБ).",
+		"name": "Графический эквалайзер"
+	},
+	"launcher": {
+		"graph_equalizer_x16_lr": "Раздельный ЛП x16",
+		"graph_equalizer_x16_mono": "Моно x16",
+		"graph_equalizer_x16_ms": "Раздельный ЦС x16",
+		"graph_equalizer_x16_stereo": "Стерео x16",
+		"graph_equalizer_x32_lr": "Раздельный ЛП x32",
+		"graph_equalizer_x32_mono": "Моно x32",
+		"graph_equalizer_x32_ms": "Раздельный ЦС x32",
+		"graph_equalizer_x32_stereo": "Стерео x32"
+	}
+}
+
