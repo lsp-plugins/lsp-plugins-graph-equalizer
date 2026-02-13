@@ -398,7 +398,7 @@ namespace lsp
             clap_features_mono,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x16_mono_ports,
-            "equalizer/graphic/mono.xml",
+            "plugins/equalizer/graphic/mono.xml",
             NULL,
             mono_plugin_port_groups,
             &graph_equalizer_bundle
@@ -429,7 +429,7 @@ namespace lsp
             clap_features_mono,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x32_mono_ports,
-            "equalizer/graphic/mono.xml",
+            "plugins/equalizer/graphic/mono.xml",
             NULL,
             mono_plugin_port_groups,
             &graph_equalizer_bundle
@@ -460,7 +460,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x16_stereo_ports,
-            "equalizer/graphic/stereo.xml",
+            "plugins/equalizer/graphic/stereo.xml",
             NULL,
             stereo_plugin_port_groups,
             &graph_equalizer_bundle
@@ -491,7 +491,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x32_stereo_ports,
-            "equalizer/graphic/stereo.xml",
+            "plugins/equalizer/graphic/stereo.xml",
             NULL,
             stereo_plugin_port_groups,
             &graph_equalizer_bundle
@@ -522,7 +522,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x16_lr_ports,
-            "equalizer/graphic/lr.xml",
+            "plugins/equalizer/graphic/lr.xml",
             NULL,
             stereo_plugin_port_groups,
             &graph_equalizer_bundle
@@ -553,7 +553,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x32_lr_ports,
-            "equalizer/graphic/lr.xml",
+            "plugins/equalizer/graphic/lr.xml",
             NULL,
             stereo_plugin_port_groups,
             &graph_equalizer_bundle
@@ -584,7 +584,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x16_ms_ports,
-            "equalizer/graphic/ms.xml",
+            "plugins/equalizer/graphic/ms.xml",
             NULL,
             stereo_plugin_port_groups,
             &graph_equalizer_bundle
@@ -615,7 +615,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x32_ms_ports,
-            "equalizer/graphic/ms.xml",
+            "plugins/equalizer/graphic/ms.xml",
             NULL,
             stereo_plugin_port_groups,
             &graph_equalizer_bundle
