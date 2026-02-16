@@ -401,7 +401,8 @@ namespace lsp
             "plugins/equalizer/graphic/mono.xml",
             NULL,
             mono_plugin_port_groups,
-            &graph_equalizer_bundle
+            &graph_equalizer_bundle,
+            3
         };
         LSP_REGISTER_METADATA(graph_equalizer_x16_mono);
 
@@ -432,7 +433,8 @@ namespace lsp
             "plugins/equalizer/graphic/mono.xml",
             NULL,
             mono_plugin_port_groups,
-            &graph_equalizer_bundle
+            &graph_equalizer_bundle,
+            4
         };
         LSP_REGISTER_METADATA(graph_equalizer_x32_mono);
 
@@ -463,7 +465,8 @@ namespace lsp
             "plugins/equalizer/graphic/stereo.xml",
             NULL,
             stereo_plugin_port_groups,
-            &graph_equalizer_bundle
+            &graph_equalizer_bundle,
+            1
         };
         LSP_REGISTER_METADATA(graph_equalizer_x16_stereo);
 
@@ -494,7 +497,8 @@ namespace lsp
             "plugins/equalizer/graphic/stereo.xml",
             NULL,
             stereo_plugin_port_groups,
-            &graph_equalizer_bundle
+            &graph_equalizer_bundle,
+            2
         };
         LSP_REGISTER_METADATA(graph_equalizer_x32_stereo);
 
@@ -525,7 +529,8 @@ namespace lsp
             "plugins/equalizer/graphic/lr.xml",
             NULL,
             stereo_plugin_port_groups,
-            &graph_equalizer_bundle
+            &graph_equalizer_bundle,
+            5
         };
         LSP_REGISTER_METADATA(graph_equalizer_x16_lr);
 
@@ -556,7 +561,8 @@ namespace lsp
             "plugins/equalizer/graphic/lr.xml",
             NULL,
             stereo_plugin_port_groups,
-            &graph_equalizer_bundle
+            &graph_equalizer_bundle,
+            6
         };
         LSP_REGISTER_METADATA(graph_equalizer_x32_lr);
 
@@ -587,7 +593,8 @@ namespace lsp
             "plugins/equalizer/graphic/ms.xml",
             NULL,
             stereo_plugin_port_groups,
-            &graph_equalizer_bundle
+            &graph_equalizer_bundle,
+            7
         };
         LSP_REGISTER_METADATA(graph_equalizer_x16_ms);
 
@@ -618,7 +625,8 @@ namespace lsp
             "plugins/equalizer/graphic/ms.xml",
             NULL,
             stereo_plugin_port_groups,
-            &graph_equalizer_bundle
+            &graph_equalizer_bundle,
+            8
         };
         LSP_REGISTER_METADATA(graph_equalizer_x32_ms);
 
