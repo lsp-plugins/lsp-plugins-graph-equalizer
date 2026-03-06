@@ -126,13 +126,13 @@ namespace lsp
         #define EQ_BAND_MS(x, f)        EQ_BAND("m", " Mid", " M", x, f), EQ_BAND("s", " Side", " S", x, f)
 
         #define EQ_MONO_PORTS \
-            MESH("ag", "Amplitude graph", 2, graph_equalizer_metadata::FILTER_MESH_POINTS), \
+            MESH("ag", "Amplitude graph", 2, graph_equalizer_metadata::MESH_POINTS + 4), \
             METER_GAIN("im", "Input signal meter", GAIN_AMP_P_12_DB), \
             METER_GAIN("sm", "Output signal meter", GAIN_AMP_P_12_DB)
 
         #define EQ_STEREO_PORTS \
             PAN_CTL("bal", "Output balance", "Out balance", 0.0f), \
-            MESH("ag", "Amplitude graph", 2, graph_equalizer_metadata::FILTER_MESH_POINTS), \
+            MESH("ag", "Amplitude graph", 2, graph_equalizer_metadata::MESH_POINTS + 4), \
             METER_GAIN("iml", "Input signal meter Left", GAIN_AMP_P_12_DB), \
             METER_GAIN("sml", "Output signal meter Left", GAIN_AMP_P_12_DB), \
             METER_GAIN("imr", "Input signal meter Right", GAIN_AMP_P_12_DB), \
@@ -140,11 +140,11 @@ namespace lsp
 
         #define EQ_LR_PORTS \
             PAN_CTL("bal", "Output balance", "Out balance", 0.0f), \
-            MESH("ag_l", "Amplitude graph Left", 2, graph_equalizer_metadata::FILTER_MESH_POINTS), \
+            MESH("ag_l", "Amplitude graph Left", 2, graph_equalizer_metadata::MESH_POINTS + 4), \
             METER_GAIN("iml", "Input signal meter Left", GAIN_AMP_P_12_DB), \
             METER_GAIN("sml", "Output signal meter Left", GAIN_AMP_P_12_DB), \
             SWITCH("fltv_l", "Filter visibility Left", "Show flt L", 1.0f), \
-            MESH("ag_r", "Amplitude graph Right", 2, graph_equalizer_metadata::FILTER_MESH_POINTS), \
+            MESH("ag_r", "Amplitude graph Right", 2, graph_equalizer_metadata::MESH_POINTS + 4), \
             METER_GAIN("imr", "Input signal meter Right", GAIN_AMP_P_12_DB), \
             METER_GAIN("smr", "Output signal meter Right", GAIN_AMP_P_12_DB), \
             SWITCH("fltv_r", "Filter visibility Right", "Show flt R", 1.0f)
@@ -154,11 +154,11 @@ namespace lsp
             SWITCH("lstn", "Mid/Side listen", "M/S listen", 0.0f), \
             AMP_GAIN100("gain_m", "Mid gain", "Gain M", GAIN_AMP_0_DB), \
             AMP_GAIN100("gain_s", "Side gain", "Gain S", GAIN_AMP_0_DB), \
-            MESH("ag_m", "Amplitude graph Mid", 2, graph_equalizer_metadata::FILTER_MESH_POINTS), \
+            MESH("ag_m", "Amplitude graph Mid", 2, graph_equalizer_metadata::MESH_POINTS + 4), \
             METER_GAIN("iml", "Input signal meter Left", GAIN_AMP_P_12_DB), \
             METER_GAIN("sml", "Output signal meter Left", GAIN_AMP_P_12_DB), \
             SWITCH("fltv_m", "Filter visibility Mid", "Show flt M", 1.0f), \
-            MESH("ag_s", "Amplitude graph Side", 2, graph_equalizer_metadata::FILTER_MESH_POINTS), \
+            MESH("ag_s", "Amplitude graph Side", 2, graph_equalizer_metadata::MESH_POINTS + 4), \
             METER_GAIN("imr", "Input signal meter Right", GAIN_AMP_P_12_DB), \
             METER_GAIN("smr", "Output signal meter Right", GAIN_AMP_P_12_DB), \
             SWITCH("fltv_s", "Filter visibility Side", "Show flt S", 1.0f)
