@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2021 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2021 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2026 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2026 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-graph-equalizer
  * Created on: 3 авг. 2021 г.
@@ -277,7 +277,7 @@ namespace lsp
                 expr::Parameters params;
                 tk::prop::String lc_string;
                 LSPString text;
-                lc_string.bind(f->wInfo->style(), pDisplay->dictionary());
+                lc_string.bind(f->wInfo->style(), display()->dictionary());
                 SET_LOCALE_SCOPED(LC_NUMERIC, "C");
 
                 // Frequency

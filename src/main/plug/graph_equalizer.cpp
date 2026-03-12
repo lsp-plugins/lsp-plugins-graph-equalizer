@@ -846,7 +846,7 @@ namespace lsp
                     sAnalyzer.get_spectrum(i*3, &mesh->pvData[1][1], vIndexes, meta::graph_equalizer_metadata::MESH_POINTS);
 
                     // Mark mesh containing data
-                    mesh->data(2, meta::graph_equalizer_metadata::MESH_POINTS+2);
+                    mesh->data(2, meta::graph_equalizer_metadata::MESH_POINTS + 2);
                 }
 
                 // Output FFT mesh
@@ -918,16 +918,26 @@ namespace lsp
                     plug::mesh_t *mesh        = c->pTrAmp->buffer<plug::mesh_t>();
                     if ((mesh != NULL) && (mesh->isEmpty()))
                     {
-                        // Add extra points
-                        mesh->pvData[0][0] = SPEC_FREQ_MIN*0.5f;
-                        mesh->pvData[0][meta::graph_equalizer_metadata::MESH_POINTS+1] = SPEC_FREQ_MAX*2.0;
-                        mesh->pvData[1][0] = 1.0f;
-                        mesh->pvData[1][meta::graph_equalizer_metadata::MESH_POINTS+1] = 1.0f;
+                        // Frequency
+                        float *pf   = mesh->pvData[0];
+                        dsp::copy(&pf[2], vFreqs, meta::graph_equalizer_metadata::MESH_POINTS);
+                        pf[0]       = SPEC_FREQ_MIN*0.5f;
+                        pf[1]       = SPEC_FREQ_MIN*0.5f;
+                        pf         += meta::graph_equalizer_metadata::MESH_POINTS + 2;
+                        pf[0]       = SPEC_FREQ_MAX*2.0f;
+                        pf[1]       = SPEC_FREQ_MAX*2.0f;
 
-                        // Copy data
-                        dsp::copy(&mesh->pvData[0][1], vFreqs, meta::graph_equalizer_metadata::MESH_POINTS);
-                        dsp::complex_mod(&mesh->pvData[1][1], c->vTrRe, c->vTrIm, meta::graph_equalizer_metadata::MESH_POINTS);
-                        mesh->data(2, meta::graph_equalizer_metadata::FILTER_MESH_POINTS);
+                        // Amplitude
+                        pf          = mesh->pvData[1];
+                        dsp::complex_mod(&pf[2], c->vTrRe, c->vTrIm, meta::graph_equalizer_metadata::MESH_POINTS);
+                        pf[0]       = GAIN_AMP_0_DB;
+                        pf[1]       = pf[2];
+                        pf         += meta::graph_equalizer_metadata::MESH_POINTS + 2;
+                        pf[0]       = pf[-1];
+                        pf[1]       = GAIN_AMP_0_DB;
+
+                        // Report data presence
+                        mesh->data(2, meta::graph_equalizer_metadata::MESH_POINTS + 4);
 
                         c->nSync           &= ~CS_SYNC_AMP;
                     }

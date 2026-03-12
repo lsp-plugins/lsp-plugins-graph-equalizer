@@ -1,7 +1,16 @@
 {
 	"graph_equalizer": {
-		"name": "Graphic Equalizer",
-		"description": "This plugin performs graphic equalization of signal. Overall 16 or 32\nfrequency bands are available for correction in range of 72 dB (-36..+36 dB)."
+		"description": "This plugin performs graphic equalization of signal. Overall 16 or 32\nfrequency bands are available for correction in range of 72 dB (-36..+36 dB).",
+		"name": "Graphic Equalizer"
+	},
+	"launcher": {
+		"graph_equalizer_x16_lr": "LR x16",
+		"graph_equalizer_x16_mono": "Mono x16",
+		"graph_equalizer_x16_ms": "MS x16",
+		"graph_equalizer_x16_stereo": "Stereo x16",
+		"graph_equalizer_x32_lr": "LR x32",
+		"graph_equalizer_x32_mono": "Mono x32",
+		"graph_equalizer_x32_ms": "MS x32",
+		"graph_equalizer_x32_stereo": "Stereo x32"
 	}
 }
-

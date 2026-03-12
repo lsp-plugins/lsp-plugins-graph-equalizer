@@ -1,7 +1,16 @@
 {
 	"graph_equalizer": {
-		"name": "Graphischer Equalizer",
-		"description": "Dieses Plugin dient als grafischer Equalizer des Signals. Insgesamt 16 bzw. 32\nFrequenzbänder sind verfügbar um Korrekturen im Umfang von 72 dB (-36 dB bis +36 dB) \ndurch zu führen."
+		"description": "Dieses Plugin dient als grafischer Equalizer des Signals. Insgesamt 16 bzw. 32\nFrequenzbänder sind verfügbar um Korrekturen im Umfang von 72 dB (-36 dB\nbis +36 dB) durch zu führen.",
+		"name": "Graphischer Equalizer"
+	},
+	"launcher": {
+		"graph_equalizer_x16_lr": "LR x16",
+		"graph_equalizer_x16_mono": "Mono x16",
+		"graph_equalizer_x16_ms": "MS x16",
+		"graph_equalizer_x16_stereo": "Stereo x16",
+		"graph_equalizer_x32_lr": "LR x32",
+		"graph_equalizer_x32_mono": "Mono x32",
+		"graph_equalizer_x32_ms": "MS x32",
+		"graph_equalizer_x32_stereo": "Stereo x32"
 	}
 }
-

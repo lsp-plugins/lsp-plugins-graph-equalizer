@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2025 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2025 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2026 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2026 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-graph-equalizer
  * Created on: 3 авг. 2021 г.
@@ -20,12 +20,13 @@
  */
 
 #include <lsp-plug.in/plug-fw/meta/ports.h>
+#include <lsp-plug.in/plug-fw/meta/registry.h>
 #include <lsp-plug.in/shared/meta/developers.h>
 #include <private/meta/graph_equalizer.h>
 
 #define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION_MAJOR       1
 #define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION_MINOR       0
-#define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION_MICRO       33
+#define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION_MICRO       34
 
 #define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION  \
     LSP_MODULE_VERSION( \
@@ -125,13 +126,13 @@ namespace lsp
         #define EQ_BAND_MS(x, f)        EQ_BAND("m", " Mid", " M", x, f), EQ_BAND("s", " Side", " S", x, f)
 
         #define EQ_MONO_PORTS \
-            MESH("ag", "Amplitude graph", 2, graph_equalizer_metadata::FILTER_MESH_POINTS), \
+            MESH("ag", "Amplitude graph", 2, graph_equalizer_metadata::MESH_POINTS + 4), \
             METER_GAIN("im", "Input signal meter", GAIN_AMP_P_12_DB), \
             METER_GAIN("sm", "Output signal meter", GAIN_AMP_P_12_DB)
 
         #define EQ_STEREO_PORTS \
             PAN_CTL("bal", "Output balance", "Out balance", 0.0f), \
-            MESH("ag", "Amplitude graph", 2, graph_equalizer_metadata::FILTER_MESH_POINTS), \
+            MESH("ag", "Amplitude graph", 2, graph_equalizer_metadata::MESH_POINTS + 4), \
             METER_GAIN("iml", "Input signal meter Left", GAIN_AMP_P_12_DB), \
             METER_GAIN("sml", "Output signal meter Left", GAIN_AMP_P_12_DB), \
             METER_GAIN("imr", "Input signal meter Right", GAIN_AMP_P_12_DB), \
@@ -139,11 +140,11 @@ namespace lsp
 
         #define EQ_LR_PORTS \
             PAN_CTL("bal", "Output balance", "Out balance", 0.0f), \
-            MESH("ag_l", "Amplitude graph Left", 2, graph_equalizer_metadata::FILTER_MESH_POINTS), \
+            MESH("ag_l", "Amplitude graph Left", 2, graph_equalizer_metadata::MESH_POINTS + 4), \
             METER_GAIN("iml", "Input signal meter Left", GAIN_AMP_P_12_DB), \
             METER_GAIN("sml", "Output signal meter Left", GAIN_AMP_P_12_DB), \
             SWITCH("fltv_l", "Filter visibility Left", "Show flt L", 1.0f), \
-            MESH("ag_r", "Amplitude graph Right", 2, graph_equalizer_metadata::FILTER_MESH_POINTS), \
+            MESH("ag_r", "Amplitude graph Right", 2, graph_equalizer_metadata::MESH_POINTS + 4), \
             METER_GAIN("imr", "Input signal meter Right", GAIN_AMP_P_12_DB), \
             METER_GAIN("smr", "Output signal meter Right", GAIN_AMP_P_12_DB), \
             SWITCH("fltv_r", "Filter visibility Right", "Show flt R", 1.0f)
@@ -153,11 +154,11 @@ namespace lsp
             SWITCH("lstn", "Mid/Side listen", "M/S listen", 0.0f), \
             AMP_GAIN100("gain_m", "Mid gain", "Gain M", GAIN_AMP_0_DB), \
             AMP_GAIN100("gain_s", "Side gain", "Gain S", GAIN_AMP_0_DB), \
-            MESH("ag_m", "Amplitude graph Mid", 2, graph_equalizer_metadata::FILTER_MESH_POINTS), \
+            MESH("ag_m", "Amplitude graph Mid", 2, graph_equalizer_metadata::MESH_POINTS + 4), \
             METER_GAIN("iml", "Input signal meter Left", GAIN_AMP_P_12_DB), \
             METER_GAIN("sml", "Output signal meter Left", GAIN_AMP_P_12_DB), \
             SWITCH("fltv_m", "Filter visibility Mid", "Show flt M", 1.0f), \
-            MESH("ag_s", "Amplitude graph Side", 2, graph_equalizer_metadata::FILTER_MESH_POINTS), \
+            MESH("ag_s", "Amplitude graph Side", 2, graph_equalizer_metadata::MESH_POINTS + 4), \
             METER_GAIN("imr", "Input signal meter Right", GAIN_AMP_P_12_DB), \
             METER_GAIN("smr", "Output signal meter Right", GAIN_AMP_P_12_DB), \
             SWITCH("fltv_s", "Filter visibility Side", "Show flt S", 1.0f)
@@ -397,11 +398,13 @@ namespace lsp
             clap_features_mono,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x16_mono_ports,
-            "equalizer/graphic/mono.xml",
+            "plugins/equalizer/graphic/mono.xml",
             NULL,
             mono_plugin_port_groups,
-            &graph_equalizer_bundle
+            &graph_equalizer_bundle,
+            3
         };
+        LSP_REGISTER_METADATA(graph_equalizer_x16_mono);
 
         const meta::plugin_t graph_equalizer_x32_mono =
         {
@@ -427,11 +430,13 @@ namespace lsp
             clap_features_mono,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x32_mono_ports,
-            "equalizer/graphic/mono.xml",
+            "plugins/equalizer/graphic/mono.xml",
             NULL,
             mono_plugin_port_groups,
-            &graph_equalizer_bundle
+            &graph_equalizer_bundle,
+            4
         };
+        LSP_REGISTER_METADATA(graph_equalizer_x32_mono);
 
         const meta::plugin_t graph_equalizer_x16_stereo =
         {
@@ -457,11 +462,13 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x16_stereo_ports,
-            "equalizer/graphic/stereo.xml",
+            "plugins/equalizer/graphic/stereo.xml",
             NULL,
             stereo_plugin_port_groups,
-            &graph_equalizer_bundle
+            &graph_equalizer_bundle,
+            1
         };
+        LSP_REGISTER_METADATA(graph_equalizer_x16_stereo);
 
         const meta::plugin_t graph_equalizer_x32_stereo =
         {
@@ -487,11 +494,13 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x32_stereo_ports,
-            "equalizer/graphic/stereo.xml",
+            "plugins/equalizer/graphic/stereo.xml",
             NULL,
             stereo_plugin_port_groups,
-            &graph_equalizer_bundle
+            &graph_equalizer_bundle,
+            2
         };
+        LSP_REGISTER_METADATA(graph_equalizer_x32_stereo);
 
         const meta::plugin_t graph_equalizer_x16_lr =
         {
@@ -517,11 +526,13 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x16_lr_ports,
-            "equalizer/graphic/lr.xml",
+            "plugins/equalizer/graphic/lr.xml",
             NULL,
             stereo_plugin_port_groups,
-            &graph_equalizer_bundle
+            &graph_equalizer_bundle,
+            5
         };
+        LSP_REGISTER_METADATA(graph_equalizer_x16_lr);
 
         const meta::plugin_t graph_equalizer_x32_lr =
         {
@@ -547,11 +558,13 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x32_lr_ports,
-            "equalizer/graphic/lr.xml",
+            "plugins/equalizer/graphic/lr.xml",
             NULL,
             stereo_plugin_port_groups,
-            &graph_equalizer_bundle
+            &graph_equalizer_bundle,
+            6
         };
+        LSP_REGISTER_METADATA(graph_equalizer_x32_lr);
 
         const meta::plugin_t graph_equalizer_x16_ms =
         {
@@ -577,11 +590,13 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x16_ms_ports,
-            "equalizer/graphic/ms.xml",
+            "plugins/equalizer/graphic/ms.xml",
             NULL,
             stereo_plugin_port_groups,
-            &graph_equalizer_bundle
+            &graph_equalizer_bundle,
+            7
         };
+        LSP_REGISTER_METADATA(graph_equalizer_x16_ms);
 
         const meta::plugin_t graph_equalizer_x32_ms =
         {
@@ -607,10 +622,13 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             graph_equalizer_x32_ms_ports,
-            "equalizer/graphic/ms.xml",
+            "plugins/equalizer/graphic/ms.xml",
             NULL,
             stereo_plugin_port_groups,
-            &graph_equalizer_bundle
+            &graph_equalizer_bundle,
+            8
         };
+        LSP_REGISTER_METADATA(graph_equalizer_x32_ms);
+
     } /* namespace meta */
 } /* namespace lsp */
