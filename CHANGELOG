@@ -2,6 +2,9 @@
 * RECENT CHANGES
 *******************************************************************************
 
+=== 1.0.35 ===
+* Updated build scripts and dependencies.
+
 === 1.0.34 ===
 * Fixed artifacts at the edges of the equalization curve.
 * Updated build scripts and dependencies.
