@@ -1,5 +1,6 @@
 {
 	"graph_eq": {
+		"bands": "Bande",
 		"bands_1:16": "Bande 1-16",
 		"bands_17:32": "Bande 17-32",
 		"bands_l": "Bande Sinistra",

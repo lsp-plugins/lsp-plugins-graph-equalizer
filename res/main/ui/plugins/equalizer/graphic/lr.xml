@@ -392,7 +392,7 @@
 		</cell>
 
 		<cell cols="3">
-			<cgroup id="fsel" bg.color="bg" ipadding="0">
+			<cgroup id="fsel" bg.color="bg" ipadding="0" text="lists.graph_eq.bands">
 				<ui:for id="blk" first="0" last=":num_blocks - 1">
 					<ui:eval id="chc" value="(:blk mod 2) ? 'right' : 'left'"/>
 					<ui:eval id="chp" value="(:blk mod 2) ? 'r' : 'l'"/>
