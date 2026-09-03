@@ -30,12 +30,12 @@
 
 #include <private/plugins/graph_equalizer.h>
 
-#define EQ_BUFFER_SIZE          0x400U
-
 namespace lsp
 {
     namespace plugins
     {
+        static constexpr size_t EQ_BUFFER_SIZE      = 0x400;
+
         //-------------------------------------------------------------------------
         inline namespace
         {
@@ -389,10 +389,12 @@ namespace lsp
         {
             switch (size_t(pEqMode->value()))
             {
-                case meta::graph_equalizer_metadata::PEM_IIR: return dspu::EQM_IIR;
-                case meta::graph_equalizer_metadata::PEM_FIR: return dspu::EQM_FIR;
-                case meta::graph_equalizer_metadata::PEM_FFT: return dspu::EQM_FFT;
-                case meta::graph_equalizer_metadata::PEM_SPM: return dspu::EQM_SPM;
+                case meta::graph_equalizer_metadata::GEM_IIR: return dspu::EQM_IIR;
+                case meta::graph_equalizer_metadata::GEM_FIR: return dspu::EQM_FIR;
+                case meta::graph_equalizer_metadata::GEM_FFT_LP: return dspu::EQM_FFT_LP;
+                case meta::graph_equalizer_metadata::GEM_SPM_LP: return dspu::EQM_SPM_LP;
+                case meta::graph_equalizer_metadata::GEM_FFT_MP: return dspu::EQM_FFT_MP;
+                case meta::graph_equalizer_metadata::GEM_SPM_MP: return dspu::EQM_SPM_MP;
                 default:
                     break;
             }

@@ -69,10 +69,12 @@ namespace lsp
 
             enum para_eq_mode_t
             {
-                PEM_IIR,
-                PEM_FIR,
-                PEM_FFT,
-                PEM_SPM
+                GEM_IIR,
+                GEM_FIR,
+                GEM_FFT_LP,
+                GEM_SPM_LP,
+                GEM_FFT_MP,
+                GEM_SPM_MP,
             };
 
             static const float band_frequencies[];
