@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2021 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2021 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2026 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2026 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-graph-equalizer
  * Created on: 3 авг. 2023 г.
@@ -70,9 +70,10 @@ namespace lsp
             enum para_eq_mode_t
             {
                 GEM_IIR,
-                GEM_FIR,
+                GEM_FIR_LP,
                 GEM_FFT_LP,
                 GEM_SPM_LP,
+                GEM_FIR_MP,
                 GEM_FFT_MP,
                 GEM_SPM_MP,
             };
@@ -89,8 +90,8 @@ namespace lsp
         extern const meta::plugin_t graph_equalizer_x32_lr;
         extern const meta::plugin_t graph_equalizer_x32_ms;
 
-    } // namespace meta
-} // namespace lsp
+    } /* namespace meta */
+} /* namespace lsp */
 
 
 #endif /* PRIVATE_META_GRAPH_EQUALIZER_H_ */

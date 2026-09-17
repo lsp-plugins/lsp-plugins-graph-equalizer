@@ -194,7 +194,7 @@ namespace lsp
                 c->pOutMeter        = NULL;
 
                 // Initialize equalizer
-                c->sEqualizer.init(nBands, meta::graph_equalizer_metadata::FFT_RANK);
+                c->sEqualizer.init(nBands, meta::graph_equalizer_metadata::FFT_RANK, &c->sConvolver);
                 max_latency         = lsp_max(max_latency, c->sEqualizer.max_latency());
 
                 for (size_t j=0; j<nBands; ++j)
@@ -390,9 +390,10 @@ namespace lsp
             switch (size_t(pEqMode->value()))
             {
                 case meta::graph_equalizer_metadata::GEM_IIR: return dspu::EQM_IIR;
-                case meta::graph_equalizer_metadata::GEM_FIR: return dspu::EQM_FIR;
+                case meta::graph_equalizer_metadata::GEM_FIR_LP: return dspu::EQM_FIR_LP;
                 case meta::graph_equalizer_metadata::GEM_FFT_LP: return dspu::EQM_FFT_LP;
                 case meta::graph_equalizer_metadata::GEM_SPM_LP: return dspu::EQM_SPM_LP;
+                case meta::graph_equalizer_metadata::GEM_FIR_MP: return dspu::EQM_FIR_MP;
                 case meta::graph_equalizer_metadata::GEM_FFT_MP: return dspu::EQM_FFT_MP;
                 case meta::graph_equalizer_metadata::GEM_SPM_MP: return dspu::EQM_SPM_MP;
                 default:
@@ -1068,6 +1069,7 @@ namespace lsp
             v->begin_object(c, sizeof(eq_channel_t));
             {
                 v->write_object("sEqualizer", &c->sEqualizer);
+                v->write_object("sConvolver", &c->sConvolver);
                 v->write_object("sBypass", &c->sBypass);
                 v->write_object("sDryDelay", &c->sDryDelay);
 
