@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2025 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2025 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2026 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2026 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-graph-equalizer
  * Created on: 3 авг. 2021 г.
@@ -30,12 +30,12 @@
 
 #include <private/plugins/graph_equalizer.h>
 
-#define EQ_BUFFER_SIZE          0x400U
-
 namespace lsp
 {
     namespace plugins
     {
+        static constexpr size_t EQ_BUFFER_SIZE      = 0x400;
+
         //-------------------------------------------------------------------------
         inline namespace
         {
@@ -194,7 +194,7 @@ namespace lsp
                 c->pOutMeter        = NULL;
 
                 // Initialize equalizer
-                c->sEqualizer.init(nBands, meta::graph_equalizer_metadata::FFT_RANK);
+                c->sEqualizer.init(nBands, meta::graph_equalizer_metadata::FFT_RANK, &c->sConvolver);
                 max_latency         = lsp_max(max_latency, c->sEqualizer.max_latency());
 
                 for (size_t j=0; j<nBands; ++j)
@@ -389,10 +389,13 @@ namespace lsp
         {
             switch (size_t(pEqMode->value()))
             {
-                case meta::graph_equalizer_metadata::PEM_IIR: return dspu::EQM_IIR;
-                case meta::graph_equalizer_metadata::PEM_FIR: return dspu::EQM_FIR;
-                case meta::graph_equalizer_metadata::PEM_FFT: return dspu::EQM_FFT;
-                case meta::graph_equalizer_metadata::PEM_SPM: return dspu::EQM_SPM;
+                case meta::graph_equalizer_metadata::GEM_IIR: return dspu::EQM_IIR;
+                case meta::graph_equalizer_metadata::GEM_FIR_LP: return dspu::EQM_FIR_LP;
+                case meta::graph_equalizer_metadata::GEM_FFT_LP: return dspu::EQM_FFT_LP;
+                case meta::graph_equalizer_metadata::GEM_SPM_LP: return dspu::EQM_SPM_LP;
+                case meta::graph_equalizer_metadata::GEM_FIR_MP: return dspu::EQM_FIR_MP;
+                case meta::graph_equalizer_metadata::GEM_FFT_MP: return dspu::EQM_FFT_MP;
+                case meta::graph_equalizer_metadata::GEM_SPM_MP: return dspu::EQM_SPM_MP;
                 default:
                     break;
             }
@@ -440,23 +443,16 @@ namespace lsp
             size_t channels     = (nMode == EQ_MONO) ? 1 : 2;
 
             // Configure analyzer
-            size_t n_an_channels = 0;
             for (size_t i=0; i<channels; ++i)
             {
-                eq_channel_t *c     = &vChannels[i];
-                const bool in_fft   = c->pFftInSwitch->value() >= 0.5f;
-                const bool out_fft  = c->pFftOutSwitch->value() >= 0.5f;
-                const bool ext_fft  = c->pFftExtSwitch->value() >= 0.5f;
+                eq_channel_t * const c     = &vChannels[i];
 
                 // channel:        0     1     2      3      4     5
                 // designation: in_l out_l ext_l   in_r  out_r ext_r
-                sAnalyzer.enable_channel(i*3, in_fft);
-                sAnalyzer.enable_channel(i*3 + 1, out_fft);
-                sAnalyzer.enable_channel(i*3 + 2, ext_fft);
-                if ((in_fft) || (out_fft) || (ext_fft))
-                    ++n_an_channels;
+                sAnalyzer.enable_channel(i*3, c->pFftInSwitch->value() >= 0.5f);
+                sAnalyzer.enable_channel(i*3 + 1, c->pFftOutSwitch->value() >= 0.5f);
+                sAnalyzer.enable_channel(i*3 + 2, c->pFftExtSwitch->value() >= 0.5f);
             }
-            sAnalyzer.set_activity(n_an_channels > 0);
             sAnalyzer.set_reactivity(pReactivity->value());
 
             // Update shift gain
@@ -630,9 +626,16 @@ namespace lsp
 
         void graph_equalizer::ui_activated()
         {
-            size_t channels     = ((nMode == EQ_MONO) || (nMode == EQ_STEREO)) ? 1 : 2;
+            sAnalyzer.set_activity(true);
+
+            const size_t channels     = ((nMode == EQ_MONO) || (nMode == EQ_STEREO)) ? 1 : 2;
             for (size_t i=0; i<channels; ++i)
                 vChannels[i].nSync     = CS_UPDATE;
+        }
+
+        void graph_equalizer::ui_deactivated()
+        {
+            sAnalyzer.set_activity(false);
         }
 
         void graph_equalizer::perform_analysis(size_t samples)
@@ -1066,6 +1069,7 @@ namespace lsp
             v->begin_object(c, sizeof(eq_channel_t));
             {
                 v->write_object("sEqualizer", &c->sEqualizer);
+                v->write_object("sConvolver", &c->sConvolver);
                 v->write_object("sBypass", &c->sBypass);
                 v->write_object("sDryDelay", &c->sDryDelay);
 

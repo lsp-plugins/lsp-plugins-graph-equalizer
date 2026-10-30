@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2024 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2024 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2026 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2026 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-graph-equalizer
  * Created on: 3 авг. 2021 г.
@@ -27,6 +27,7 @@
 #include <lsp-plug.in/dsp-units/ctl/Bypass.h>
 #include <lsp-plug.in/dsp-units/filters/Equalizer.h>
 #include <lsp-plug.in/dsp-units/util/Analyzer.h>
+#include <lsp-plug.in/dsp-units/util/Convolver.h>
 #include <lsp-plug.in/dsp-units/util/Delay.h>
 
 #include <private/meta/graph_equalizer.h>
@@ -80,6 +81,7 @@ namespace lsp
                 typedef struct eq_channel_t
                 {
                     dspu::Equalizer     sEqualizer;     // Equalizer
+                    dspu::Convolver     sConvolver;     // Convolver for FIR modes
                     dspu::Bypass        sBypass;        // Bypass
                     dspu::Delay         sDryDelay;      // Dry delay
 
@@ -154,7 +156,12 @@ namespace lsp
 
             public:
                 explicit graph_equalizer(const meta::plugin_t *metadata, size_t bands, size_t mode);
+                graph_equalizer(const graph_equalizer &) = delete;
+                graph_equalizer(graph_equalizer &&) = delete;
                 virtual ~graph_equalizer() override;
+
+                graph_equalizer & operator = (const graph_equalizer &) = delete;
+                graph_equalizer & operator = (graph_equalizer &&) = delete;
 
             public:
                 virtual void        init(plug::IWrapper *wrapper, plug::IPort **ports) override;
@@ -163,6 +170,7 @@ namespace lsp
                 virtual void        update_settings() override;
                 virtual void        update_sample_rate(long sr) override;
                 virtual void        ui_activated() override;
+                virtual void        ui_deactivated() override;
 
                 virtual void        process(size_t samples) override;
                 virtual bool        inline_display(plug::ICanvas *cv, size_t width, size_t height) override;

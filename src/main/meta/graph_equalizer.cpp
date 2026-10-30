@@ -26,7 +26,7 @@
 
 #define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION_MAJOR       1
 #define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION_MINOR       0
-#define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION_MICRO       39
+#define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION_MICRO       40
 
 #define LSP_PLUGINS_GRAPH_EQUALIZER_VERSION  \
     LSP_MODULE_VERSION( \
@@ -56,21 +56,24 @@ namespace lsp
 
         static const port_item_t band_slopes[] =
         {
-            { "BT48",                   "graph_eq.slope.bt48" },
-            { "MT48",                   "graph_eq.slope.mt48" },
-            { "BT72",                   "graph_eq.slope.bt72" },
-            { "MT72",                   "graph_eq.slope.mt72" },
-            { "BT96",                   "graph_eq.slope.bt96" },
-            { "MT96",                   "graph_eq.slope.mt96" },
+            { "BT48",                   "graph_eq.slope.bt48"   },
+            { "MT48",                   "graph_eq.slope.mt48"   },
+            { "BT72",                   "graph_eq.slope.bt72"   },
+            { "MT72",                   "graph_eq.slope.mt72"   },
+            { "BT96",                   "graph_eq.slope.bt96"   },
+            { "MT96",                   "graph_eq.slope.mt96"   },
             { NULL, NULL }
         };
 
         static const port_item_t band_eq_modes[] =
         {
-            { "IIR",                    "eq.type.iir" },
-            { "FIR",                    "eq.type.fir" },
-            { "FFT",                    "eq.type.fft" },
-            { "SPM",                    "eq.type.spm" },
+            { "IIR",                    "eq.type.iir",          },
+            { "Linear phase (FIR)",     "eq.type.fir_lp",       },
+            { "Linear phase (FFT)",     "eq.type.fft_lp",       },
+            { "Linear phase (SPM)",     "eq.type.spm_lp",       },
+            { "Minimum phase (FIR)",    "eq.type.fir_mp",       },
+            { "Minimum phase (FFT)",    "eq.type.fft_mp",       },
+            { "Minimum phase (SPM)",    "eq.type.spm_mp",       },
             { NULL, NULL }
         };
 
